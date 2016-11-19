@@ -1,2 +1,1 @@
-# ui-customizer
-SBIS UI-Customizer
+# SBIS UI-Customizer

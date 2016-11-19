@@ -1,0 +1,3 @@
+#leftInfoBlocks div[data-id="accounting"] {
+    display: none !important;
+}

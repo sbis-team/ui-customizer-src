@@ -1,0 +1,61 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "name": "DEV Собрать",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/build/build.js",
+         "cwd": "${workspaceRoot}"
+      },
+      {
+         "name": "DEV Собрать и сжать",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/build/build.js",
+         "cwd": "${workspaceRoot}",
+         "args": [
+            "--minimize"
+         ]
+      },
+      {
+         "name": "RC Собрать",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/build/build.js",
+         "cwd": "${workspaceRoot}",
+         "args": [
+            "--rc"
+         ]
+      },
+      {
+         "name": "RC Собрать и сжать",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/build/build.js",
+         "cwd": "${workspaceRoot}",
+         "args": [
+            "--rc",
+            "--minimize"
+         ]
+      },
+      {
+         "name": "Release Собрать и сжать",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/build/build.js",
+         "cwd": "${workspaceRoot}",
+         "args": [
+            "--r",
+            "--minimize"
+         ]
+      },
+      {
+         "name": "Запустить сервер",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/server/run.js",
+         "cwd": "${workspaceRoot}"
+      }
+   ]
+}

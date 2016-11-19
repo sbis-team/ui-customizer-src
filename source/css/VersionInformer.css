@@ -1,0 +1,115 @@
+.SBIS-UI-Customizer .VersionInformer .background {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 7000000;
+   background-color: #000;
+   opacity: 0.1;
+}
+
+.SBIS-UI-Customizer .VersionInformer .area {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 7000001;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog {
+   min-width: 600px;
+   max-width: 800px;
+   display: inline-block;
+   background: #FFFFFF;
+   border: 2px solid #DDDDDD;
+   border-top-width: 0px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .header {
+   height: 24px;
+   padding: 12px;
+   border-bottom: 1px solid #EAEAEA;
+   border-top: 3px solid #135091;
+} 
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .header .title {
+   font-weight: bold;
+   font-size: 20px;
+   color: #313e78;
+   padding-right: 16px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .header .info {
+   float: right;
+   color: #999;
+   font-size: 12px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .content {
+   padding: 12px 16px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .content > .group {
+   padding-bottom: 8px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .content > .group > .title {
+   color: #313E78;
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 24px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .content > .group > ul {
+   padding-left: 26px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .content > .group > ul > li {
+   padding-bottom: 8px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer {
+   padding: 16px 0;
+   border-top: 1px solid #EAEAEA;
+   background: #F5F5F5;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer > .links {
+   float: left;
+   padding: 0 12px;
+   line-height: 25px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer > .links.right {
+   float: right;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer >  .links > a {
+   border-right: 1px solid #EAEAEA;
+   padding-right: 6px;
+   padding-left: 2px;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer > .links > a:last-child {
+   border-right: none;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer .button {
+   border: 1px solid #ff7033;
+   margin: auto;
+   border-radius: 16px;
+   padding: 2px;
+   width: 100px;
+   text-align: center;
+   cursor: pointer;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer .button:hover {
+   background-color: #fdecd9;
+}
+
+.SBIS-UI-Customizer .VersionInformer .dialog > .footer .button:active {
+   background-color: #fdd2c0 !important;
+}

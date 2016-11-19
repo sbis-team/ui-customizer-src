@@ -1,0 +1,3 @@
+#leftInfoBlocks div[data-id="documents"] {
+    display: none !important;
+}

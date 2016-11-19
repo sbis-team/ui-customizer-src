@@ -1,0 +1,4 @@
+#sideRight,
+div.news-SpecialNews[sbisname="SpecialNewsRight"] {
+   display: none !important;
+}

@@ -1,0 +1,7 @@
+div.main-page-News[data-component="SBIS3.Socnet.NewsPage"] .controls-ListView__itemsContainer>div {
+   position: relative !important;
+   width: auto !important;
+   float: none !important;
+   top: auto !important;
+   left: auto !important;
+}

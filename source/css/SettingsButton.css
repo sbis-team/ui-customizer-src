@@ -1,0 +1,23 @@
+#SBIS-UI-Customizer-SettingsButton {
+   margin: 9px 0 -8px 0;
+   height: 100%;
+   font-size: 15px;
+}
+
+#SBIS-UI-Customizer-SettingsButton .row {
+   padding: 6px 0px 6px;
+}
+
+#SBIS-UI-Customizer-SettingsButton .row:hover {
+   cursor: pointer;
+   background: #F0F4FB;
+}
+
+#SBIS-UI-Customizer-SettingsButton .icon-16 {
+    float: left;
+    margin: 1px 0px 0 15px;
+}
+
+#SBIS-UI-Customizer-SettingsButton .title {
+   margin-left: 37px;
+}
