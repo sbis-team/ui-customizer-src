@@ -2,10 +2,25 @@
 <html lang="ru">
 
 <head>
-    <title>Prototype: SBIS UI-Customizer</title>
-    <link rel="stylesheet" href="./main.css">
-    <script type="text/javascript" src="./main.js"></script>
+   <title>Prototype: SBIS UI-Customizer</title>
+   <link rel="stylesheet" href="./main1.css">
+   <script type="text/javascript" src="./main1.js"></script>
 </head>
+
+<style>/* inline css работает */
+   #t1 {
+      background: white;
+   }
+</style>
+
+<script>
+
+window.onload = function() {
+   'use strict';
+   document.body.querySelector('#t1').innerHTML = 'inline js работает';
+};
+
+</script>
 
 <body>
    init proto
