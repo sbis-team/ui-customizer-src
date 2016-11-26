@@ -1,5 +1,13 @@
 "use strict";
 
+const assert = require('assert');
+
+const fn = require('ndk.fn');
+
+const parse_regexp = /^[A-Z0-9]+$/;
+const parse_depthRegexp = /\/\*[A-Z0-9]+\*\//;
+const parse_depthMax = 1000;
+
 var _mode = 'development';
 if (~process.argv.indexOf('--rc')) {
    _mode = 'candidate';
@@ -9,6 +17,7 @@ if (~process.argv.indexOf('--rc')) {
 
 module.exports.mode = _mode;
 
+module.exports.parse = parse;
 module.exports.setBuild = setBuild;
 module.exports.setVersion = setVersion;
 module.exports.getVersionName = getVersionName;
@@ -16,6 +25,39 @@ module.exports.getDateTime = getDateTime;
 module.exports.getDisplayDateTime = getDisplayDateTime;
 module.exports.minimize = minimize;
 module.exports.getVerInfo = getVerInfo;
+
+function parse(tmpl, data) {
+   assert.strictEqual(typeof tmpl, 'string');
+   assert.strictEqual(typeof data, 'object');
+   return fn.execute(function* () {
+      var depth = {};
+      var fromIndex = yield tmpl.indexOf('/*');
+      while (~fromIndex) {
+         let keyIndex = fromIndex + 2;
+         let toIndex = tmpl.indexOf('*/', keyIndex);
+         let key = tmpl.substring(keyIndex, toIndex);
+         let inKeyIndex = key.indexOf('/*');
+         if (~inKeyIndex) {
+            fromIndex = keyIndex + inKeyIndex;
+         } else if (parse_regexp.test(key) && key in data) {
+            let rdata = data[key];
+            if (parse_depthRegexp.test(rdata)) {
+               if (!(key in depth)) {
+                  depth[key] = 0;
+               }
+               if (++depth[key] > parse_depthMax) {
+                  throw Error('Превышена глубина рекурсии для шаблонизатора по ключу: ' + key);
+               }
+            }
+            tmpl = tmpl.substring(0, fromIndex) + rdata + tmpl.substring(toIndex + 2);
+         } else {
+            fromIndex = toIndex + 2;
+         }
+         fromIndex = yield tmpl.indexOf('/*', fromIndex);
+      }
+      return tmpl;
+   });
+}
 
 function setBuild(data) {
    if (!('number' in data)) {
