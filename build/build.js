@@ -28,13 +28,13 @@ fn.execute(function* () {
       SVG: ', ' + (yield it.readResources('source/svg'))
    }));
    script = yield helper.parse(script, scriptData);
-   yield it.mkdir('bin');
+   yield fs.makeDir('bin');
    yield fs.writeText(`bin/${mode}_sbis-ui-customizer.user.js`, script);
    var meta = script.replace(/^(\/\/ ==UserScript==[\s\S]*==\/UserScript==)[\s\S]*$/, '$1');
    yield fs.writeText(`bin/${mode}_sbis-ui-customizer.meta.js`, meta);
    console.log('Скрипт успешно собран v' + scriptData.VERSION);
    if (yield require('./publish').push(version, build, scriptData, notes)) {
-      yield fs.writeJSON('bin/build.json', build, false);
+      yield fs.writeJSON('bin/build.json', build);
    }
 }).catch(err => {
    console.error(err);

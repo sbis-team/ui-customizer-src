@@ -11,8 +11,6 @@ const ndk_fs = require('ndk.fs');
 const rootPath = path.resolve(__dirname, '../');
 
 module.exports.readImage = readImage;
-module.exports.mkdir = mkdir;
-module.exports.readdir = readdir;
 module.exports.readResources = readResources;
 module.exports.exec = exec;
 
@@ -31,29 +29,10 @@ function readImage(file) {
    });
 }
 
-function mkdir(dir) {
-   return new Promise((resolve) => {
-      node_fs.mkdir(path.join(rootPath, dir), () => resolve());
-   });
-}
-
-function readdir(dir) {
-   assert.strictEqual(typeof dir, 'string');
-   return new Promise((resolve, reject) => {
-      node_fs.readdir(path.join(rootPath, dir), (err, files) => {
-         if (err) {
-            reject(err);
-         } else {
-            resolve(files);
-         }
-      });
-   });
-}
-
 function readResources(dir) {
    assert.strictEqual(typeof dir, 'string');
    return fn.execute(function* () {
-      var files = yield readdir(dir);
+      var files = yield ndk_fs.readDir(dir);
       var resources = '\n';
       for (let i = 0; i < files.length; i++) {
          let file = files[i];
@@ -83,7 +62,7 @@ function exec(command, silence) {
          if (err) {
             reject(err);
          } else {
-            let msg = stdout.replace(/^[\r\n\s]/, '').replace(/[\r\n\s]$/, '');
+            let msg = stdout.trim();
             if (msg && !silence) {
                console.log(msg);
             }

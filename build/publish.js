@@ -22,7 +22,7 @@ function push(version, build, scriptData, notes) {
 function _push_development(scriptData) {
    return fn.execute(function* () {
       console.log(`Обновляем "development" до v${scriptData.VERSION}`);
-      yield it.mkdir('server/bin');
+      yield fs.makeDir('server/bin');
       yield fs.writeText(
          path.join('server/bin/sbis-ui-customizer.user.js'),
          yield fs.readText('bin/development_sbis-ui-customizer.user.js')
@@ -87,7 +87,7 @@ function _push_release(version, build, scriptData, notes) {
          if (yield it.exec('git status -s release-notes.json')) {
             yield it.exec('git add release-notes.json');
          }
-         yield fs.writeJSON('source/version.json', version, false);
+         yield fs.writeJSON('source/version.json', version);
          yield it.exec('git add source/version.json');
          yield it.exec(`git commit -m "update ${helper.mode} v${scriptData.VERSION}"`);
          yield it.exec('git push');
