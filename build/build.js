@@ -23,10 +23,10 @@ fn.execute(function* () {
    scriptData.SCRIPT = helper.minimize(yield helper.parse(yield fs.readText('source/script.js'), {
       VERINFO: ', ' + helper.getVerInfo(scriptData, notes),
       SETTINGS: ', ' + (yield fs.readText('settings.json')),
-      JS: ', ' + (yield it.readResources('source/js')),
-      XHTML: ', ' + (yield it.readResources('source/xhtml')),
-      CSS: ', ' + (yield it.readResources('source/css')),
-      SVG: ', ' + (yield it.readResources('source/svg'))
+      JS: ', ' + (yield it.readSources('source/js')),
+      XHTML: ', ' + (yield it.readSources('source/xhtml')),
+      CSS: ', ' + (yield it.readSources('source/css')),
+      SVG: ', ' + (yield it.readSources('source/svg'))
    }));
    script = yield helper.parse(script, scriptData);
    yield fs.makeDir('bin');

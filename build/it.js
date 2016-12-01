@@ -10,10 +10,10 @@ const ndk_fs = require('ndk.fs');
 
 const rootPath = path.resolve(__dirname, '../');
 
-module.exports.readResources = readResources;
+module.exports.readSources = readSources;
 module.exports.exec = exec;
 
-function readResources(dir) {
+function readSources(dir) {
    assert.strictEqual(typeof dir, 'string');
    return fn.execute(function* () {
       var files = yield ndk_fs.readDir(dir);
