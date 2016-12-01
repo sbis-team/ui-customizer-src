@@ -1,6 +1,7 @@
 "use strict";
 const fn = require('ndk.fn');
 const fs = require('ndk.fs');
+const src = require('ndk.src');
 const it = require('./it');
 const helper = require('./helper');
 fn.execute(function* () {
@@ -17,8 +18,8 @@ fn.execute(function* () {
    scriptData.BUILD = build.number;
    scriptData.DATE = helper.getDateTime(buildDate);
    scriptData.DISPLAYDATE = helper.getDisplayDateTime(buildDate);
-   scriptData.ICON = yield it.readImage('source/image/script-icon16.png');
-   scriptData.ICON64 = yield it.readImage('source/image/script-icon64.png');
+   scriptData.ICON = yield src.readDataImageBase64('source/image/script-icon16.png');
+   scriptData.ICON64 = yield src.readDataImageBase64('source/image/script-icon64.png');
    scriptData.SCRIPT = helper.minimize(yield helper.parse(yield fs.readText('source/script.js'), {
       VERINFO: ', ' + helper.getVerInfo(scriptData, notes),
       SETTINGS: ', ' + (yield fs.readText('settings.json')),

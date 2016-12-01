@@ -10,24 +10,8 @@ const ndk_fs = require('ndk.fs');
 
 const rootPath = path.resolve(__dirname, '../');
 
-module.exports.readImage = readImage;
 module.exports.readResources = readResources;
 module.exports.exec = exec;
-
-function readImage(file) {
-   assert.strictEqual(typeof file, 'string');
-   return new Promise((resolve, reject) => {
-      node_fs.readFile(path.join(rootPath, file), 'base64', (err, data) => {
-         if (err) {
-            reject(err);
-         } else {
-            let ext = path.extname(file);
-            ext = ext.slice(-ext.length + 1);
-            resolve(`data:image/${ext};base64,${data}`);
-         }
-      });
-   });
-}
 
 function readResources(dir) {
    assert.strictEqual(typeof dir, 'string');
