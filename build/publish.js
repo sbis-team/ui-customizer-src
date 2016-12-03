@@ -52,7 +52,7 @@ function _push_release(version, build, scriptData, notes) {
          return false;
       }
       it.exec.cwd = thisRepo;
-      if (helper.mode === 'release' && (yield it.exec('git symbolic-ref --short HEAD', true)) !== 'master') {
+      if (helper.mode === 'release' && (yield it.exec('git rev-parse --abbrev-ref HEAD', true)) !== 'master') {
          console.error('Нельзя публиковать версию из побочной ветки!');
          return false;
       }
@@ -60,7 +60,7 @@ function _push_release(version, build, scriptData, notes) {
       it.exec.cwd = targetRepo;
       yield it.exec('git fetch');
       yield it.exec('git reset');
-      var branch = yield it.exec('git symbolic-ref --short HEAD', true);
+      var branch = yield it.exec('git rev-parse --abbrev-ref HEAD', true);
       if (branch !== targetBranch) {
          yield it.exec('git checkout ' + targetBranch);
       }
