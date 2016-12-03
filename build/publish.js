@@ -139,10 +139,10 @@ function createNotes(date, version, notes) {
          });
       }
       if (helper.mode === 'candidate') {
-         yield fs.writeText(path.join('./bin/ui-customizer', 'README.md'), '## ' + text);
+         yield fs.writeText('./bin/ui-customizer/README.md', '## ' + text);
          yield it.exec('git add README.md');
       } else {
-         let file = path.join('./bin/ui-customizer', 'CHANGELOG.md');
+         let file = './bin/ui-customizer/CHANGELOG.md';
          let clog = yield fs.readText(file);
          clog = clog.replace(/История изменений/, 'История изменений\n\n' + '## ' + text + '---');
          yield fs.writeText(file, clog);
