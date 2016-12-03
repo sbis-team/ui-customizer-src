@@ -23,13 +23,15 @@ function _push_development(scriptData) {
    return fn.execute(function* () {
       console.log(`Обновляем "development" до v${scriptData.VERSION}`);
       yield fs.makeDir('server/bin');
-      yield fs.writeText(
-         path.join('server/bin/sbis-ui-customizer.user.js'),
-         yield fs.readText('bin/development_sbis-ui-customizer.user.js')
+      yield fs.copyFile(
+         'bin/development_sbis-ui-customizer.user.js',
+         'server/bin/sbis-ui-customizer.user.js',
+         true
       );
-      yield fs.writeText(
-         path.join('server/bin/sbis-ui-customizer.meta.js'),
-         yield fs.readText('bin/development_sbis-ui-customizer.meta.js')
+      yield fs.copyFile(
+         'bin/development_sbis-ui-customizer.meta.js',
+         'server/bin/sbis-ui-customizer.meta.js',
+         true
       );
       console.log(`Скрипт "${helper.mode}" v${scriptData.VERSION} успешно опубликован`);
       return true;
@@ -63,13 +65,15 @@ function _push_release(version, build, scriptData, notes) {
          yield it.exec('git checkout ' + targetBranch);
       }
       yield it.exec('git pull');
-      yield fs.writeText(
-         path.join('./bin/ui-customizer', 'sbis-ui-customizer.user.js'),
-         yield fs.readText(`bin/${helper.mode}_sbis-ui-customizer.user.js`)
+      yield fs.copyFile(
+         `bin/${helper.mode}_sbis-ui-customizer.user.js`,
+         './bin/ui-customizer/sbis-ui-customizer.user.js',
+         true
       );
-      yield fs.writeText(
-         path.join('./bin/ui-customizer', 'sbis-ui-customizer.meta.js'),
-         yield fs.readText(`bin/${helper.mode}_sbis-ui-customizer.meta.js`)
+      yield fs.copyFile(
+         `bin/${helper.mode}_sbis-ui-customizer.meta.js`,
+         './bin/ui-customizer/sbis-ui-customizer.meta.js',
+         true
       );
       notes = yield createNotes(scriptData.DISPLAYDATE, scriptData.VERSION, notes);
       yield it.exec('git add sbis-ui-customizer.user.js');
