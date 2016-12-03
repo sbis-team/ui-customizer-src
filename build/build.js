@@ -6,7 +6,6 @@ const it = require('./it');
 const helper = require('./helper');
 fn.execute(function* () {
    var buildDate = new Date();
-   var mode = helper.mode;
    var script = yield fs.readText('source/sbis-ui-customizer.template.user.js');
    var scriptData = yield fs.readJSON('source/sbis-ui-customizer.template.json');
    var localData = yield fs.readJSON('source/local-sbis-ui-customizer.template.json', {});
@@ -30,9 +29,9 @@ fn.execute(function* () {
    }));
    script = yield helper.parse(script, scriptData);
    yield fs.makeDir('bin');
-   yield fs.writeText(`bin/${mode}_sbis-ui-customizer.user.js`, script);
+   yield fs.writeText(`bin/${helper.mode}_sbis-ui-customizer.user.js`, script);
    var meta = script.replace(/^(\/\/ ==UserScript==[\s\S]*==\/UserScript==)[\s\S]*$/, '$1');
-   yield fs.writeText(`bin/${mode}_sbis-ui-customizer.meta.js`, meta);
+   yield fs.writeText(`bin/${helper.mode}_sbis-ui-customizer.meta.js`, meta);
    console.log('Скрипт успешно собран v' + scriptData.VERSION);
    if (yield require('./publish').push(version, build, scriptData, notes)) {
       yield fs.writeJSON('bin/build.json', build);
