@@ -83,6 +83,7 @@ function _push_release(version, build, scriptData, notes) {
          yield trggit.checkout(branch);
       }
       if (helper.mode === 'release') {
+         const oldBranch = yield srcgit['rev-parse']('--abbrev-ref', 'HEAD');
          const newBranch = `release/v${scriptData.VERSION}`;
          yield srcgit.fetch();
          yield srcgit.reset();
@@ -96,6 +97,9 @@ function _push_release(version, build, scriptData, notes) {
          yield srcgit.push();
          yield srcgit.checkout('-b', newBranch);
          yield srcgit.push('origin', newBranch);
+         if (oldBranch === 'development') {
+            srcgit.checkout(oldBranch);
+         }
          build.number = 0;
       }
       console.log(`Скрипт "${helper.mode}" v${scriptData.VERSION} успешно опубликован`);
