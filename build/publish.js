@@ -5,6 +5,7 @@ const node_fs = require('fs');
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_git = require('ndk.git');
+
 const helper = require('./helper');
 
 module.exports.push = push;
@@ -39,9 +40,9 @@ function _push_development(scriptData) {
 }
 
 function _push_release(version, build, scriptData, notes) {
-   var srcgit = ndk_git.createCL('./', process.stdout, process.stderr);
-   var trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
-   var targetBranch = helper.mode;
+   const srcgit = ndk_git.createCL('./', process.stdout, process.stderr);
+   const trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
+   const targetBranch = helper.mode;
    return ndk_fn.execute(function* () {
       if (!notes.added.length && !notes.changed.length && !notes.fixed.length && !notes.issues.length) {
          console.error('Необходимо заполнить заметки о выпуске!');
@@ -55,14 +56,10 @@ function _push_release(version, build, scriptData, notes) {
          yield ndk_git.createCL('./bin/', process.stdout, process.stderr)
             .clone('git@github.com:sbis-team/ui-customizer.git');
       }
-      if (helper.mode === 'release' && (yield srcgit['rev-parse']('--abbrev-ref', 'HEAD')) !== 'master') {
-         console.error('Нельзя публиковать версию из побочной ветки!');
-         return false;
-      }
       console.log(`Обновляем "${helper.mode}" до v${scriptData.VERSION}`);
       yield trggit.fetch();
       yield trggit.reset();
-      var branch = yield trggit['rev-parse']('--abbrev-ref', 'HEAD');
+      const branch = yield trggit['rev-parse']('--abbrev-ref', 'HEAD');
       if (branch !== targetBranch) {
          yield trggit.checkout(targetBranch);
       }
@@ -86,20 +83,19 @@ function _push_release(version, build, scriptData, notes) {
          yield trggit.checkout(branch);
       }
       if (helper.mode === 'release') {
-         it.exec.cwd = thisRepo;
-         yield it.exec('git fetch');
-         yield it.exec('git reset');
-         yield it.exec('git pull');
-         if (yield it.exec('git status -s release-notes.json')) {
-            yield it.exec('git add release-notes.json');
+         const newBranch = `release/${scriptData.VERSION}`;
+         yield srcgit.fetch();
+         yield srcgit.reset();
+         yield srcgit.pull();
+         if (yield srcgit.status('-s', 'release-notes.json')) {
+            yield srcgit.add('release-notes.json');
          }
          yield ndk_fs.writeJSON('source/version.json', version);
-         yield it.exec('git add source/version.json');
-         yield it.exec(`git commit -m "update ${helper.mode} v${scriptData.VERSION}"`);
-         yield it.exec('git push');
-         yield it.exec(`git checkout -b release/${scriptData.VERSION}`);
-         yield it.exec(`git push origin release/${scriptData.VERSION}`);
-         yield it.exec('git checkout master');
+         yield srcgit.add('source/version.json');
+         yield srcgit.commit('-m', `update notes ${helper.mode} v${scriptData.VERSION}`);
+         yield srcgit.push();
+         yield srcgit.checkout('-b', newBranch);
+         yield srcgit.push('origin', newBranch);
          build.number = 0;
       }
       console.log(`Скрипт "${helper.mode}" v${scriptData.VERSION} успешно опубликован`);
@@ -108,9 +104,9 @@ function _push_release(version, build, scriptData, notes) {
 }
 
 function createNotes(date, version, notes) {
-   var trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
+   const trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
    return ndk_fn.execute(function* () {
-      var text = `Обновление v${version}\n\n`;
+      let text = `Обновление v${version}\n\n`;
       text += `Сборка от: ${date}\n\n`;
       if (notes.added.length) {
          text += '#### Новые возможности\n\n';
@@ -156,7 +152,7 @@ function createNotes(date, version, notes) {
             fixed: [],
             issues: []
          }, null, '   '));
-         yield it.exec('git add CHANGELOG.md');
+         yield trggit.add('CHANGELOG.md');
       }
       return text;
    });
