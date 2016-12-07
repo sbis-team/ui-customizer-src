@@ -83,7 +83,7 @@ function _push_release(version, build, scriptData, notes) {
          yield trggit.checkout(branch);
       }
       if (helper.mode === 'release') {
-         const newBranch = `release/${scriptData.VERSION}`;
+         const newBranch = `release/v${scriptData.VERSION}`;
          yield srcgit.fetch();
          yield srcgit.reset();
          yield srcgit.pull();
@@ -92,7 +92,7 @@ function _push_release(version, build, scriptData, notes) {
          }
          yield ndk_fs.writeJSON('source/version.json', version);
          yield srcgit.add('source/version.json');
-         yield srcgit.commit('-m', `update notes ${helper.mode} v${scriptData.VERSION}`);
+         yield srcgit.commit('-m', `Обновление v${scriptData.VERSION}-${helper.mode}`);
          yield srcgit.push();
          yield srcgit.checkout('-b', newBranch);
          yield srcgit.push('origin', newBranch);
@@ -138,12 +138,12 @@ function createNotes(date, version, notes) {
          });
       }
       if (helper.mode === 'candidate') {
-         yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text);
+         yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text + '-\nCopyright (c) SBIS Team');
          yield trggit.add('README.md');
       } else {
          let file = './bin/ui-customizer/CHANGELOG.md';
          let clog = yield ndk_fs.readText(file);
-         clog = clog.replace(/История изменений/, 'История изменений\n\n' + '## ' + text + '---');
+         clog = clog.replace(/История изменений/, 'История изменений\n\n' + '### ' + text + '-');
          yield ndk_fs.writeText(file, clog);
          yield ndk_fs.writeText('release-notes.json', JSON.stringify({
             release: false,
