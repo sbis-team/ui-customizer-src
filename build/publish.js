@@ -98,7 +98,7 @@ function _push_release(version, build, scriptData, notes) {
          yield srcgit.checkout('-b', newBranch);
          yield srcgit.push('origin', newBranch);
          if (oldBranch === 'development') {
-            srcgit.checkout(oldBranch);
+            yield srcgit.checkout(oldBranch);
          }
          build.number = 0;
       }
