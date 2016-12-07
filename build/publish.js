@@ -138,7 +138,7 @@ function createNotes(date, version, notes) {
          });
       }
       if (helper.mode === 'candidate') {
-         yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text + '-\nCopyright (c) SBIS Team');
+         yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text + '-\n\nCopyright (c) SBIS Team');
          yield trggit.add('README.md');
       } else {
          let file = './bin/ui-customizer/CHANGELOG.md';
