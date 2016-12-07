@@ -1,21 +1,18 @@
 'use strict';
 
-const child_process = require('child_process');
 const assert = require('assert');
 const path = require('path');
-const node_fs = require('fs');
 
-const fn = require('ndk.fn');
+const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 
 const rootPath = path.resolve(__dirname, '../');
 
 module.exports.readSources = readSources;
-module.exports.exec = exec;
 
 function readSources(dir) {
    assert.strictEqual(typeof dir, 'string');
-   return fn.execute(function* () {
+   return ndk_fn.execute(function* () {
       var files = yield ndk_fs.readDir(dir);
       var resources = '\n';
       for (let i = 0; i < files.length; i++) {
@@ -32,26 +29,5 @@ function readSources(dir) {
          }
       }
       return '{' + resources + '}';
-   });
-}
-
-function exec(command, silence) {
-   return new Promise((resolve, reject) => {
-      if (!silence) {
-         console.log(command);
-      }
-      child_process.exec(command, {
-         cwd: exec.cwd || path.resolve(__dirname, '../')
-      }, (err, stdout) => {
-         if (err) {
-            reject(err);
-         } else {
-            let msg = stdout.trim();
-            if (msg && !silence) {
-               console.log(msg);
-            }
-            resolve(msg);
-         }
-      });
    });
 }

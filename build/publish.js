@@ -1,10 +1,10 @@
 "use strict";
 
-const path = require('path');
+const node_fs = require('fs');
 
-const fn = require('ndk.fn');
-const fs = require('ndk.fs');
-const it = require('./it');
+const ndk_fn = require('ndk.fn');
+const ndk_fs = require('ndk.fs');
+const ndk_git = require('ndk.git');
 const helper = require('./helper');
 
 module.exports.push = push;
@@ -20,15 +20,15 @@ function push(version, build, scriptData, notes) {
 }
 
 function _push_development(scriptData) {
-   return fn.execute(function* () {
+   return ndk_fn.execute(function* () {
       console.log(`Обновляем "development" до v${scriptData.VERSION}`);
-      yield fs.makeDir('server/bin');
-      yield fs.copyFile(
+      yield ndk_fs.makeDir('server/bin');
+      yield ndk_fs.copyFile(
          'bin/development_sbis-ui-customizer.user.js',
          'server/bin/sbis-ui-customizer.user.js',
          true
       );
-      yield fs.copyFile(
+      yield ndk_fs.copyFile(
          'bin/development_sbis-ui-customizer.meta.js',
          'server/bin/sbis-ui-customizer.meta.js',
          true
@@ -39,10 +39,10 @@ function _push_development(scriptData) {
 }
 
 function _push_release(version, build, scriptData, notes) {
-   var thisRepo = path.resolve(__dirname, '../');
-   var targetRepo = path.resolve(__dirname, '../bin/ui-customizer/');
+   var srcgit = ndk_git.createCL('./', process.stdout, process.stderr);
+   var trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
    var targetBranch = helper.mode;
-   return fn.execute(function* () {
+   return ndk_fn.execute(function* () {
       if (!notes.added.length && !notes.changed.length && !notes.fixed.length && !notes.issues.length) {
          console.error('Необходимо заполнить заметки о выпуске!');
          return false;
@@ -51,37 +51,39 @@ function _push_release(version, build, scriptData, notes) {
          console.error('Необходимо подтвердить обновление release!');
          return false;
       }
-      it.exec.cwd = thisRepo;
-      if (helper.mode === 'release' && (yield it.exec('git rev-parse --abbrev-ref HEAD', true)) !== 'master') {
+      if (!node_fs.existsSync('./bin/ui-customizer/')) {
+         yield ndk_git.createCL('./bin/', process.stdout, process.stderr)
+            .clone('git@github.com:sbis-team/ui-customizer.git');
+      }
+      if (helper.mode === 'release' && (yield srcgit['rev-parse']('--abbrev-ref', 'HEAD')) !== 'master') {
          console.error('Нельзя публиковать версию из побочной ветки!');
          return false;
       }
       console.log(`Обновляем "${helper.mode}" до v${scriptData.VERSION}`);
-      it.exec.cwd = targetRepo;
-      yield it.exec('git fetch');
-      yield it.exec('git reset');
-      var branch = yield it.exec('git rev-parse --abbrev-ref HEAD', true);
+      yield trggit.fetch();
+      yield trggit.reset();
+      var branch = yield trggit['rev-parse']('--abbrev-ref', 'HEAD');
       if (branch !== targetBranch) {
-         yield it.exec('git checkout ' + targetBranch);
+         yield trggit.checkout(targetBranch);
       }
-      yield it.exec('git pull');
-      yield fs.copyFile(
+      yield trggit.pull();
+      yield ndk_fs.copyFile(
          `bin/${helper.mode}_sbis-ui-customizer.user.js`,
          './bin/ui-customizer/sbis-ui-customizer.user.js',
          true
       );
-      yield fs.copyFile(
+      yield ndk_fs.copyFile(
          `bin/${helper.mode}_sbis-ui-customizer.meta.js`,
          './bin/ui-customizer/sbis-ui-customizer.meta.js',
          true
       );
       notes = yield createNotes(scriptData.DISPLAYDATE, scriptData.VERSION, notes);
-      yield it.exec('git add sbis-ui-customizer.user.js');
-      yield it.exec('git add sbis-ui-customizer.meta.js');
-      yield it.exec(`git commit -m "${notes}"`);
-      yield it.exec('git push');
+      yield trggit.add('sbis-ui-customizer.user.js');
+      yield trggit.add('sbis-ui-customizer.meta.js');
+      yield trggit.commit('-m', notes);
+      yield trggit.push();
       if (branch !== targetBranch) {
-         yield it.exec('git checkout ' + branch);
+         yield trggit.checkout(branch);
       }
       if (helper.mode === 'release') {
          it.exec.cwd = thisRepo;
@@ -91,7 +93,7 @@ function _push_release(version, build, scriptData, notes) {
          if (yield it.exec('git status -s release-notes.json')) {
             yield it.exec('git add release-notes.json');
          }
-         yield fs.writeJSON('source/version.json', version);
+         yield ndk_fs.writeJSON('source/version.json', version);
          yield it.exec('git add source/version.json');
          yield it.exec(`git commit -m "update ${helper.mode} v${scriptData.VERSION}"`);
          yield it.exec('git push');
@@ -106,7 +108,8 @@ function _push_release(version, build, scriptData, notes) {
 }
 
 function createNotes(date, version, notes) {
-   return fn.execute(function* () {
+   var trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
+   return ndk_fn.execute(function* () {
       var text = `Обновление v${version}\n\n`;
       text += `Сборка от: ${date}\n\n`;
       if (notes.added.length) {
@@ -139,14 +142,14 @@ function createNotes(date, version, notes) {
          });
       }
       if (helper.mode === 'candidate') {
-         yield fs.writeText('./bin/ui-customizer/README.md', '## ' + text);
-         yield it.exec('git add README.md');
+         yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text);
+         yield trggit.add('README.md');
       } else {
          let file = './bin/ui-customizer/CHANGELOG.md';
-         let clog = yield fs.readText(file);
+         let clog = yield ndk_fs.readText(file);
          clog = clog.replace(/История изменений/, 'История изменений\n\n' + '## ' + text + '---');
-         yield fs.writeText(file, clog);
-         yield fs.writeText('release-notes.json', JSON.stringify({
+         yield ndk_fs.writeText(file, clog);
+         yield ndk_fs.writeText('release-notes.json', JSON.stringify({
             release: false,
             added: [],
             changed: [],
