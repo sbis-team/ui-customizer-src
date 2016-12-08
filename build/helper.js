@@ -1,8 +1,8 @@
 "use strict";
 
 const assert = require('assert');
-
-const fn = require('ndk.fn');
+const fs = require('fs');
+const path = require('path');
 
 const parse_regexp = /^[A-Z0-9]+$/;
 const parse_depthRegexp = /\/\*[A-Z0-9]+\*\//;
@@ -17,6 +17,7 @@ if (~process.argv.indexOf('--rc')) {
 
 module.exports.mode = _mode;
 
+module.exports.checkInstallNDK = checkInstallNDK;
 module.exports.parse = parse;
 module.exports.setBuild = setBuild;
 module.exports.setVersion = setVersion;
@@ -26,10 +27,31 @@ module.exports.getDisplayDateTime = getDisplayDateTime;
 module.exports.minimize = minimize;
 module.exports.getVerInfo = getVerInfo;
 
+function checkInstallNDK() {
+   const child = require('child_process');
+   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.fn'))) {
+      console.log('Установка ndk.fn...');
+      child.execSync('npm install ndk.fn', { cwd: __dirname, stdio: 'ignore' });
+   }
+   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.fs'))) {
+      console.log('Установка ndk.fs...');
+      child.execSync('npm install ndk.fs', { cwd: __dirname, stdio: 'ignore' });
+   }
+   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.src'))) {
+      console.log('Установка ndk.src...');
+      child.execSync('npm install ndk.src', { cwd: __dirname, stdio: 'ignore' });
+   }
+   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.git'))) {
+      console.log('Установка ndk.git...');
+      child.execSync('npm install ndk.git', { cwd: __dirname, stdio: 'ignore' });
+   }
+   return module.exports;
+}
+
 function parse(tmpl, data) {
    assert.strictEqual(typeof tmpl, 'string');
    assert.strictEqual(typeof data, 'object');
-   return fn.execute(function* () {
+   return require('ndk.fn').execute(function* () {
       var depth = {};
       var fromIndex = yield tmpl.indexOf('/*');
       while (~fromIndex) {

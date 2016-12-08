@@ -1,9 +1,9 @@
 "use strict";
+const helper = require('./helper').checkInstallNDK();
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
 const it = require('./it');
-const helper = require('./helper');
 ndk_fn.execute(function* () {
    var buildDate = new Date();
    var script = yield ndk_fs.readText('source/sbis-ui-customizer.template.user.js');
