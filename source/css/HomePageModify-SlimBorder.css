@@ -1,0 +1,15 @@
+div.main-page-News .np-News__itemAll {
+   margin-top: 1px !important;
+}
+
+div.np-View__twoColumns .np-News__item:not([style*="left: 0px"]) .np-News__itemAll {
+   margin-left: 1px !important;
+}
+
+div.np-View__twoColumns .np-News__item[style*="left: 0px"] .np-News__itemAll {
+   margin-right: 1px !important;
+}
+
+div.np-View__twoColumns .np-News__item .np-News__itemAll {
+   margin-top: 1px !important;
+}

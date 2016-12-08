@@ -153,8 +153,14 @@
                   "title": "Новости",
                   "view": "block",
                   "options": {
-                     "OneColumnNews": {
-                        "title": "Лента в одну колонку",
+                     "SmallImg": {
+                        "title": "Уменьшить фото новости",
+                        "view": "option",
+                        "type": "boolean",
+                        "value": false
+                     },
+                     "SlimBorder": {
+                        "title": "Тонкие границы новости",
                         "view": "option",
                         "type": "boolean",
                         "value": false
