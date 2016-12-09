@@ -5,8 +5,6 @@ const path = require('path');
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 
-const rootPath = path.resolve(__dirname, '../');
-
 module.exports.readSources = readSources;
 
 function readSources(dir) {
