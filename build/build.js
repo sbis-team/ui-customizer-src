@@ -14,7 +14,6 @@ ndk_fn.execute(function* () {
    var version = helper.setVersion(yield ndk_fs.readJSON('source/version.json', {}), notes);
    Object.assign(scriptData, localData);
    scriptData.VERSION = helper.getVersionName(version, build);
-   scriptData.BUILD = build.number;
    scriptData.DATE = helper.getDateTime(buildDate);
    scriptData.DISPLAYDATE = helper.getDisplayDateTime(buildDate);
    scriptData.ICON = yield ndk_src.readDataImageBase64('source/image/script-icon16.png');

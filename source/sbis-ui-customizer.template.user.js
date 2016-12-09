@@ -3,7 +3,6 @@
 // @namespace     SBIS
 // @version       /*VERSION*/
 // @date          /*DATE*/
-// @build         /*BUILD*/
 // @author        Новожилов И. А.
 // @description   Пользовательская настройка web интерфейса сайтов SBIS
 // @homepage      /*HOMEPAGE*/
