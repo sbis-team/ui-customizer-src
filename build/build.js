@@ -6,13 +6,11 @@ const ndk_src = require('ndk.src');
 const it = require('./it');
 ndk_fn.execute(function* () {
    var buildDate = new Date();
-   var script = yield ndk_fs.readText('source/sbis-ui-customizer.template.user.js');
-   var scriptData = yield ndk_fs.readJSON('source/sbis-ui-customizer.template.json');
-   var localData = yield ndk_fs.readJSON('source/local-sbis-ui-customizer.template.json', {});
    var notes = yield ndk_fs.readJSON('release-notes.json');
    var build = helper.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
    var version = helper.setVersion(yield ndk_fs.readJSON('source/version.json', {}), notes);
-   Object.assign(scriptData, localData);
+   var script = yield ndk_fs.readText('source/sbis-ui-customizer.template.user.js');
+   var scriptData = {};
    scriptData.VERSION = helper.getVersionName(version, build);
    scriptData.DATE = helper.getDateTime(buildDate);
    scriptData.DISPLAYDATE = helper.getDisplayDateTime(buildDate);

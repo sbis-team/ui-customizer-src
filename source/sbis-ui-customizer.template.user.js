@@ -5,10 +5,10 @@
 // @date          /*DATE*/
 // @author        Новожилов И. А.
 // @description   Пользовательская настройка web интерфейса сайтов SBIS
-// @homepage      /*HOMEPAGE*/
+// @homepage      https://github.com/sbis-team/ui-customizer
 // @icon          /*ICON*/
 // @icon64        /*ICON64*/
-// @supportURL    /*SUPPORTURL*/
+// @supportURL    https://github.com/sbis-team/ui-customizer/issues
 // @include       https://inside.tensor.ru/*
 // @exclude       https://inside.tensor.ru/obj/*
 // @exclude       https://inside.tensor.ru/shared/*
