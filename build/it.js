@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const path = require('path');
 
 const ndk_fn = require('ndk.fn');
@@ -11,7 +10,6 @@ const rootPath = path.resolve(__dirname, '../');
 module.exports.readSources = readSources;
 
 function readSources(dir) {
-   assert.strictEqual(typeof dir, 'string');
    return ndk_fn.execute(function* () {
       var files = yield ndk_fs.readDir(dir);
       var resources = '\n';

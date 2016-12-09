@@ -1,6 +1,5 @@
 "use strict";
 
-const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
@@ -49,8 +48,6 @@ function checkInstallNDK() {
 }
 
 function parse(tmpl, data) {
-   assert.strictEqual(typeof tmpl, 'string');
-   assert.strictEqual(typeof data, 'object');
    return require('ndk.fn').execute(function* () {
       var depth = {};
       var fromIndex = yield tmpl.indexOf('/*');
