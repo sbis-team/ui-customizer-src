@@ -1,7 +1,20 @@
 "use strict";
+(() => {
+   const node_fs = require('fs');
+   const node_child = require('child_process');
+   const opt = { stdio: 'ignore' };
+   ['env', 'fn', 'fs', 'src', 'git'].forEach(name => {
+      if (
+         !node_fs.existsSync(`node_modules/ndk.${name}`) &&
+         !node_fs.existsSync(`node_modules/ndk.${name}.js`)
+      ) {
+         console.log(`Установка ndk.${name}...`);
+         node_child.execSync(`npm install ndk.${name}`, opt);
+      }
+   });
+})();
 
-const fs = require('fs');
-const path = require('path');
+const ndk_fn = require('ndk.fn');
 
 const parse_regexp = /^[A-Z0-9]+$/;
 const parse_depthRegexp = /\/\*[A-Z0-9]+\*\//;
@@ -16,7 +29,6 @@ if (~process.argv.indexOf('--rc')) {
 
 module.exports.mode = _mode;
 
-module.exports.checkInstallNDK = checkInstallNDK;
 module.exports.parse = parse;
 module.exports.setBuild = setBuild;
 module.exports.setVersion = setVersion;
@@ -26,29 +38,8 @@ module.exports.getDisplayDateTime = getDisplayDateTime;
 module.exports.minimize = minimize;
 module.exports.getVerInfo = getVerInfo;
 
-function checkInstallNDK() {
-   const child = require('child_process');
-   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.fn'))) {
-      console.log('Установка ndk.fn...');
-      child.execSync('npm install ndk.fn', { cwd: __dirname, stdio: 'ignore' });
-   }
-   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.fs'))) {
-      console.log('Установка ndk.fs...');
-      child.execSync('npm install ndk.fs', { cwd: __dirname, stdio: 'ignore' });
-   }
-   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.src'))) {
-      console.log('Установка ndk.src...');
-      child.execSync('npm install ndk.src', { cwd: __dirname, stdio: 'ignore' });
-   }
-   if (!fs.existsSync(path.join(__dirname, './node_modules/ndk.git'))) {
-      console.log('Установка ndk.git...');
-      child.execSync('npm install ndk.git', { cwd: __dirname, stdio: 'ignore' });
-   }
-   return module.exports;
-}
-
 function parse(tmpl, data) {
-   return require('ndk.fn').execute(function* () {
+   return ndk_fn.execute(function* () {
       var depth = {};
       var fromIndex = yield tmpl.indexOf('/*');
       while (~fromIndex) {

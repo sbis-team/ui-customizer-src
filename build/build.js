@@ -1,5 +1,5 @@
 "use strict";
-const helper = require('./helper').checkInstallNDK();
+const helper = require('./helper');
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
