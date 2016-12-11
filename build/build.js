@@ -3,7 +3,6 @@ const helper = require('./helper');
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
-const it = require('./it');
 ndk_fn.execute(function* () {
    var buildDate = new Date();
    var notes = yield ndk_fs.readJSON('release-notes.json');
@@ -19,10 +18,10 @@ ndk_fn.execute(function* () {
    scriptData.SCRIPT = helper.minimize(yield helper.parse(yield ndk_fs.readText('source/script.js'), {
       VERINFO: ', ' + helper.getVerInfo(scriptData, notes),
       SETTINGS: ', ' + (yield ndk_fs.readText('settings.json')),
-      JS: ', ' + (yield it.readSources('source/js')),
-      XHTML: ', ' + (yield it.readSources('source/xhtml')),
-      CSS: ', ' + (yield it.readSources('source/css')),
-      SVG: ', ' + (yield it.readSources('source/svg'))
+      JS: ', ' + (yield ndk_src.readAsEmbeddedObject('source/js')),
+      XHTML: ', ' + (yield ndk_src.readAsEmbeddedObject('source/xhtml')),
+      CSS: ', ' + (yield ndk_src.readAsEmbeddedObject('source/css')),
+      SVG: ', ' + (yield ndk_src.readAsEmbeddedObject('source/svg'))
    }));
    script = yield helper.parse(script, scriptData);
    yield ndk_fs.makeDir('bin');

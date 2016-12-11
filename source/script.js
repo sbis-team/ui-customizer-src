@@ -45,7 +45,7 @@
             module.id = `SBIS-UI-Customizer-${name}-script`;
             module.className = 'SBIS-UI-Customizer';
             module.type = 'text/javascript';
-            module.innerHTML = js[name];
+            module.innerHTML = js[name + '.js'];
             globalContainer.appendChild(module);
          }
          if (typeof (dependences[i] = JSModules[name]) !== 'object') {

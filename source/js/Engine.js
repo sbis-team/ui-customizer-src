@@ -247,10 +247,11 @@ UICustomizerDefine('Engine', function () {
    }
 
    function getHTML(name) {
+      name += '.xhtml';
       if (name in xhtml) {
          return xhtml[name];
       } else {
-         throw Error('Неизвестное имя xhtml файла: ' + name);
+         throw Error('Неизвестное имя файла: ' + name);
       }
    }
 
@@ -282,16 +283,18 @@ UICustomizerDefine('Engine', function () {
    }
 
    function getCSS(name) {
+      name += '.css';
       if (name in css) {
          return css[name];
       } else {
-         throw Error('Неизвестное имя css файла: ' + name);
+         throw Error('Неизвестное имя файла: ' + name);
       }
    }
 
    function appendCSS(name, use_css) {
-      if (name in css || use_css) {
-         var id = `SBIS-UI-Customizer-${name}-css`;
+      let fullname = name + '.css';
+      if (fullname in css || use_css) {
+         var id = `SBIS-UI-Customizer-${fullname}`;
          var elm = document.getElementById(id);
          if (!elm) {
             elm = document.createElement('style');
@@ -305,7 +308,8 @@ UICustomizerDefine('Engine', function () {
    }
 
    function removeCSS(name) {
-      var id = `SBIS-UI-Customizer-${name}-css`;
+      let fullname = name + '.css';
+      var id = `SBIS-UI-Customizer-${fullname}`;
       var elm = document.getElementById(id);
       if (elm) {
          elm.remove();
@@ -313,10 +317,11 @@ UICustomizerDefine('Engine', function () {
    }
 
    function getSVG(name) {
+      name += '.svg';
       if (name in svg) {
          return svg[name];
       } else {
-         throw Error('Неизвестное имя svg файла: ' + name);
+         throw Error('Неизвестное имя файла: ' + name);
       }
    }
 
