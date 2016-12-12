@@ -25,7 +25,7 @@
          "program": "${workspaceRoot}/build/build.js",
          "cwd": "${workspaceRoot}",
          "args": [
-            "--rc"
+            "--candidate"
          ]
       },
       {
@@ -35,7 +35,7 @@
          "program": "${workspaceRoot}/build/build.js",
          "cwd": "${workspaceRoot}",
          "args": [
-            "--rc",
+            "--candidate",
             "--minimize"
          ]
       },
@@ -46,7 +46,7 @@
          "program": "${workspaceRoot}/build/build.js",
          "cwd": "${workspaceRoot}",
          "args": [
-            "--r",
+            "--release",
             "--minimize"
          ]
       },

@@ -16,6 +16,7 @@ const node_fs = require('fs');
    });
 })();
 
+const ndk_env = require('ndk.env');
 const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_git = require('ndk.git');
@@ -36,9 +37,9 @@ it.getVerInfo = getVerInfo;
 it.publish = publish;
 
 it.mode = 'development';
-if (~process.argv.indexOf('--rc')) {
+if (ndk_env.argv.candidate) {
    it.mode = 'candidate';
-} else if (~process.argv.indexOf('--r')) {
+} else if (ndk_env.argv.release) {
    it.mode = 'release';
 }
 
@@ -124,7 +125,7 @@ function getDisplayDateTime(date) {
 }
 
 function minimize(script) {
-   if (~process.argv.indexOf('--minimize')) {
+   if (ndk_env.argv.minimize) {
       script = script.replace(/\n/g, ' ').replace(/\r/g, ' ').replace(/\t+/g, ' ').replace(/ +/g, ' ');
    }
    return script;
