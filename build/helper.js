@@ -3,7 +3,7 @@
    const node_fs = require('fs');
    const node_child = require('child_process');
    const opt = { stdio: 'ignore' };
-   ['env', 'fn', 'fs', 'src', 'git'].forEach(name => {
+   ['env', 'fn', 'fs', 'git', 'src'].forEach(name => {
       if (
          !node_fs.existsSync(`node_modules/ndk.${name}`) &&
          !node_fs.existsSync(`node_modules/ndk.${name}.js`)
