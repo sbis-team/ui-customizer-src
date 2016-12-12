@@ -29,7 +29,7 @@ ndk_fn.execute(function* () {
    var meta = script.replace(/^(\/\/ ==UserScript==[\s\S]*==\/UserScript==)[\s\S]*$/, '$1');
    yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.meta.js`, meta);
    console.log('Скрипт успешно собран v' + scriptData.VERSION);
-   if (yield require('./publish').push(version, build, scriptData, notes)) {
+   if (yield it.publish(version, build, scriptData, notes)) {
       yield ndk_fs.writeJSON('bin/build.json', build);
    }
 }).catch(err => {
