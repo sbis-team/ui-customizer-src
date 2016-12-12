@@ -20,23 +20,22 @@ const parse_regexp = /^[A-Z0-9]+$/;
 const parse_depthRegexp = /\/\*[A-Z0-9]+\*\//;
 const parse_depthMax = 1000;
 
-var _mode = 'development';
+const it = module.exports;
+it.parse = parse;
+it.setBuild = setBuild;
+it.setVersion = setVersion;
+it.getVersionName = getVersionName;
+it.getDateTime = getDateTime;
+it.getDisplayDateTime = getDisplayDateTime;
+it.minimize = minimize;
+it.getVerInfo = getVerInfo;
+
+it.mode = 'development';
 if (~process.argv.indexOf('--rc')) {
-   _mode = 'candidate';
+   it.mode = 'candidate';
 } else if (~process.argv.indexOf('--r')) {
-   _mode = 'release';
+   it.mode = 'release';
 }
-
-module.exports.mode = _mode;
-
-module.exports.parse = parse;
-module.exports.setBuild = setBuild;
-module.exports.setVersion = setVersion;
-module.exports.getVersionName = getVersionName;
-module.exports.getDateTime = getDateTime;
-module.exports.getDisplayDateTime = getDisplayDateTime;
-module.exports.minimize = minimize;
-module.exports.getVerInfo = getVerInfo;
 
 function parse(tmpl, data) {
    return ndk_fn.execute(function* () {
@@ -89,7 +88,7 @@ function setVersion(version, notes) {
 
 function getVersionName(version, build) {
    var ver = `${version.major}.${version.minor}.${version.patch}`;
-   switch (_mode) {
+   switch (it.mode) {
       case 'development':
          return `${ver}.dev${build.number}`;
       case 'candidate':

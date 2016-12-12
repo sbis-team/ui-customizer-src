@@ -6,12 +6,12 @@ const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_git = require('ndk.git');
 
-const helper = require('./helper');
+const it = require('./it');
 
 module.exports.push = push;
 
 function push(version, build, scriptData, notes) {
-   switch (helper.mode) {
+   switch (it.mode) {
       case 'development':
          return _push_development(scriptData);
       case 'candidate':
@@ -34,7 +34,7 @@ function _push_development(scriptData) {
          'server/bin/sbis-ui-customizer.meta.js',
          true
       );
-      console.log(`Скрипт "${helper.mode}" v${scriptData.VERSION} успешно опубликован`);
+      console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
       return true;
    });
 }
@@ -42,13 +42,13 @@ function _push_development(scriptData) {
 function _push_release(version, build, scriptData, notes) {
    const srcgit = ndk_git.createCL('./', process.stdout, process.stderr);
    const trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
-   const targetBranch = helper.mode;
+   const targetBranch = it.mode;
    return ndk_fn.execute(function* () {
       if (!notes.added.length && !notes.changed.length && !notes.fixed.length && !notes.issues.length) {
          console.error('Необходимо заполнить заметки о выпуске!');
          return false;
       }
-      if (helper.mode === 'release' && !notes.release) {
+      if (it.mode === 'release' && !notes.release) {
          console.error('Необходимо подтвердить обновление release!');
          return false;
       }
@@ -56,7 +56,7 @@ function _push_release(version, build, scriptData, notes) {
          yield ndk_git.createCL('./bin/', process.stdout, process.stderr)
             .clone('git@github.com:sbis-team/ui-customizer.git');
       }
-      console.log(`Обновляем "${helper.mode}" до v${scriptData.VERSION}`);
+      console.log(`Обновляем "${it.mode}" до v${scriptData.VERSION}`);
       yield trggit.fetch();
       yield trggit.reset();
       const branch = yield trggit['rev-parse']('--abbrev-ref', 'HEAD');
@@ -65,12 +65,12 @@ function _push_release(version, build, scriptData, notes) {
       }
       yield trggit.pull();
       yield ndk_fs.copyFile(
-         `bin/${helper.mode}_sbis-ui-customizer.user.js`,
+         `bin/${it.mode}_sbis-ui-customizer.user.js`,
          './bin/ui-customizer/sbis-ui-customizer.user.js',
          true
       );
       yield ndk_fs.copyFile(
-         `bin/${helper.mode}_sbis-ui-customizer.meta.js`,
+         `bin/${it.mode}_sbis-ui-customizer.meta.js`,
          './bin/ui-customizer/sbis-ui-customizer.meta.js',
          true
       );
@@ -82,7 +82,7 @@ function _push_release(version, build, scriptData, notes) {
       if (branch !== targetBranch) {
          yield trggit.checkout(branch);
       }
-      if (helper.mode === 'release') {
+      if (it.mode === 'release') {
          const oldBranch = yield srcgit['rev-parse']('--abbrev-ref', 'HEAD');
          const newBranch = `release/v${scriptData.VERSION}`;
          yield srcgit.fetch();
@@ -93,7 +93,7 @@ function _push_release(version, build, scriptData, notes) {
          }
          yield ndk_fs.writeJSON('source/version.json', version);
          yield srcgit.add('source/version.json');
-         yield srcgit.commit('-m', `Обновление v${scriptData.VERSION}-${helper.mode}`);
+         yield srcgit.commit('-m', `Обновление v${scriptData.VERSION}-${it.mode}`);
          yield srcgit.push();
          yield srcgit.checkout('-b', newBranch);
          yield srcgit.push('origin', newBranch);
@@ -102,7 +102,7 @@ function _push_release(version, build, scriptData, notes) {
          }
          build.number = 0;
       }
-      console.log(`Скрипт "${helper.mode}" v${scriptData.VERSION} успешно опубликован`);
+      console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
       return true;
    });
 }
@@ -141,7 +141,7 @@ function createNotes(date, version, notes) {
             }
          });
       }
-      if (helper.mode === 'candidate') {
+      if (it.mode === 'candidate') {
          yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text + '-\n\nCopyright (c) SBIS Team');
          yield trggit.add('README.md');
       } else {
