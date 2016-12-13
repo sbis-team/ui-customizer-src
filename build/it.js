@@ -26,6 +26,10 @@ const parse_depthRegexp = /\/\*[A-Z0-9]+\*\//;
 const parse_depthMax = 1000;
 
 const it = module.exports;
+it.configure = it__configure;
+it.build = it__build;
+it.publish2 = it__publish;
+
 it.parse = parse;
 it.setBuild = setBuild;
 it.setVersion = setVersion;
@@ -41,6 +45,19 @@ if (ndk_env.argv.candidate) {
 } else if (ndk_env.argv.release) {
    it.mode = 'release';
 }
+
+function it__configure(opt) {
+   return it;
+}
+
+function it__build(builder) {
+   return it;
+}
+
+function it__publish() {
+
+}
+
 
 function parse(tmpl, data) {
    return ndk_fn.execute(function* () {
