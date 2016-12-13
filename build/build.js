@@ -4,16 +4,28 @@ const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
 
-it.configure({
+it.build({
    notes: 'release-notes.json',
    version: 'script/version.json',
    build: {
       development: 'bin/build.json',
       candidate: 'script/build.json'
+   },
+   builder: () => { },
+   publish: {
+      repo: 'git@github.com:sbis-team/ui-customizer.git',
+      branch: {
+         development: 'development',
+         candidate: 'candidate',
+         release: 'release'
+      },
+      mode: {
+         development: 'local',
+         candidate: 'git',
+         release: 'git'
+      }
    }
-}).build(function* () {
-   yield true;
-}).publish2();
+});
 
 ndk_fn.execute(function* () {
    var notes = yield ndk_fs.readJSON('release-notes.json');
