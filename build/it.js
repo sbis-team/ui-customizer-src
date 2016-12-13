@@ -31,7 +31,6 @@ it.setBuild = setBuild;
 it.setVersion = setVersion;
 it.getVersionName = getVersionName;
 it.getDateTime = getDateTime;
-it.getDisplayDateTime = getDisplayDateTime;
 it.minimize = minimize;
 it.getVerInfo = getVerInfo;
 it.publish = publish;
@@ -106,16 +105,6 @@ function getVersionName(version, build) {
 
 function getDateTime(date) {
    date = date || new Date();
-   return date.getFullYear() + '-' +
-      ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-      ('0' + date.getDate()).slice(-2) + 'T' +
-      ('0' + date.getHours()).slice(-2) + ':' +
-      ('0' + date.getMinutes()).slice(-2) + ':' +
-      ('0' + date.getSeconds()).slice(-2);
-}
-
-function getDisplayDateTime(date) {
-   date = date || new Date();
    return ('0' + date.getDate()).slice(-2) + '.' +
       ('0' + (date.getMonth() + 1)).slice(-2) + '.' +
       date.getFullYear() + ' ' +
@@ -134,7 +123,7 @@ function minimize(script) {
 function getVerInfo(scriptData, notes) {
    return JSON.stringify({
       version: scriptData.VERSION,
-      date: scriptData.DISPLAYDATE,
+      date: scriptData.DATE,
       notes: {
          added: notes.added,
          changed: notes.changed,
@@ -208,7 +197,7 @@ function __publish_release(version, build, scriptData, notes) {
          './bin/ui-customizer/sbis-ui-customizer.meta.js',
          true
       );
-      notes = yield __publish_createNotes(scriptData.DISPLAYDATE, scriptData.VERSION, notes);
+      notes = yield __publish_createNotes(scriptData.DATE, scriptData.VERSION, notes);
       yield trggit.add('sbis-ui-customizer.user.js');
       yield trggit.add('sbis-ui-customizer.meta.js');
       yield trggit.commit('-m', notes);

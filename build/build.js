@@ -4,7 +4,6 @@ const ndk_fn = require('ndk.fn');
 const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
 ndk_fn.execute(function* () {
-   var buildDate = new Date();
    var notes = yield ndk_fs.readJSON('release-notes.json');
    var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
    var version = it.setVersion(yield ndk_fs.readJSON('script/version.json', {}), notes);
@@ -12,8 +11,7 @@ ndk_fn.execute(function* () {
    var script = yield ndk_fs.readText('script/script.js');
    var metaData = {};
    metaData.VERSION = it.getVersionName(version, build);
-   metaData.DATE = it.getDateTime(buildDate);
-   metaData.DISPLAYDATE = it.getDisplayDateTime(buildDate);
+   metaData.DATE = it.getDateTime();
    metaData.ICON = yield ndk_src.readDataImageBase64('script/image/script-icon16.png');
    metaData.ICON64 = yield ndk_src.readDataImageBase64('script/image/script-icon64.png');
    meta = yield it.parse(meta, metaData);
