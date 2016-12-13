@@ -44,4 +44,3 @@
 // @grant         GM_setClipboard
 // @noframes
 // ==/UserScript==
-/*SCRIPT*/

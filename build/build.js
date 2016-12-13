@@ -8,25 +8,25 @@ ndk_fn.execute(function* () {
    var notes = yield ndk_fs.readJSON('release-notes.json');
    var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
    var version = it.setVersion(yield ndk_fs.readJSON('script/version.json', {}), notes);
-   var script = yield ndk_fs.readText('script/sbis-ui-customizer.template.user.js');
-   var scriptData = {};
-   scriptData.VERSION = it.getVersionName(version, build);
-   scriptData.DATE = it.getDateTime(buildDate);
-   scriptData.DISPLAYDATE = it.getDisplayDateTime(buildDate);
-   scriptData.ICON = yield ndk_src.readDataImageBase64('script/image/script-icon16.png');
-   scriptData.ICON64 = yield ndk_src.readDataImageBase64('script/image/script-icon64.png');
-   scriptData.SCRIPT = it.minimize(yield it.parse(yield ndk_fs.readText('script/script.js'), {
-      VERINFO: ', ' + it.getVerInfo(scriptData, notes),
+   var meta = yield ndk_fs.readText('script/meta.js');
+   var script = yield ndk_fs.readText('script/script.js');
+   var metaData = {};
+   metaData.VERSION = it.getVersionName(version, build);
+   metaData.DATE = it.getDateTime(buildDate);
+   metaData.DISPLAYDATE = it.getDisplayDateTime(buildDate);
+   metaData.ICON = yield ndk_src.readDataImageBase64('script/image/script-icon16.png');
+   metaData.ICON64 = yield ndk_src.readDataImageBase64('script/image/script-icon64.png');
+   meta = yield it.parse(meta, metaData);
+   script = it.minimize(yield it.parse(script, {
+      VERINFO: ', ' + it.getVerInfo(metaData, notes),
       SETTINGS: ', ' + (yield ndk_fs.readText('settings.json')),
       SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject('script/src'))
    }));
-   script = yield it.parse(script, scriptData);
    yield ndk_fs.makeDir('bin');
-   yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.user.js`, script);
-   var meta = script.replace(/^(\/\/ ==UserScript==[\s\S]*==\/UserScript==)[\s\S]*$/, '$1');
    yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.meta.js`, meta);
-   console.log('Скрипт успешно собран v' + scriptData.VERSION);
-   if (yield it.publish(version, build, scriptData, notes)) {
+   yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.user.js`, meta + script);
+   console.log('Скрипт успешно собран v' + metaData.VERSION);
+   if (yield it.publish(version, build, metaData, notes)) {
       yield ndk_fs.writeJSON('bin/build.json', build);
    }
 }).catch(err => {
