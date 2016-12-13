@@ -7,7 +7,7 @@ UICustomizerDefine('Engine', function () {
       'TaskToolbarBtns': 'ToolbarBtns'
    };
 
-   var verinfo, baseSettings, js, xhtml, css, svg, gmapi, settings;
+   var verinfo, baseSettings, sources, gmapi, settings;
 
    var SbisService, InformationPopupManager;
 
@@ -74,15 +74,12 @@ UICustomizerDefine('Engine', function () {
       openInformationPopup: openInformationPopup
    };
 
-   function init(_verinfo, _baseSettings, _js, _xhtml, _css, _svg, _gmapi) {
+   function init(_verinfo, _baseSettings, _sources, _gmapi) {
       /* jshint -W040 */
       delete this.init;
       verinfo = _verinfo;
       baseSettings = _baseSettings;
-      js = _js;
-      xhtml = _xhtml;
-      css = _css;
-      svg = _svg;
+      sources = _sources;
       gmapi = _gmapi;
       settings = _copyObject(baseSettings);
       var localSettings = localStorage.getItem('SBIS-UI-Customizer-Settings');
@@ -248,8 +245,8 @@ UICustomizerDefine('Engine', function () {
 
    function getHTML(name) {
       name += '.xhtml';
-      if (name in xhtml) {
-         return xhtml[name];
+      if (name in sources.xhtml) {
+         return sources.xhtml[name];
       } else {
          throw Error('Неизвестное имя файла: ' + name);
       }
@@ -284,8 +281,8 @@ UICustomizerDefine('Engine', function () {
 
    function getCSS(name) {
       name += '.css';
-      if (name in css) {
-         return css[name];
+      if (name in sources.css) {
+         return sources.css[name];
       } else {
          throw Error('Неизвестное имя файла: ' + name);
       }
@@ -293,7 +290,7 @@ UICustomizerDefine('Engine', function () {
 
    function appendCSS(name, use_css) {
       let fullname = name + '.css';
-      if (fullname in css || use_css) {
+      if (fullname in sources.css || use_css) {
          var id = `SBIS-UI-Customizer-${fullname}`;
          var elm = document.getElementById(id);
          if (!elm) {
@@ -318,8 +315,8 @@ UICustomizerDefine('Engine', function () {
 
    function getSVG(name) {
       name += '.svg';
-      if (name in svg) {
-         return svg[name];
+      if (name in sources.svg) {
+         return sources.svg[name];
       } else {
          throw Error('Неизвестное имя файла: ' + name);
       }

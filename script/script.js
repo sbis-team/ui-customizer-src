@@ -1,5 +1,5 @@
 /* jshint esnext:true */
-(function (window, verinfo, settings, js, xhtml, css, svg) {
+(function (window, verinfo, settings, sources) {
    "use strict";
    var JSModules = {};
    window.UICustomizerDefine = UICustomizerDefine;
@@ -7,15 +7,9 @@
    window.UICustomizerEvent = UICustomizerEvent;
    var globalContainer = document.createElement('userscript');
    globalContainer.id = 'SBIS-UI-Customizer';
-   var Engine = document.createElement('script');
-   Engine.id = 'SBIS-UI-Customizer-Engine-script';
-   Engine.className = 'SBIS-UI-Customizer';
-   Engine.type = 'text/javascript';
-   Engine.innerHTML = js.Engine;
-   globalContainer.appendChild(Engine);
    document.getElementsByTagName('html')[0].appendChild(globalContainer);
    UICustomizerRequire(['Engine'], function (Engine) {
-      Engine.init(verinfo, settings, js, xhtml, css, svg, {
+      Engine.init(verinfo, settings, sources, {
          GM_info: GM_info,
          GM_setClipboard: GM_setClipboard
       });
@@ -45,7 +39,7 @@
             module.id = `SBIS-UI-Customizer-${name}-script`;
             module.className = 'SBIS-UI-Customizer';
             module.type = 'text/javascript';
-            module.innerHTML = js[name + '.js'];
+            module.innerHTML = sources.js[name + '.js'];
             globalContainer.appendChild(module);
          }
          if (typeof (dependences[i] = JSModules[name]) !== 'object') {
@@ -68,4 +62,4 @@
          }
       });
    }
-})(unsafeWindow/*VERINFO*//*SETTINGS*//*JS*//*XHTML*//*CSS*//*SVG*/);
+})(unsafeWindow/*VERINFO*//*SETTINGS*//*SOURCES*/);

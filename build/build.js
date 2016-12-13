@@ -18,10 +18,7 @@ ndk_fn.execute(function* () {
    scriptData.SCRIPT = it.minimize(yield it.parse(yield ndk_fs.readText('script/script.js'), {
       VERINFO: ', ' + it.getVerInfo(scriptData, notes),
       SETTINGS: ', ' + (yield ndk_fs.readText('settings.json')),
-      JS: ', ' + (yield ndk_src.readAsEmbeddedObject('script/js')),
-      XHTML: ', ' + (yield ndk_src.readAsEmbeddedObject('script/xhtml')),
-      CSS: ', ' + (yield ndk_src.readAsEmbeddedObject('script/css')),
-      SVG: ', ' + (yield ndk_src.readAsEmbeddedObject('script/svg'))
+      SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject('script/src'))
    }));
    script = yield it.parse(script, scriptData);
    yield ndk_fs.makeDir('bin');
