@@ -7,21 +7,21 @@ ndk_fn.execute(function* () {
    var buildDate = new Date();
    var notes = yield ndk_fs.readJSON('release-notes.json');
    var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
-   var version = it.setVersion(yield ndk_fs.readJSON('source/version.json', {}), notes);
-   var script = yield ndk_fs.readText('source/sbis-ui-customizer.template.user.js');
+   var version = it.setVersion(yield ndk_fs.readJSON('script/version.json', {}), notes);
+   var script = yield ndk_fs.readText('script/sbis-ui-customizer.template.user.js');
    var scriptData = {};
    scriptData.VERSION = it.getVersionName(version, build);
    scriptData.DATE = it.getDateTime(buildDate);
    scriptData.DISPLAYDATE = it.getDisplayDateTime(buildDate);
-   scriptData.ICON = yield ndk_src.readDataImageBase64('source/image/script-icon16.png');
-   scriptData.ICON64 = yield ndk_src.readDataImageBase64('source/image/script-icon64.png');
-   scriptData.SCRIPT = it.minimize(yield it.parse(yield ndk_fs.readText('source/script.js'), {
+   scriptData.ICON = yield ndk_src.readDataImageBase64('script/image/script-icon16.png');
+   scriptData.ICON64 = yield ndk_src.readDataImageBase64('script/image/script-icon64.png');
+   scriptData.SCRIPT = it.minimize(yield it.parse(yield ndk_fs.readText('script/script.js'), {
       VERINFO: ', ' + it.getVerInfo(scriptData, notes),
       SETTINGS: ', ' + (yield ndk_fs.readText('settings.json')),
-      JS: ', ' + (yield ndk_src.readAsEmbeddedObject('source/js')),
-      XHTML: ', ' + (yield ndk_src.readAsEmbeddedObject('source/xhtml')),
-      CSS: ', ' + (yield ndk_src.readAsEmbeddedObject('source/css')),
-      SVG: ', ' + (yield ndk_src.readAsEmbeddedObject('source/svg'))
+      JS: ', ' + (yield ndk_src.readAsEmbeddedObject('script/js')),
+      XHTML: ', ' + (yield ndk_src.readAsEmbeddedObject('script/xhtml')),
+      CSS: ', ' + (yield ndk_src.readAsEmbeddedObject('script/css')),
+      SVG: ', ' + (yield ndk_src.readAsEmbeddedObject('script/svg'))
    }));
    script = yield it.parse(script, scriptData);
    yield ndk_fs.makeDir('bin');

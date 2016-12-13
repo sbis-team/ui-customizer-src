@@ -225,8 +225,8 @@ function __publish_release(version, build, scriptData, notes) {
          if (yield srcgit.status('-s', 'release-notes.json')) {
             yield srcgit.add('release-notes.json');
          }
-         yield ndk_fs.writeJSON('source/version.json', version);
-         yield srcgit.add('source/version.json');
+         yield ndk_fs.writeJSON('script/version.json', version);
+         yield srcgit.add('script/version.json');
          yield srcgit.commit('-m', `Обновление v${scriptData.VERSION}-${it.mode}`);
          yield srcgit.push();
          yield srcgit.checkout('-b', newBranch);
