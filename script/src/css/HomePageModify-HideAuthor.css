@@ -1,0 +1,16 @@
+div.main-page-News .np-News__itemAll .np-News__header_leftPart,
+div.main-page-News .np-News__itemAll .np-News__header_rightPart .np-News__itemAuthor,
+div.main-page-News .np-News__itemAll .np-News__header_rightPart .np-News__itemPosition,
+div.main-page-News .np-News__itemAll .np-News__header_rightPart .np-News__itemAuthorOrPosition {
+   display: none !important;
+}
+
+div.main-page-News .np-News__itemAll .np-News__header {
+   min-height: 0 !important;
+}
+
+div.main-page-News .np-News__itemAll .np-News__header .np-News__header_rightPart,
+div.main-page-News .np-News__itemAll .np-News__body,
+div.main-page-News .np-News__itemAll .np-News__footer {
+   margin-left: 0 !important;
+}

@@ -159,6 +159,12 @@
                         "type": "boolean",
                         "value": false
                      },
+                     "HideAuthor": {
+                        "title": "Скрыть автора из списка",
+                        "view": "option",
+                        "type": "boolean",
+                        "value": false
+                     },
                      "SlimBorder": {
                         "title": "Тонкие границы новости",
                         "view": "option",
