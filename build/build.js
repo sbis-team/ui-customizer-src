@@ -5,7 +5,7 @@ const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
 
 it.build({
-   notes: 'release-notes.json',
+   notes: 'script/release-notes.json',
    version: 'script/version.json',
    build: {
       development: 'bin/build.json',
@@ -28,7 +28,7 @@ it.build({
 });
 
 ndk_fn.execute(function* () {
-   var notes = yield ndk_fs.readJSON('release-notes.json');
+   var notes = yield ndk_fs.readJSON('script/release-notes.json');
    var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
    var version = it.setVersion(yield ndk_fs.readJSON('script/version.json', {}), notes);
    var meta = yield ndk_fs.readText('script/meta.js');
@@ -41,7 +41,7 @@ ndk_fn.execute(function* () {
    meta = yield it.parse(meta, metaData);
    script = it.minimize(yield it.parse(script, {
       VERINFO: ', ' + it.getVerInfo(metaData, notes),
-      SETTINGS: ', ' + (yield ndk_fs.readText('settings.json')),
+      SETTINGS: ', ' + (yield ndk_fs.readText('script/settings.json')),
       SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject('script/src'))
    }));
    yield ndk_fs.makeDir('bin');

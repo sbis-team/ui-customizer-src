@@ -218,8 +218,8 @@ function __publish_release(version, build, scriptData, notes) {
          yield srcgit.fetch();
          yield srcgit.reset();
          yield srcgit.pull();
-         if (yield srcgit.status('-s', 'release-notes.json')) {
-            yield srcgit.add('release-notes.json');
+         if (yield srcgit.status('-s', 'script/release-notes.json')) {
+            yield srcgit.add('script/release-notes.json');
          }
          yield ndk_fs.writeJSON('script/version.json', version);
          yield srcgit.add('script/version.json');
@@ -279,7 +279,7 @@ function __publish_createNotes(date, version, notes) {
          let clog = yield ndk_fs.readText(file);
          clog = clog.replace(/История изменений/, 'История изменений\n\n' + '### ' + text + '-');
          yield ndk_fs.writeText(file, clog);
-         yield ndk_fs.writeText('release-notes.json', JSON.stringify({
+         yield ndk_fs.writeText('script/release-notes.json', JSON.stringify({
             release: false,
             added: [],
             changed: [],
