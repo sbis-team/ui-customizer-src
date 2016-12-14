@@ -165,6 +165,12 @@
                         "type": "boolean",
                         "value": false
                      },
+                     "HideFooterBtn": {
+                        "title": "Скрыть оценки и репосты",
+                        "view": "option",
+                        "type": "boolean",
+                        "value": false
+                     },
                      "SlimBorder": {
                         "title": "Тонкие границы новости",
                         "view": "option",

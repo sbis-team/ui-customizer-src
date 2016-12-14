@@ -1,0 +1,9 @@
+div.main-page-News .np-News__itemAll .np-News__footer_left,
+div.main-page-News .np-News__itemAll .np-News__footer_right {
+   display: none !important;
+}
+
+div.main-page-News .np-News__itemAll .np-News__footer{
+   margin-top: 0px !important;
+   height: 12px !important;
+}
