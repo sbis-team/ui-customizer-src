@@ -3,9 +3,7 @@ UICustomizerDefine('Engine', function () {
 
    const htmlre = /\{\{([\w]+)\}\}/g;
 
-   const migrateSettingsGroup = {
-      'TaskToolbarBtns': 'ToolbarBtns'
-   };
+   const migrateSettingsGroup = {};
 
    var verinfo, baseSettings, sources, gmapi, settings;
 
