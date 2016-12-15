@@ -57,7 +57,7 @@ UICustomizerDefine('Engine', function () {
       createComponent: createComponent,
       removeByQuery: removeByQuery,
       generateCSS: {
-         hide: generateCSS_hide
+         displayNone: generateCSS_displayNone
       },
       getCSS: getCSS,
       appendCSS: appendCSS,
@@ -280,7 +280,7 @@ UICustomizerDefine('Engine', function () {
       }
    }
 
-   function generateCSS_hide(selector) {
+   function generateCSS_displayNone(selector) {
       return `${selector} { display: none !important; }`;
    }
 

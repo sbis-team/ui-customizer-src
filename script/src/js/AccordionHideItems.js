@@ -27,7 +27,7 @@ UICustomizerDefine('AccordionHideItems', ['Engine'], function (Engine) {
          let group = settings.options[groupName];
          for (let name in group.options) {
             if (group.options[name].value) {
-               css += Engine.generateCSS.hide(selectors[name]);
+               css += Engine.generateCSS.displayNone(selectors[name]);
             }
          }
       }
