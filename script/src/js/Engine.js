@@ -468,7 +468,7 @@ UICustomizerDefine('Engine', function () {
             if (name in migrateSettingsGroup) {
                sName = migrateSettingsGroup[name];
             } else {
-               break;
+               continue;
             }
          }
          let fName = ptName ? `${ptName}.${name}` : name;
