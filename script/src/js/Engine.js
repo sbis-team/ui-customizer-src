@@ -56,6 +56,9 @@ UICustomizerDefine('Engine', function () {
       createElement: createElement,
       createComponent: createComponent,
       removeByQuery: removeByQuery,
+      generateCSS: {
+         hide: generateCSS_hide
+      },
       getCSS: getCSS,
       appendCSS: appendCSS,
       removeCSS: removeCSS,
@@ -275,6 +278,10 @@ UICustomizerDefine('Engine', function () {
       for (let i = 0; i < elms.length; i++) {
          elms[i].remove();
       }
+   }
+
+   function generateCSS_hide(selector) {
+      return `${selector} { display: none !important; }`;
    }
 
    function getCSS(name) {
