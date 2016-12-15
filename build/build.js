@@ -41,7 +41,7 @@ ndk_fn.execute(function* () {
    meta = yield it.parse(meta, metaData);
    script = it.minimize(yield it.parse(script, {
       VERINFO: ', ' + it.getVerInfo(metaData, notes),
-      SETTINGS: ', ' + (yield ndk_fs.readText('script/settings.json')),
+      SETTINGS: ', ' + (yield ndk_fs.readText('script/settings.js')),
       SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject('script/src'))
    }));
    yield ndk_fs.makeDir('bin');
