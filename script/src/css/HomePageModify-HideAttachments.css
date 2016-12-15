@@ -1,0 +1,26 @@
+.np-News__collage:before {
+   content: 'Показать вложения...';
+   color: #8991A9;
+   font-size: 12px;
+}
+
+.np-News__collage {
+   margin-top: 0px;
+   display: inline-block;
+}
+
+.np-News__collage .collage {
+   display: none;
+}
+
+.np-News__collage:hover {
+   display: block;
+   z-index: 1;
+   position: relative;
+}
+
+.np-News__collage:hover .collage {
+   display: block;
+   background: white;
+   border: 1px solid #f4f4f4;
+}

@@ -176,6 +176,12 @@
                         "view": "option",
                         "type": "boolean",
                         "value": false
+                     },
+                     "HideAttachments": {
+                        "title": "Скрыть вложения под спойлер",
+                        "view": "option",
+                        "type": "boolean",
+                        "value": false
                      }
                   }
                },
