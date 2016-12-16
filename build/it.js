@@ -126,7 +126,15 @@ function getDateTime(date) {
 
 function minimize(script) {
    if (ndk_env.argv.minimize) {
-      script = script.replace(/\n/g, ' ').replace(/\r/g, ' ').replace(/\t+/g, ' ').replace(/ +/g, ' ');
+      let s1 = script.length;
+      script = script
+         .replace(/\r/g, ' ')
+         .replace(/\t+/g, ' ')
+         .replace(/  +/g, ' ')
+         .replace(/\n\n+/g, '\n')
+         .replace(/ *\n */g, '\n');
+      let s2 = script.length;
+      console.log('Минимизация:', (((s2 / s1) * 10000) ^ 0) / 100 + '%');
    }
    return script;
 }
