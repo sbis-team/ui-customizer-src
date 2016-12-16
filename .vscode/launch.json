@@ -49,13 +49,6 @@
             "--release",
             "--minimize"
          ]
-      },
-      {
-         "name": "Запустить сервер",
-         "type": "node",
-         "request": "launch",
-         "program": "${workspaceRoot}/server/run.js",
-         "cwd": "${workspaceRoot}"
       }
    ]
 }

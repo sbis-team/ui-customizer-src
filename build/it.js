@@ -1,6 +1,10 @@
 "use strict";
 
 const node_fs = require('fs');
+const node_http = require('http');
+const node_url = require('url');
+const node_os = require('os');
+const node_dns = require('dns');
 
 (() => {
    const node_child = require('child_process');
@@ -151,21 +155,55 @@ function publish(version, build, scriptData, notes) {
 }
 
 function __publish_development(scriptData) {
-   return ndk_fn.execute(function* () {
-      console.log(`Обновляем "development" до v${scriptData.VERSION}`);
-      yield ndk_fs.makeDir('server/bin');
-      yield ndk_fs.copyFile(
-         'bin/development_sbis-ui-customizer.user.js',
-         'server/bin/sbis-ui-customizer.user.js',
-         true
-      );
-      yield ndk_fs.copyFile(
-         'bin/development_sbis-ui-customizer.meta.js',
-         'server/bin/sbis-ui-customizer.meta.js',
-         true
-      );
-      console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
-      return true;
+   return new Promise((resolve, reject) => {
+      const hostname = node_os.hostname();
+      const port = 1777;
+      const server = node_http.createServer(function requestListener(req, res) {
+         ndk_fn.execute(function* () {
+            req.url = node_url.parse(req.url, true);
+            res.end = (function (end) {
+               return function (data, callback) {
+                  node_dns.reverse(req.socket.remoteAddress, (err, hostnames) => {
+                     let addr = hostnames[0] || req.socket.remoteAddress;
+                     console.log(`${addr} ${res.statusCode} ${req.method} ${req.url.href}`);
+                     end.call(res, data);
+                     if (typeof callback === 'function') {
+                        callback();
+                     }
+                  });
+               };
+            })(res.end);
+            switch (req.url.pathname) {
+               case '/sbis-ui-customizer.user.js':
+                  res.setHeader('Content-Type', 'text/js;charset=utf-8');
+                  res.end(yield ndk_fs.readText(`bin/development_sbis-ui-customizer.user.js`), () => {
+                     console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
+                     resolve(true);
+                     setTimeout(process.exit, 100);
+                  });
+                  break;
+               case '/sbis-ui-customizer.meta.js':
+                  res.setHeader('Content-Type', 'text/js;charset=utf-8');
+                  res.end(yield ndk_fs.readText(`bin/development_sbis-ui-customizer.meta.js`));
+                  break;
+               default:
+                  res.setHeader('Content-Type', 'text/plain;charset=utf-8');
+                  res.statusCode = 404;
+                  res.end('404 Not Found');
+            }
+         }).catch(err => {
+            reject(err);
+            res.setHeader('Content-Type', 'text/plain;charset=utf-8');
+            res.statusCode = 500;
+            res.end('500 Internal Server Error');
+         });
+      });
+      server.on('error', function (err) {
+         reject(err);
+      });
+      server.listen(port, hostname, function () {
+         console.log(`Обновить с: http://${hostname}:${port}/sbis-ui-customizer.user.js`);
+      });
    });
 }
 
