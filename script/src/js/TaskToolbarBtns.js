@@ -65,7 +65,11 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
          }
       }
       if (addExtraButtons) {
-         css += Engine.getCSS(moduleName + '-ExtraButtons');
+         let extbtn = Engine.getCSS('TaskToolbarBtns-ExtraButtons');
+         if (moduleName !== 'TaskToolbarBtns') {
+            extbtn = extbtn.replace(/TaskToolbarBtns/g, moduleName);
+         }
+         css += extbtn;
          if (moduleProperty.WaitHandler) {
             Engine.unsubscribeWait('.edo-Dialog_header-ServiceButtons', moduleProperty.WaitHandler);
          }
