@@ -7,7 +7,14 @@ UICustomizerDefine('MRToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Eng
             icon: 'link'
          }
       },
-      ApplyDocTypeName: ['Merge request']
+      ApplyDocTypeName: ['Merge request'],
+      selectors: {
+         'Schedule': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoShowDocTime"]',
+         'Monitoring': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoShowMonitoringDialog"]',
+         'Agreement': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoSendToAgreement"]',
+         'Print': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoPrintDocument"]',
+         'Save': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoSaveDocumentOnDisk"]'
+      }
    };
 
    return {

@@ -18,7 +18,14 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             icon: 'git-commit'
          }
       },
-      ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку']
+      ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку'],
+      selectors: {
+         'Schedule': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoShowDocTime"]',
+         'Monitoring': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoShowMonitoringDialog"]',
+         'Agreement': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSendToAgreement"]',
+         'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoPrintDocument"]',
+         'Save': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSaveDocumentOnDisk"]'
+      }
    };
    var BranchNameUserLogin = '';
    var idReadedUserLogin = false;
@@ -35,13 +42,13 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       group = settings.options.Show;
       for (let name in group.options) {
          if (group.options[name].value) {
-            css += Engine.getCSS(moduleName + '-' + name);
+            css += Engine.generateCSS.inlineBlock(moduleProperty.selectors[name]);
          }
       }
       group = settings.options.Hide;
       for (let name in group.options) {
          if (group.options[name].value) {
-            css += Engine.getCSS(moduleName + '-' + name);
+            css += Engine.generateCSS.displayNone(moduleProperty.selectors[name]);
          }
       }
       group = settings.options.Add;

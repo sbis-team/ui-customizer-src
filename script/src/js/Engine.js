@@ -57,7 +57,8 @@ UICustomizerDefine('Engine', function () {
       createComponent: createComponent,
       removeByQuery: removeByQuery,
       generateCSS: {
-         displayNone: generateCSS_displayNone
+         displayNone: generateCSS_displayNone,
+         inlineBlock: generateCSS_inlineBlock
       },
       getCSS: getCSS,
       appendCSS: appendCSS,
@@ -282,6 +283,10 @@ UICustomizerDefine('Engine', function () {
 
    function generateCSS_displayNone(selector) {
       return `${selector} { display: none !important; }`;
+   }
+
+   function generateCSS_inlineBlock(selector) {
+      return `${selector} { display: inline-block !important; }`;
    }
 
    function getCSS(name) {
