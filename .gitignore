@@ -1,6 +1,7 @@
 # Логи
 logs
 *.log
+npm-debug.log.*
 
 # Каталог зависимостей
 node_modules
