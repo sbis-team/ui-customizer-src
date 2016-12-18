@@ -57,6 +57,7 @@ UICustomizerDefine('Engine', function () {
       createComponent: createComponent,
       removeByQuery: removeByQuery,
       generateCSS: {
+         custom: generateCSS_custom,
          displayNone: generateCSS_displayNone,
          inlineBlock: generateCSS_inlineBlock
       },
@@ -279,6 +280,10 @@ UICustomizerDefine('Engine', function () {
       for (let i = 0; i < elms.length; i++) {
          elms[i].remove();
       }
+   }
+
+   function generateCSS_custom(selector, rule, value) {
+      return `${selector} { ${rule}: ${value}; }`;
    }
 
    function generateCSS_displayNone(selector) {
