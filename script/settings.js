@@ -155,14 +155,20 @@
                      "title": "Новости",
                      "view": "block",
                      "options": {
+                        "HideAuthor": {
+                           "title": "Скрыть автора из списка",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
                         "SmallImg": {
                            "title": "Уменьшить фото новости",
                            "view": "option",
                            "type": "boolean",
                            "value": false
                         },
-                        "HideAuthor": {
-                           "title": "Скрыть автора из списка",
+                        "HideAttachments": {
+                           "title": "Скрыть вложения под спойлер",
                            "view": "option",
                            "type": "boolean",
                            "value": false
@@ -175,12 +181,6 @@
                         },
                         "SlimBorder": {
                            "title": "Тонкие границы новости",
-                           "view": "option",
-                           "type": "boolean",
-                           "value": false
-                        },
-                        "HideAttachments": {
-                           "title": "Скрыть вложения под спойлер",
                            "view": "option",
                            "type": "boolean",
                            "value": false
