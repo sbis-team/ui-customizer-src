@@ -23,6 +23,10 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
             'none !important'
          );
       }
+      let news = settings.options.News.options;
+      if (news.HideAuthor.value && news.HideFooterBtn.value) {
+         css += Engine.getCSS('HomePageModify-FixHeight');
+      }
       if (css) {
          Engine.appendCSS('HomePageModify', css);
       } else {

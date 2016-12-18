@@ -1,0 +1,10 @@
+.sn-NewsPage__oneNews-contentArticle {
+   height: 20px;
+}
+
+.sn-NewsPage__oneNews-contentLogoBrif {
+   min-height: 96px !important;
+   max-height: 96px !important;
+   margin-bottom: 8px !important;
+   overflow: hidden;
+}
