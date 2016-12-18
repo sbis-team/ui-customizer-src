@@ -1,7 +1,7 @@
-div.main-page-News .np-News__itemAll .np-News__footer {
+.sn-NewsPage__oneNews-footer {
    display: none !important;
 }
 
-div.main-page-News .np-News__itemAll {
-   padding: 12px !important;
+.sn-NewsPage__oneNews-itemAll {
+   padding: 3px 12px 3px 12px !important;
 }

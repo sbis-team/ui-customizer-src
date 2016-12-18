@@ -1,25 +1,25 @@
-.np-News__collage:before {
+.sn-NewsPage__oneNews-contentCollage:before {
    content: 'Показать вложения...';
    color: #8991A9;
    font-size: 12px;
 }
 
-.np-News__collage {
+.sn-NewsPage__oneNews-contentCollage {
    margin-top: 0px;
    display: inline-block;
 }
 
-.np-News__collage .collage {
+.sn-NewsPage__oneNews-contentCollage .collage {
    display: none;
 }
 
-.np-News__collage:hover {
+.sn-NewsPage__oneNews-contentCollage:hover {
    display: block;
    z-index: 1;
    position: relative;
 }
 
-.np-News__collage:hover .collage {
+.sn-NewsPage__oneNews-contentCollage:hover .collage {
    display: block;
    background: white;
    border: 1px solid #f4f4f4;

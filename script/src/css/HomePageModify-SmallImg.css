@@ -1,4 +1,8 @@
-img.sn-News__logoNewsImg {
+img.sn-NewsPage__oneNews-contentLogo {
    width: 64px !important;
    height: 64px !important;
+}
+
+div.sn-NewsPage__oneNews-withLogo .sn-NewsPage__oneNews-contentText {
+   margin-left: 70px !important;
 }
