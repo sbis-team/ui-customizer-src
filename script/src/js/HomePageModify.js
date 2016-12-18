@@ -1,4 +1,4 @@
-UICustomizerDefine('HomePageModify', ['Engine'], function(Engine) {
+UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
    "use strict";
 
    return {
@@ -14,6 +14,14 @@ UICustomizerDefine('HomePageModify', ['Engine'], function(Engine) {
                css += Engine.getCSS('HomePageModify-' + name);
             }
          }
+      }
+      let other = settings.options.Other.options;
+      if (other.StretchPage.value || other.HideTapeEvents.value) {
+         css += Engine.generateCSS.custom(
+            '.np-View__twoColumns .sn-NewsPage__oneNews-contentLogo+.sn-NewsPage__oneNews-contentText',
+            'max-width',
+            'none !important'
+         );
       }
       if (css) {
          Engine.appendCSS('HomePageModify', css);
