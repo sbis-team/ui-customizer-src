@@ -5,13 +5,27 @@ const ndk_fs = require('ndk.fs');
 const ndk_src = require('ndk.src');
 
 it.build({
+   name: 'sbis-ui-customizer',
+   meta: 'script/meta.js',
+   script: 'script/script.js',
    notes: 'script/release-notes.json',
    version: 'script/version.json',
    build: {
       development: 'bin/build.json',
       candidate: 'script/build.json'
    },
-   builder: () => { },
+   buildPrefix: {
+      development: 'dev',
+      candidate: 'rc'
+   },
+   builder: script_builder,
+   builderOptions: {
+      icon: 'script/image/script-icon16.png',
+      icon64: 'script/image/script-icon64.png',
+      settings: 'script/settings.js',
+      sources: 'script/src'
+   },
+   outputDir: 'bin',
    publish: {
       repo: 'git@github.com:sbis-team/ui-customizer.git',
       branch: {
@@ -26,6 +40,11 @@ it.build({
       }
    }
 });
+
+function* script_builder(options) {
+   // TODO builder
+   yield console.log('script_builder');
+}
 
 ndk_fn.execute(function* () {
    var notes = yield ndk_fs.readJSON('script/release-notes.json');

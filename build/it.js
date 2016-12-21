@@ -48,8 +48,85 @@ if (ndk_env.argv.candidate) {
    it.mode = 'release';
 }
 
-function it__build(opt) {
+function it__build(options) {
+   it.options = options;
+   ndk_fn.execute(function* () {
+      __log_step('Сборка');
+      it.meta = yield ndk_fs.readText(it.options.meta);
+      it.script = yield ndk_fs.readText(it.options.script);
+      it.notes = yield ndk_fs.readJSON(it.options.notes);
+      it.version = yield ndk_fs.readJSON(it.options.version);
+      if (it.notes.added.length) {
+         it.version.minor += 1;
+         it.version.patch = 0;
+      } else {
+         it.version.patch += 1;
+      }
+      it.version = `${it.version.major}.${it.version.minor}.${it.version.patch}`;
+      it.build = it.options.build[it.mode];
+      if (it.build) {
+         it.build = yield ndk_fs.readJSON(it.build, {});
+         if (isNaN(it.build.number)) {
+            it.build.number = 0;
+         }
+         it.build.number += 1;
+      }
+      it.buildPrefix = it.options.buildPrefix[it.mode];
+      if (it.build && it.buildPrefix) {
+         it.version += `.${it.buildPrefix}${it.build.number}`;
+      }
+      __log_variable(it.version);
+      yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
+      if (it.meta.slice(-1) !== '\n') {
+         it.meta += '\n';
+      }
+      __log_notes(it.notes);
+      __log_step('Запись на диск');
+      yield ndk_fs.makeDir(it.options.outputDir);
+      it.outputName = `${it.options.outputDir}/${it.mode}_${it.options.name}`;
+      it.outputMeta = `${it.outputName}.meta.js`;
+      __log_variable(it.outputMeta);
+      yield ndk_fs.writeText(it.outputMeta, it.meta);
+      it.outputScript = `${it.outputName}.user.js`;
+      __log_variable(it.outputScript);
+      yield ndk_fs.writeText(it.outputScript, it.meta + it.script);
+      // TODO publish
+      console.log('publish');
+   });
+}
 
+function __log_notes(notes) {
+   __log_step('Заметки о выпуске');
+   for (let i in notes) {
+      let group = notes[i];
+      let descr = typeof group.length !== 'undefined' ? group.length : group;
+      if (typeof group.length !== 'undefined') {
+         __log_variable(i, '-', group.length);
+         for (let i = 0; i < group.length; i++) {
+            let note = group[i];
+            if (typeof note === 'string') {
+               __log_text(' -', note);
+            } else {
+               __log_text(' -', ...note);
+            }
+         }
+      } else {
+         __log_variable(i, '-', group);
+      }
+
+   }
+}
+
+function __log_step(title) {
+   process.stdout.write(`***   ${title}   ***\n`);
+}
+
+function __log_variable(...value) {
+   process.stdout.write(`# ${value.join(' ')} \n`);
+}
+
+function __log_text(...value) {
+   process.stdout.write(`${value.join(' ')} \n`);
 }
 
 
