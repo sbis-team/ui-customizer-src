@@ -63,17 +63,17 @@ function it__build(options) {
          it.version.patch += 1;
       }
       it.version = `${it.version.major}.${it.version.minor}.${it.version.patch}`;
-      it.build = it.options.build[it.mode];
-      if (it.build) {
-         it.build = yield ndk_fs.readJSON(it.build, {});
-         if (isNaN(it.build.number)) {
-            it.build.number = 0;
+      it.buildFile = it.options.build[it.mode];
+      if (it.buildFile) {
+         it.buildData = yield ndk_fs.readJSON(it.buildFile, {});
+         if (isNaN(it.buildData.number)) {
+            it.buildData.number = 0;
          }
-         it.build.number += 1;
+         it.buildData.number += 1;
       }
       it.buildPrefix = it.options.buildPrefix[it.mode];
-      if (it.build && it.buildPrefix) {
-         it.version += `.${it.buildPrefix}${it.build.number}`;
+      if (it.buildData && it.buildPrefix) {
+         it.version += `.${it.buildPrefix}${it.buildData.number}`;
       }
       __log_variable(it.version);
       yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
