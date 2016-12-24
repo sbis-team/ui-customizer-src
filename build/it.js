@@ -80,7 +80,7 @@ function it__build(options) {
       if (it.meta.slice(-1) !== '\n') {
          it.meta += '\n';
       }
-      __log_notes(it.notes);
+      __log_notes();
       __log_step('Запись на диск');
       yield ndk_fs.makeDir(it.options.outputDir);
       it.outputName = `${it.options.outputDir}/${it.mode}_${it.options.name}`;
@@ -95,10 +95,10 @@ function it__build(options) {
    });
 }
 
-function __log_notes(notes) {
+function __log_notes() {
    __log_step('Заметки о выпуске');
-   for (let i in notes) {
-      let group = notes[i];
+   for (let i in it.notes) {
+      let group = it.notes[i];
       let descr = typeof group.length !== 'undefined' ? group.length : group;
       if (typeof group.length !== 'undefined') {
          __log_variable(i, '-', group.length);
