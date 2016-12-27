@@ -63,24 +63,42 @@ function it__build(options) {
          it.version.patch += 1;
       }
       it.version = `${it.version.major}.${it.version.minor}.${it.version.patch}`;
-      it.buildFile = it.options.build[it.mode];
+      it.buildFile = it.options.buildFile[it.mode];
       if (it.buildFile) {
-         it.buildData = yield ndk_fs.readJSON(it.buildFile, {});
-         if (isNaN(it.buildData.number)) {
-            it.buildData.number = 0;
+         it.buildNumber = (yield ndk_fs.readJSON(it.buildFile, {})).number;
+         if (isNaN(it.buildNumber)) {
+            it.buildNumber = 0;
          }
-         it.buildData.number += 1;
+         it.buildNumber += 1;
       }
       it.buildPrefix = it.options.buildPrefix[it.mode];
-      if (it.buildData && it.buildPrefix) {
-         it.version += `.${it.buildPrefix}${it.buildData.number}`;
+      if (it.buildNumber && it.buildPrefix) {
+         it.version += `.${it.buildPrefix}${it.buildNumber}`;
       }
       __log_variable(it.version);
       yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
       if (it.meta.slice(-1) !== '\n') {
          it.meta += '\n';
       }
-      __log_notes();
+      __log_step('Заметки о выпуске');
+      for (let i in it.notes) {
+         let group = it.notes[i];
+         let descr = typeof group.length !== 'undefined' ? group.length : group;
+         if (typeof group.length !== 'undefined') {
+            __log_variable(i, '-', group.length);
+            for (let i = 0; i < group.length; i++) {
+               let note = group[i];
+               if (typeof note === 'string') {
+                  __log_text(' -', note);
+               } else {
+                  __log_text(' -', ...note);
+               }
+            }
+         } else {
+            __log_variable(i, '-', group);
+         }
+
+      }
       __log_step('Запись на диск');
       yield ndk_fs.makeDir(it.options.outputDir);
       it.outputName = `${it.options.outputDir}/${it.mode}_${it.options.name}`;
@@ -93,28 +111,6 @@ function it__build(options) {
       // TODO publish
       console.log('publish');
    });
-}
-
-function __log_notes() {
-   __log_step('Заметки о выпуске');
-   for (let i in it.notes) {
-      let group = it.notes[i];
-      let descr = typeof group.length !== 'undefined' ? group.length : group;
-      if (typeof group.length !== 'undefined') {
-         __log_variable(i, '-', group.length);
-         for (let i = 0; i < group.length; i++) {
-            let note = group[i];
-            if (typeof note === 'string') {
-               __log_text(' -', note);
-            } else {
-               __log_text(' -', ...note);
-            }
-         }
-      } else {
-         __log_variable(i, '-', group);
-      }
-
-   }
 }
 
 function __log_step(title) {

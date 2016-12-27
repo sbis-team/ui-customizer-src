@@ -10,7 +10,7 @@ it.build({
    script: 'script/script.js',
    notes: 'script/release-notes.json',
    version: 'script/version.json',
-   build: {
+   buildFile: {
       development: 'bin/build.json',
       candidate: 'script/build.json'
    },
