@@ -42,8 +42,26 @@ it.build({
 });
 
 function* script_builder(options) {
-   // TODO builder
-   yield console.log('script_builder');
+   it.meta = yield it.parse(it.meta, {
+      VERSION: it.version,
+      DATE: it.buildDate,
+      ICON: yield ndk_src.readDataImageBase64(options.icon),
+      ICON64: yield ndk_src.readDataImageBase64(options.icon64)
+   });
+   it.script = yield it.parse(it.script, {
+      VERINFO: ', ' + JSON.stringify({
+         version: it.version,
+         date: it.buildDate,
+         notes: {
+            added: it.notes.added,
+            changed: it.notes.changed,
+            fixed: it.notes.fixed,
+            issues: it.notes.issues
+         }
+      }, null, '   '),
+      SETTINGS: ', ' + (yield ndk_fs.readText(options.settings)),
+      SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject(options.sources))
+   });
 }
 
 ndk_fn.execute(function* () {

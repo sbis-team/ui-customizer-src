@@ -77,9 +77,22 @@ function it__build(options) {
          it.version += `.${it.buildPrefix}${it.buildNumber}`;
       }
       __log_variable(it.version);
+      it.buildDate = getDateTime();
+      __log_variable(it.buildDate);
       yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
       if (it.meta.slice(-1) !== '\n') {
          it.meta += '\n';
+      }
+      if (ndk_env.argv.minimize) {
+         let s1 = it.script.length;
+         it.script = it.script
+            .replace(/\r/g, ' ')
+            .replace(/\t+/g, ' ')
+            .replace(/  +/g, ' ')
+            .replace(/\n\n+/g, '\n')
+            .replace(/ *\n */g, '\n');
+         let s2 = it.script.length;
+         console.log('Минимизация:', (((s2 / s1) * 10000) ^ 0) / 100 + '%');
       }
       __log_step('Заметки о выпуске');
       for (let i in it.notes) {
@@ -121,7 +134,7 @@ function __log_step(title) {
 
 function __log_variable(...value) {
    value[0] = __apply__color(value[0], 'green');
-   process.stdout.write(`# ${value.join(' ')} \n`);
+   process.stdout.write(`* ${value.join(' ')} \n`);
 }
 
 function __log_text(...value) {
