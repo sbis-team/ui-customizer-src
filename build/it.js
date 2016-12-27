@@ -5,6 +5,7 @@ const node_http = require('http');
 const node_url = require('url');
 const node_os = require('os');
 const node_dns = require('dns');
+const node_util = require('util');
 
 (() => {
    const node_child = require('child_process');
@@ -114,15 +115,28 @@ function it__build(options) {
 }
 
 function __log_step(title) {
+   title = __apply__color(__apply__color(title, 'blue'), 'bold');
    process.stdout.write(`***   ${title}   ***\n`);
 }
 
 function __log_variable(...value) {
+   value[0] = __apply__color(value[0], 'green');
    process.stdout.write(`# ${value.join(' ')} \n`);
 }
 
 function __log_text(...value) {
    process.stdout.write(`${value.join(' ')} \n`);
+}
+
+function __apply__color(str, color) {
+   let colors = node_util.inspect.colors;
+   if (color in colors) {
+      let open = colors[color][0];
+      let close = colors[color][1];
+      return `\u001b[${open}m${str}\u001b[${close}m`;
+   } else {
+      return str;
+   }
 }
 
 
