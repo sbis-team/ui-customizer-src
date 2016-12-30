@@ -89,25 +89,7 @@ function* __builder() {
    if (ndk_env.argv.minimize) {
       __minimize();
    }
-   __log_step('Заметки о выпуске');
-   for (let i in it.notes) {
-      let group = it.notes[i];
-      let descr = typeof group.length !== 'undefined' ? group.length : group;
-      if (typeof group.length !== 'undefined') {
-         __log_variable(i, '-', group.length);
-         for (let i = 0; i < group.length; i++) {
-            let note = group[i];
-            if (typeof note === 'string') {
-               __log_text(' -', note);
-            } else {
-               __log_text(' -', ...note);
-            }
-         }
-      } else {
-         __log_variable(i, '-', group);
-      }
-
-   }
+   __buildNotes();
    __log_step('Запись на диск');
    yield ndk_fs.makeDir(it.options.outputDir);
    it.outputName = `${it.options.outputDir}/${it.mode}_${it.options.name}`;
@@ -133,6 +115,36 @@ function __minimize() {
    __log_variable('min: ' + (((s2 / s1) * 10000) ^ 0) / 100 + '%');
 }
 
+function __buildNotes() {
+   __log_step('Заметки о выпуске');
+   it.notesMD = '';
+   it.notesTXT = '';
+   __buildNotes_forEach('Новые возможности', it.notes.added);
+   __buildNotes_forEach('Небольшие изменения', it.notes.changed);
+   __buildNotes_forEach('Исправленные ошибки', it.notes.fixed);
+   __buildNotes_forEach('Выполненные задачи', it.notes.issues);
+}
+
+function __buildNotes_forEach(name, notes) {
+   if (notes.length) {
+      it.notesMD += `#### ${name}\n\n`;
+      it.notesTXT += `${name}\n`;
+      __log_variable(name, '-', notes.length);
+      notes.forEach((note) => {
+         if (note instanceof Array) {
+            let id = note[0].replace(/.*\/(\d+).*/g, '$1');
+            it.notesMD += `* [[issue#${id}](${note[0]})] ${note[1]}\n\n`;
+            it.notesTXT += ` - ${note[0]} - ${note[1]}\n`;
+            __log_text('-', ...note);
+         } else {
+            it.notesMD += `* ${note}\n\n`;
+            it.notesTXT += ` - ${note}\n`;
+            __log_text('-', note);
+         }
+      });
+   }
+}
+
 function __log_step(title) {
    title = __apply__color(__apply__color(title, 'blue'), 'bold');
    process.stdout.write(`***   ${title}   ***\n`);
@@ -144,7 +156,7 @@ function __log_variable(...value) {
 }
 
 function __log_text(...value) {
-   process.stdout.write(`${value.join(' ')} \n`);
+   process.stdout.write(`* ${value.join(' ')} \n`);
 }
 
 function __apply__color(str, color) {
