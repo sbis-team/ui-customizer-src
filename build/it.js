@@ -51,7 +51,9 @@ if (ndk_env.argv.candidate) {
 
 function it__build(options) {
    it.options = options;
-   ndk_fn.execute(__builder);
+   ndk_fn.execute(__builder).catch(err => {
+      console.error(err);
+   });
 }
 
 function* __builder() {
@@ -89,18 +91,33 @@ function* __builder() {
    if (ndk_env.argv.minimize) {
       __minimize();
    }
+   it.script = it.meta + it.script;
    __buildNotes();
    __log_step('Запись на диск');
    yield ndk_fs.makeDir(it.options.outputDir);
-   it.outputName = `${it.options.outputDir}/${it.mode}_${it.options.name}`;
-   it.outputMeta = `${it.outputName}.meta.js`;
+   it.outputPath = `${it.options.outputDir}/${it.mode}_`;
+   it.metaFile = `${it.options.name}.meta.js`;
+   it.outputMeta = it.outputPath + it.metaFile;
    __log_variable(it.outputMeta);
    yield ndk_fs.writeText(it.outputMeta, it.meta);
-   it.outputScript = `${it.outputName}.user.js`;
+   it.scriptFile = `${it.options.name}.user.js`;
+   it.outputScript = it.outputPath + it.scriptFile;
    __log_variable(it.outputScript);
-   yield ndk_fs.writeText(it.outputScript, it.meta + it.script);
-   // TODO publish
-   console.log('publish');
+   yield ndk_fs.writeText(it.outputScript, it.script);
+   __log_step('Публикация');
+   switch (it.options.publish.mode[it.mode]) {
+      case 'local':
+         yield __publish_local();
+         break;
+   }
+   if (it.buildNumber) {
+      __log_step('Запись на диск');
+      __log_variable(it.buildFile);
+      yield ndk_fs.writeJSON(it.buildFile, {
+         number: it.buildNumber
+      });
+   }
+   __log_step('Сборка и обновление успешно завершены');
 }
 
 function __minimize() {
@@ -143,6 +160,53 @@ function __buildNotes_forEach(name, notes) {
          }
       });
    }
+}
+
+function __publish_local() {
+   return new Promise((resolve, reject) => {
+      const hostname = node_os.hostname();
+      const port = 1777;
+      const server = node_http.createServer(function requestListener(req, res) {
+         req.url = node_url.parse(req.url, true);
+         res.end = (function (end) {
+            return function (data, callback) {
+               node_dns.reverse(req.socket.remoteAddress, (err, hostnames) => {
+                  let addr = hostnames[0] || req.socket.remoteAddress;
+                  __log_text(`${addr} ${res.statusCode} ${req.method} ${req.url.href}`);
+                  end.call(res, data);
+                  if (typeof callback === 'function') {
+                     callback();
+                  }
+               });
+            };
+         })(res.end);
+         switch (req.url.pathname) {
+            case `/${it.scriptFile}`:
+               res.setHeader('Content-Type', 'text/js;charset=utf-8');
+               res.end(it.script, () => {
+                  __log_text(`Скрипт "${it.mode}" v${it.version} успешно опубликован`);
+                  resolve(true);
+                  setTimeout(process.exit, 100);
+               });
+               break;
+            case `/${it.metaFile}`:
+               res.setHeader('Content-Type', 'text/js;charset=utf-8');
+               res.end(it.meta);
+               break;
+            default:
+               res.setHeader('Content-Type', 'text/plain;charset=utf-8');
+               res.statusCode = 404;
+               res.end(node_http.STATUS_CODES['404']);
+         }
+      });
+      server.on('error', function (err) {
+         reject(err);
+      });
+      server.listen(port, hostname, function () {
+         __log_text(`Обновить v${it.version} с:`);
+         __log_variable(`http://${hostname}:${port}/${it.scriptFile}`);
+      });
+   });
 }
 
 function __log_step(title) {

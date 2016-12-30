@@ -63,7 +63,7 @@ function* script_builder(options) {
       SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject(options.sources))
    });
 }
-
+/*
 ndk_fn.execute(function* () {
    var notes = yield ndk_fs.readJSON('script/release-notes.json');
    var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
@@ -91,3 +91,4 @@ ndk_fn.execute(function* () {
 }).catch(err => {
    console.error(err);
 });
+*/
