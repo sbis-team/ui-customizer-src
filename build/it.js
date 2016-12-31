@@ -110,6 +110,9 @@ function* __builder() {
       case 'local':
          it.successfully = yield __publish_local();
          break;
+      case 'git':
+         it.successfully = yield __publish_git();
+         break;
    }
    if (!it.successfully) {
       console.error('Сборка и обновление завершились с ошибкой');
@@ -121,6 +124,10 @@ function* __builder() {
       yield ndk_fs.writeJSON(it.buildFile, {
          number: it.buildNumber
       });
+   }
+   if (it.publishMode === 'git') {
+      __log_step('Публикация исходников');
+      yield __publish_self_git();
    }
    __log_step('Сборка и обновление успешно завершены');
 }
@@ -151,7 +158,7 @@ function __buildNotes() {
          it.notesMD;
       it.notesTXT = `Обновление v${it.versionName}\n` +
          it.notesTXT;
-}
+   }
 }
 
 function __buildNotes_forEach(name, notes) {
@@ -218,6 +225,141 @@ function __publish_local() {
          __log_text(`Обновляем "${it.mode}" до v${it.versionName} с:`);
          __log_variable(`http://${hostname}:${port}/${it.scriptFile}`);
       });
+   });
+}
+
+function __publish_git() {
+   const repoDir = `${it.options.outputDir}/${it.options.publish.repoName}`;
+   const metaFile = `${repoDir}/${it.metaFile}`;
+   const scriptFile = `${repoDir}/${it.scriptFile}`;
+   const git = ndk_git.createCL(repoDir);
+   const targetBranch = it.options.publish.branch[it.mode];
+   const notesMode = it.options.publish.notes[it.mode];
+   return ndk_fn.execute(function* () {
+      if (!it.notesMD) {
+         console.error('Необходимо заполнить заметки о выпуске!');
+         return false;
+      }
+      if (it.mode === 'release' && !it.notes.release) {
+         console.error('Необходимо подтвердить обновление release!');
+         return false;
+      }
+      __log_text(`Обновляем "${it.mode}" до v${it.versionName}`);
+      if (!node_fs.existsSync(repoDir)) {
+         __log_variable('git clone', it.options.publish.repo);
+         yield ndk_git.createCL(it.options.outputDir)
+            .clone(it.options.publish.repo);
+      }
+      __log_variable('git fetch');
+      yield git.fetch();
+      __log_variable('git reset');
+      yield git.reset();
+      __log_variable('git rev-parse', '--abbrev-ref', 'HEAD');
+      const branch = yield git['rev-parse']('--abbrev-ref', 'HEAD');
+      if (branch !== targetBranch) {
+         __log_variable('git checkout', targetBranch);
+         yield git.checkout(targetBranch);
+      }
+      __log_variable('git pull');
+      yield git.pull();
+      __log_variable('write', metaFile);
+      yield ndk_fs.writeText(metaFile, it.meta);
+      __log_variable('write', scriptFile);
+      yield ndk_fs.writeText(scriptFile, it.script);
+      switch (notesMode) {
+         case 'README':
+            let text = `## ${it.notesMD}-\n\nCopyright (c) SBIS Team`;
+            let readme = `${repoDir}/README.md`;
+            __log_variable('write', readme);
+            yield ndk_fs.writeText(readme, text);
+            break;
+         case 'CHANGELOG':
+            let changelog = `${repoDir}/CHANGELOG.md`;
+            let clDefaultText = '## История изменений\n\nCopyright (c) SBIS Team';
+            __log_variable('read', changelog);
+            let clText = yield ndk_fs.readText(changelog, clDefaultText);
+            clText = clText.replace(/(История изменений)/, `$1\n\n### ${it.notesMD}-`);
+            __log_variable('write', changelog);
+            yield ndk_fs.writeText(changelog, clText);
+            break;
+      }
+      __log_variable('git add', it.metaFile);
+      yield git.add(it.metaFile);
+      __log_variable('git add', it.scriptFile);
+      yield git.add(it.scriptFile);
+      switch (notesMode) {
+         case 'README':
+            __log_variable('git add', 'README.md');
+            yield git.add('README.md');
+            break;
+         case 'CHANGELOG':
+            __log_variable('git add', 'CHANGELOG.md');
+            yield git.add('CHANGELOG.md');
+            break;
+      }
+      __log_variable('git commit');
+      __log_text(yield git.commit('-m', it.notesTXT));
+      __log_variable('git push');
+      yield git.push();
+      if (branch !== targetBranch) {
+         __log_variable('git checkout', branch);
+         yield git.checkout(branch);
+      }
+      return true;
+   });
+}
+
+function __publish_self_git() {
+   const git = ndk_git.createCL();
+   return ndk_fn.execute(function* () {
+      __log_variable('git fetch');
+      yield git.fetch();
+      __log_variable('git reset');
+      yield git.reset();
+      __log_variable('git pull');
+      yield git.pull();
+      switch (it.mode) {
+         case 'candidate':
+            __log_variable('git add', it.buildFile);
+            yield git.add(it.buildFile);
+            break;
+         case 'release':
+            const buildFile = it.options.buildFile.candidate;
+            __log_variable('write', it.options.notes);
+            yield ndk_fs.writeJSON(it.options.notes, {
+               release: false, added: [], changed: [], fixed: [], issues: []
+            });
+            __log_variable('write', it.options.version);
+            yield ndk_fs.writeJSON(it.options.version, it.version);
+            __log_variable('write', buildFile);
+            yield ndk_fs.writeJSON(buildFile, {
+               number: 0
+            });
+            __log_variable('git add', it.options.notes);
+            yield git.add(it.options.notes);
+            __log_variable('git add', it.options.version);
+            yield git.add(it.options.version);
+            __log_variable('git add', buildFile);
+            yield git.add(buildFile);
+            break;
+      }
+      __log_variable('git commit');
+      __log_text(yield git.commit('-m', it.notesTXT));
+      __log_variable('git push');
+      yield git.push();
+      if (it.mode === 'release') {
+         __log_variable('git rev-parse', '--abbrev-ref', 'HEAD');
+         const oldBranch = yield git['rev-parse']('--abbrev-ref', 'HEAD');
+         const newBranch = `release/v${it.versionName}`;
+         __log_variable('git checkout', '-b', newBranch);
+         yield git.checkout('-b', newBranch);
+         __log_variable('git push', 'origin', newBranch);
+         yield git.push('origin', newBranch);
+         if (oldBranch === 'development') {
+            __log_variable('git checkout', oldBranch);
+            yield git.checkout(oldBranch);
+         }
+      }
    });
 }
 

@@ -28,6 +28,7 @@ it.build({
    outputDir: 'bin',
    publish: {
       repo: 'git@github.com:sbis-team/ui-customizer.git',
+      repoName: 'ui-customizer',
       branch: {
          development: 'development',
          candidate: 'candidate',
@@ -37,6 +38,10 @@ it.build({
          development: 'local',
          candidate: 'git',
          release: 'git'
+      },
+      notes: {
+         candidate: 'README',
+         release: 'CHANGELOG'
       }
    }
 });
