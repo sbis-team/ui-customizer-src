@@ -232,6 +232,9 @@ function __log_variable(...value) {
 }
 
 function __log_text(...value) {
+   for (let i = 0; i < value.length; i++) {
+      value[i] = value[i].replace(/\n/g, '\n* ');
+   }
    process.stdout.write(`* ${value.join(' ')} \n`);
 }
 
