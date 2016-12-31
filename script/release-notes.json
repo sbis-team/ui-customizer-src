@@ -1,7 +1,9 @@
 {
    "release": false,
    "added": [],
-   "changed": [],
+   "changed": [
+      "Тестирование нового скрипта сборки"
+   ],
    "fixed": [],
    "issues": []
 }
