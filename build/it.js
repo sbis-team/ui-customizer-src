@@ -68,7 +68,7 @@ function* __builder() {
    } else {
       it.version.patch += 1;
    }
-   it.version = `${it.version.major}.${it.version.minor}.${it.version.patch}`;
+   it.versionName = `${it.version.major}.${it.version.minor}.${it.version.patch}`;
    it.buildFile = it.options.buildFile[it.mode];
    if (it.buildFile) {
       it.buildNumber = (yield ndk_fs.readJSON(it.buildFile, {})).number;
@@ -79,9 +79,9 @@ function* __builder() {
    }
    it.buildPrefix = it.options.buildPrefix[it.mode];
    if (it.buildNumber && it.buildPrefix) {
-      it.version += `.${it.buildPrefix}${it.buildNumber}`;
+      it.versionName += `.${it.buildPrefix}${it.buildNumber}`;
    }
-   __log_variable(it.version);
+   __log_variable(it.versionName);
    it.buildDate = getDateTime();
    __log_variable(it.buildDate);
    yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
@@ -146,10 +146,10 @@ function __buildNotes() {
    __buildNotes_forEach('Исправленные ошибки', it.notes.fixed);
    __buildNotes_forEach('Выполненные задачи', it.notes.issues);
    if (it.notesMD) {
-      it.notesMD = `Обновление v${it.version}\n\n` +
+      it.notesMD = `Обновление v${it.versionName}\n\n` +
          `Сборка от: ${it.buildDate}\n\n` +
          it.notesMD;
-      it.notesTXT = `Обновление v${it.version}\n` +
+      it.notesTXT = `Обновление v${it.versionName}\n` +
          it.notesTXT;
 }
 }
@@ -196,7 +196,7 @@ function __publish_local() {
             case `/${it.scriptFile}`:
                res.setHeader('Content-Type', 'text/js;charset=utf-8');
                res.end(it.script, () => {
-                  __log_text(`Скрипт "${it.mode}" v${it.version} успешно опубликован`);
+                  __log_text(`Скрипт "${it.mode}" v${it.versionName} успешно опубликован`);
                   resolve(true);
                   setTimeout(process.exit, 100);
                });
@@ -215,7 +215,7 @@ function __publish_local() {
          reject(err);
       });
       server.listen(port, hostname, function () {
-         __log_text(`Обновляем "${it.mode}" до v${it.version} с:`);
+         __log_text(`Обновляем "${it.mode}" до v${it.versionName} с:`);
          __log_variable(`http://${hostname}:${port}/${it.scriptFile}`);
       });
    });

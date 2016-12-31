@@ -43,14 +43,14 @@ it.build({
 
 function* script_builder(options) {
    it.meta = yield it.parse(it.meta, {
-      VERSION: it.version,
+      VERSION: it.versionName,
       DATE: it.buildDate,
       ICON: yield ndk_src.readDataImageBase64(options.icon),
       ICON64: yield ndk_src.readDataImageBase64(options.icon64)
    });
    it.script = yield it.parse(it.script, {
       VERINFO: ', ' + JSON.stringify({
-         version: it.version,
+         version: it.versionName,
          date: it.buildDate,
          notes: {
             added: it.notes.added,
