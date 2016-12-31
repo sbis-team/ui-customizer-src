@@ -140,6 +140,13 @@ function __buildNotes() {
    __buildNotes_forEach('Небольшие изменения', it.notes.changed);
    __buildNotes_forEach('Исправленные ошибки', it.notes.fixed);
    __buildNotes_forEach('Выполненные задачи', it.notes.issues);
+   if (it.notesMD) {
+      it.notesMD = `Обновление v${it.version}\n\n` +
+         `Сборка от: ${it.buildDate}\n\n` +
+         it.notesMD;
+      it.notesTXT = `Обновление v${it.version}\n` +
+         it.notesTXT;
+}
 }
 
 function __buildNotes_forEach(name, notes) {
