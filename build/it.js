@@ -105,10 +105,15 @@ function* __builder() {
    __log_variable(it.outputScript);
    yield ndk_fs.writeText(it.outputScript, it.script);
    __log_step('Публикация');
-   switch (it.options.publish.mode[it.mode]) {
+   it.publishMode = it.options.publish.mode[it.mode];
+   switch (it.publishMode) {
       case 'local':
-         yield __publish_local();
+         it.successfully = yield __publish_local();
          break;
+   }
+   if (!it.successfully) {
+      console.error('Сборка и обновление завершились с ошибкой');
+      return false;
    }
    if (it.buildNumber) {
       __log_step('Запись на диск');
@@ -210,7 +215,7 @@ function __publish_local() {
          reject(err);
       });
       server.listen(port, hostname, function () {
-         __log_text(`Обновить v${it.version} с:`);
+         __log_text(`Обновляем "${it.mode}" до v${it.version} с:`);
          __log_variable(`http://${hostname}:${port}/${it.scriptFile}`);
       });
    });
