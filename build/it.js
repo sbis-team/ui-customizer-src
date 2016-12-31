@@ -232,7 +232,7 @@ function __publish_git() {
    const repoDir = `${it.options.outputDir}/${it.options.publish.repoName}`;
    const metaFile = `${repoDir}/${it.metaFile}`;
    const scriptFile = `${repoDir}/${it.scriptFile}`;
-   const git = ndk_git.createCL(repoDir);
+   const git = ndk_git.createCL(repoDir, __log_text);
    const targetBranch = it.options.publish.branch[it.mode];
    const notesMode = it.options.publish.notes[it.mode];
    return ndk_fn.execute(function* () {
@@ -298,7 +298,7 @@ function __publish_git() {
             break;
       }
       __log_variable('git commit');
-      __log_text(yield git.commit('-m', it.notesTXT));
+      yield git.commit('-m', it.notesTXT);
       __log_variable('git push');
       yield git.push();
       if (branch !== targetBranch) {
@@ -310,7 +310,7 @@ function __publish_git() {
 }
 
 function __publish_self_git() {
-   const git = ndk_git.createCL();
+   const git = ndk_git.createCL(undefined, __log_text);
    return ndk_fn.execute(function* () {
       __log_variable('git fetch');
       yield git.fetch();
@@ -344,7 +344,7 @@ function __publish_self_git() {
             break;
       }
       __log_variable('git commit');
-      __log_text(yield git.commit('-m', it.notesTXT));
+      yield git.commit('-m', it.notesTXT);
       __log_variable('git push');
       yield git.push();
       if (it.mode === 'release') {
@@ -375,6 +375,9 @@ function __log_variable(...value) {
 
 function __log_text(...value) {
    for (let i = 0; i < value.length; i++) {
+      if (Buffer.isBuffer(value[i])) {
+         value[i] = value[i].toString().trim();
+      }
       value[i] = value[i].replace(/\n/g, '\n* ');
    }
    process.stdout.write(`* ${value.join(' ')} \n`);
