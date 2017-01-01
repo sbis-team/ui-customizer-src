@@ -68,32 +68,3 @@ function* script_builder(options) {
       SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject(options.sources))
    });
 }
-/*
-ndk_fn.execute(function* () {
-   var notes = yield ndk_fs.readJSON('script/release-notes.json');
-   var build = it.setBuild(yield ndk_fs.readJSON('bin/build.json', {}));
-   var version = it.setVersion(yield ndk_fs.readJSON('script/version.json', {}), notes);
-   var meta = yield ndk_fs.readText('script/meta.js');
-   var script = yield ndk_fs.readText('script/script.js');
-   var metaData = {};
-   metaData.VERSION = it.getVersionName(version, build);
-   metaData.DATE = it.getDateTime();
-   metaData.ICON = yield ndk_src.readDataImageBase64('script/image/script-icon16.png');
-   metaData.ICON64 = yield ndk_src.readDataImageBase64('script/image/script-icon64.png');
-   meta = yield it.parse(meta, metaData);
-   script = it.minimize(yield it.parse(script, {
-      VERINFO: ', ' + it.getVerInfo(metaData, notes),
-      SETTINGS: ', ' + (yield ndk_fs.readText('script/settings.js')),
-      SOURCES: ', ' + (yield ndk_src.readAsEmbeddedObject('script/src'))
-   }));
-   yield ndk_fs.makeDir('bin');
-   yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.meta.js`, meta);
-   yield ndk_fs.writeText(`bin/${it.mode}_sbis-ui-customizer.user.js`, meta + script);
-   console.log('Скрипт успешно собран v' + metaData.VERSION);
-   if (yield it.publish(version, build, metaData, notes)) {
-      yield ndk_fs.writeJSON('bin/build.json', build);
-   }
-}).catch(err => {
-   console.error(err);
-});
-*/

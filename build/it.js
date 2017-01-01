@@ -34,13 +34,6 @@ const it = module.exports;
 it.build = it__build;
 
 it.parse = parse;
-it.setBuild = setBuild;
-it.setVersion = setVersion;
-it.getVersionName = getVersionName;
-it.getDateTime = getDateTime;
-it.minimize = minimize;
-it.getVerInfo = getVerInfo;
-it.publish = publish;
 
 it.mode = 'development';
 if (ndk_env.argv.candidate) {
@@ -82,7 +75,7 @@ function* __builder() {
       it.versionName += `.${it.buildPrefix}${it.buildNumber}`;
    }
    __log_variable(it.versionName);
-   it.buildDate = getDateTime();
+   it.buildDate = __getDateTime();
    __log_variable(it.buildDate);
    yield ndk_fn.execute(it.options.builder(it.options.builderOptions));
    if (it.meta.slice(-1) !== '\n') {
@@ -130,6 +123,16 @@ function* __builder() {
       yield __publish_self_git();
    }
    __log_step('Сборка и обновление успешно завершены');
+}
+
+function __getDateTime(date) {
+   date = date || new Date();
+   return ('0' + date.getDate()).slice(-2) + '.' +
+      ('0' + (date.getMonth() + 1)).slice(-2) + '.' +
+      date.getFullYear() + ' ' +
+      ('0' + date.getHours()).slice(-2) + ':' +
+      ('0' + date.getMinutes()).slice(-2) + ':' +
+      ('0' + date.getSeconds()).slice(-2);
 }
 
 function __minimize() {
@@ -305,6 +308,7 @@ function __publish_git() {
          __log_variable('git checkout', branch);
          yield git.checkout(branch);
       }
+      __log_text(`Скрипт "${it.mode}" v${it.versionName} успешно опубликован`);
       return true;
    });
 }
@@ -424,84 +428,6 @@ function parse(tmpl, data) {
       }
       return tmpl;
    });
-}
-
-function setBuild(data) {
-   if (!('number' in data)) {
-      data.number = 0;
-   }
-   data.number += 1;
-   return data;
-}
-
-function setVersion(version, notes) {
-   if (notes.added.length) {
-      version.minor += 1;
-      version.patch = 0;
-   } else {
-      version.patch += 1;
-   }
-   return version;
-}
-
-function getVersionName(version, build) {
-   var ver = `${version.major}.${version.minor}.${version.patch}`;
-   switch (it.mode) {
-      case 'development':
-         return `${ver}.dev${build.number}`;
-      case 'candidate':
-         return `${ver}.rc${build.number}`;
-      default:
-         return ver;
-   }
-}
-
-function getDateTime(date) {
-   date = date || new Date();
-   return ('0' + date.getDate()).slice(-2) + '.' +
-      ('0' + (date.getMonth() + 1)).slice(-2) + '.' +
-      date.getFullYear() + ' ' +
-      ('0' + date.getHours()).slice(-2) + ':' +
-      ('0' + date.getMinutes()).slice(-2) + ':' +
-      ('0' + date.getSeconds()).slice(-2);
-}
-
-function minimize(script) {
-   if (ndk_env.argv.minimize) {
-      let s1 = script.length;
-      script = script
-         .replace(/\r/g, ' ')
-         .replace(/\t+/g, ' ')
-         .replace(/  +/g, ' ')
-         .replace(/\n\n+/g, '\n')
-         .replace(/ *\n */g, '\n');
-      let s2 = script.length;
-      console.log('Минимизация:', (((s2 / s1) * 10000) ^ 0) / 100 + '%');
-   }
-   return script;
-}
-
-function getVerInfo(scriptData, notes) {
-   return JSON.stringify({
-      version: scriptData.VERSION,
-      date: scriptData.DATE,
-      notes: {
-         added: notes.added,
-         changed: notes.changed,
-         fixed: notes.fixed,
-         issues: notes.issues
-      }
-   }, null, '   ');
-}
-
-function publish(version, build, scriptData, notes) {
-   switch (it.mode) {
-      case 'development':
-         return __publish_development(scriptData);
-      case 'candidate':
-      case 'release':
-         return __publish_release(version, build, scriptData, notes);
-   }
 }
 
 function __publish_development(scriptData) {
