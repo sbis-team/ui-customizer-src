@@ -2,11 +2,15 @@
 .sn-NewsPage__oneNews-headerName,
 .sn-NewsPage__oneNews-headerPosition,
 .sn-NewsPage__oneNews-headerDestination,
-.sn-NewsPage__oneNews-header .activity__ActivityMarker,
 .sn-NewsPage__repostHeader .sn-NewsPage__oneNews-headerDate,
 .sn-NewsPage__oneNews-itemAll .sn-NewsPage__oneNews-repostComment,
-.sn-NewsPage__oneNews-itemAll .sn-RepostIcon {
+.sn-NewsPage__oneNews-itemAll .sn-RepostIcon,
+.sn-NewsPage__oneNews-itemAll .activity__ActivityMarker {
    display: none !important;
+}
+
+.sn-NewsPage__oneNews>.sn-NewsPage__oneNews-itemAll {
+   padding: 3px 6px 3px 6px !important;
 }
 
 .sn-NewsPage__oneNews-headerTop,
@@ -14,9 +18,26 @@
    z-index: 1;
 }
 
+.sn-NewsPage__oneNews-header {
+   margin: 0px !important;
+}
+
+.sn-NewsPage__repostHeader,
 .sn-NewsPage__oneNews-header,
 .sn-NewsPage__oneNews-headerTop {
    height: auto !important;
+}
+
+.sn-NewsPage .controls-ItemsToolbar {
+   top: 8px !important;
+}
+
+.sn-NewsPage__oneNews-headerRead {
+   top: 0 !important;
+   margin-top: 0 !important;
+   background-color: #fff;
+   line-height: 16px;
+   padding-left: 80px;
 }
 
 .sn-NewsPage__oneNews-contentButtons div {
