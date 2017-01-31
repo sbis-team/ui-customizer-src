@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Dialog</title>
+   <style>
+      body {
+         background: white;
+         margin: 16px;
+      }
+      
+      .hide {
+         display: none;
+      }
+      /* Dialog */
+      
+      .uiczer-dialog {
+         background: white;
+      }
+      /* * */
+   </style>
+</head>
+
+<body>
+   <button id="btn1">show Dialog#1</button>
+   <div id="dlg1" class="hide uiczer-dialog"> </div>
+</body>
+<script>
+   window.onload = function () {
+      'use strict';
+      document.body.querySelector('btn1').oncick = function () {
+         document.querySelector('dlg1').classList.remove('hide');
+      }
+
+   };
+</script>
+
+</html>
