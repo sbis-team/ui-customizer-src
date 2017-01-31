@@ -6,17 +6,103 @@
    <title>Dialog</title>
    <style>
       body {
-         background: white;
+         background: #fff;
          margin: 16px;
       }
       
       .hide {
          display: none;
       }
+      
+       :root {
+         --main-bg: rgb(63, 81, 181);
+         --main-color: rgba(255, 255, 255, 0.87);
+         --accent-color: rgb(255, 171, 64);
+         --content-tcolor: #757575;
+      }
+      /* Buttons */
+      
+      .uiczer-button {
+         cursor: pointer;
+         min-height: 36px;
+         min-width: 88px;
+         line-height: 36px;
+         vertical-align: middle;
+         text-align: center;
+         border-radius: 2px;
+         box-sizing: border-box;
+         user-select: none;
+         outline: none;
+         border: 0;
+         padding: 0 6px;
+         margin: 6px 8px;
+         background: transparent;
+         color: currentColor;
+         white-space: nowrap;
+         font-weight: 500;
+         font-size: 14px;
+         font-style: inherit;
+         font-variant: inherit;
+         font-family: inherit;
+         text-decoration: none;
+         overflow: hidden;
+         transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), background-color .4s cubic-bezier(.25, .8, .25, 1);
+      }
+      
+      .uiczer-button:not([disabled]):hover {
+         background-color: rgba(158, 158, 158, 0.2);
+      }
+      
+      .uiczer-button-close {
+         font-weight: normal;
+         font-size: 36px;
+         min-width: 36px;
+      }
+      /* * */
       /* Dialog */
       
       .uiczer-dialog {
-         background: white;
+         z-index: 7000000;
+         position: fixed;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         background-color: rgba(33, 33, 33, .48);
+      }
+      
+      .uiczer-dialog__container {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         border-radius: 3px;
+         overflow: hidden;
+         box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 13px 19px 2px rgba(0, 0, 0, .14), 0 5px 24px 4px rgba(0, 0, 0, .12);
+      }
+      
+      .uiczer-dialog__header {
+         background-color: var(--main-bg);
+         color: var(--main-color);
+         height: 64px;
+         padding: 0 8px 0 16px;
+         display: flex;
+         align-items: center;
+         box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+      }
+      
+      .uiczer-dialog__header-flex {
+         flex: 1;
+      }
+      
+      .uiczer-dialog__title {
+         font-size: 20px;
+      }
+      
+      .uiczer-dialog__content {
+         min-height: 64px;
+         min-width: 256px;
+         background-color: #EFEFEF;
       }
       /* * */
    </style>
@@ -24,15 +110,26 @@
 
 <body>
    <button id="btn1">show Dialog#1</button>
-   <div id="dlg1" class="hide uiczer-dialog"> </div>
+   <div id="dlg1" class="hide1 uiczer-dialog">
+      <div class="uiczer-dialog__container">
+         <div class="uiczer-dialog__header">
+            <span class="uiczer-dialog__title">Dialog 1</span>
+            <span class="uiczer-dialog__header-flex"></span>
+            <button id="btn1_cls" class="uiczer-button uiczer-button-close">×</button>
+         </div>
+         <div class="uiczer-dialog__content"></div>
+      </div>
+   </div>
 </body>
 <script>
    window.onload = function () {
       'use strict';
-      document.body.querySelector('btn1').oncick = function () {
-         document.querySelector('dlg1').classList.remove('hide');
+      document.body.querySelector('#btn1').onclick = function () {
+         document.querySelector('#dlg1').classList.remove('hide');
       }
-
+      document.body.querySelector('#btn1_cls').onclick = function () {
+         document.querySelector('#dlg1').classList.add('hide');
+      }
    };
 </script>
 
