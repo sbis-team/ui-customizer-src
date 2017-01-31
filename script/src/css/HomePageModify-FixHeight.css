@@ -2,9 +2,18 @@
    height: 20px;
 }
 
+.sn-NewsPage__oneNews-contentLogoBrif,
+.sn-NewsPage__oneNews-contentText:not(.sn-NewsPage__oneNews-NewsOnlyMedia) {
+   min-height: 100px !important;
+   max-height: 100px !important;
+}
+
 .sn-NewsPage__oneNews-contentLogoBrif {
-   min-height: 96px !important;
-   max-height: 96px !important;
-   margin-bottom: 8px !important;
+   margin-bottom: 2px !important;
    overflow: hidden;
+}
+
+.sn-NewsPage__oneNews-itemAll,
+.sn-NewsPage__oneNews {
+   min-height: 156px;
 }

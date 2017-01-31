@@ -5,11 +5,14 @@
 }
 
 .sn-NewsPage__oneNews-contentCollage {
+   height: auto !important;
    margin-top: 0px;
    display: inline-block;
+   margin: 0px 0px 2px 0px !important;
 }
 
-.sn-NewsPage__oneNews-contentCollage .collage {
+.sn-NewsPage__oneNews-contentCollage .socnet-collage,
+.sn-NewsPage__oneNews-contentCollage .socnet-collage__content {
    display: none;
 }
 
@@ -19,7 +22,8 @@
    position: relative;
 }
 
-.sn-NewsPage__oneNews-contentCollage:hover .collage {
+.sn-NewsPage__oneNews-contentCollage:hover .socnet-collage,
+.sn-NewsPage__oneNews-contentCollage:hover .socnet-collage__content {
    display: block;
    background: white;
    border: 1px solid #f4f4f4;

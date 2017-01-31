@@ -6,3 +6,14 @@ img.sn-NewsPage__oneNews-contentLogo {
 div.sn-NewsPage__oneNews-withLogo {
    margin-left: 74px !important;
 }
+
+.sn-NewsPage__oneNews-contentLogoBrif,
+.sn-NewsPage__oneNews-contentText:not(.sn-NewsPage__oneNews-NewsOnlyMedia) {
+   min-height: 64px !important;
+   max-height: 64px !important;
+}
+
+.sn-NewsPage__oneNews-itemAll,
+.sn-NewsPage__oneNews {
+   min-height: 120px !important;
+}
