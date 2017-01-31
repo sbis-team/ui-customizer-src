@@ -32,6 +32,18 @@
    top: 8px !important;
 }
 
+.sn-NewsPage .sn-DraftIcon,
+.sn-NewsPage .sn-FavoriteIcon,
+.sn-NewsPage .sn-PinIcon {
+   top: -4px !important;
+   right: 88px !important;
+}
+
+.np-View__twoColumns .np-News__item[style*="left: 0px"] .sn-DraftIcon,
+.np-View__twoColumns .np-News__item[style*="left: 0px"] .sn-FavoriteIcon {
+   right: 85px !important;
+}
+
 .sn-NewsPage__oneNews-headerRead {
    top: 0 !important;
    margin-top: 0 !important;

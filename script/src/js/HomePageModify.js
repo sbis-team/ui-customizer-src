@@ -19,6 +19,13 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
             }
          }
       }
+      if (news.HideAuthor.value && news.SlimBorder.value) {
+         css += Engine.generateCSS.custom(
+            '.sn-NewsPage .sn-DraftIcon, .sn-NewsPage .sn-FavoriteIcon, .sn-NewsPage .sn-PinIcon',
+            'top',
+            '0px !important'
+         );
+      }
       let other = settings.options.Other.options;
       if (other.StretchPage.value || other.HideTapeEvents.value) {
          css += Engine.generateCSS.custom(
