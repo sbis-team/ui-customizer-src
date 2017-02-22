@@ -1,9 +1,7 @@
 {
    "release": false,
    "added": [],
-   "changed": [
-      "В связи с новостью о закрытии inside, теперь плагин работает и на online.sbis.ru"
-   ],
+   "changed": [],
    "fixed": [],
    "issues": []
 }
