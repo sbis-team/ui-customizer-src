@@ -246,28 +246,31 @@ UICustomizerDefine('Engine', function () {
       }
    }
 
-   function getHTML(name) {
+   function getHTML(name, data) {
       name += '.xhtml';
       if (name in sources.xhtml) {
-         return sources.xhtml[name];
+         let xhtml = sources.xhtml[name];
+         if (data) {
+            xhtml = xhtml.replace(htmlre, function (str, key) {
+               return key in data ? data[key] : str;
+            });
+         }
+         return xhtml;
       } else {
          throw Error('Неизвестное имя файла: ' + name);
       }
    }
 
    function createElement(name, data) {
-      var html = getHTML(name);
+      var html = getHTML(name, data);
       var cnt = document.createElement('div');
-      html = html.replace(htmlre, function (str, key) {
-         return key in data ? data[key] : str;
-      });
       cnt.className = 'SBIS-UI-Customizer ' + name;
       cnt.innerHTML = html;
       return cnt;
    }
 
-   function createComponent(name) {
-      var html = getHTML(name);
+   function createComponent(name, data) {
+      var html = getHTML(name, data);
       var cnt = document.createElement('div');
       cnt.id = 'SBIS-UI-Customizer-' + name;
       cnt.className = 'SBIS-UI-Customizer';

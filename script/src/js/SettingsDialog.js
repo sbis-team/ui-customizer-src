@@ -11,7 +11,10 @@ UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, Soc
    };
 
    function open() {
-      document.querySelector('div[templatename="js!SBIS3.AccountsManagement.UserPanel"]').wsControl.hide();
+      var up = document.querySelector('div[templatename="js!SBIS3.AccountsManagement.UserPanel"]');
+      if (up) {
+         up.wsControl.hide();
+      }
       if (dialog) {
          dialog.style.display = '';
       } else {

@@ -5,7 +5,7 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
    var ChatUUID = '3af31f44-c91a-4bbf-8470-3dd423f0b6eb';
    var AuthorUUID = 'd7dde799-21cb-49ea-89cf-de56e4f7f78b';
 
-   if (location.host === 'test-inside.tensor.ru') {
+   if (location.host === 'test-online.sbis.ru') {
       GroupUUID = 'ceeeedd4-8d0e-4dd0-9635-88f1758c3ef3';
       ChatUUID = '83adaca3-d02b-490b-bbbf-95ce9953797d';
       AuthorUUID = '8cab8a51-da51-40fd-bef3-6f090edbdeaa';
@@ -22,12 +22,12 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
 
    function getFeedbackButtons() {
       if (!feedbackButtons) {
-         feedbackButtons = Engine.getHTML('SocNet-FeedbackButtons');
-         feedbackButtons = feedbackButtons
-            .replace(/\{\{LikeIt\}\}/, Engine.getSVG('thumbsup'))
-            .replace(/\{\{SendQuestion\}\}/, Engine.getSVG('comment-discussion'))
-            .replace(/\{\{SendFeedback\}\}/, Engine.getSVG('megaphone'))
-            .replace(/\{\{ReportError\}\}/, Engine.getSVG('bug'));
+         feedbackButtons = Engine.getHTML('SocNet-FeedbackButtons', {
+            'LikeIt': Engine.getSVG('thumbsup'),
+            'SendQuestion': Engine.getSVG('comment-discussion'),
+            'SendFeedback': Engine.getSVG('megaphone'),
+            'ReportError': Engine.getSVG('bug')
+         });
       }
       return feedbackButtons;
    }
@@ -54,9 +54,10 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
    function _showInputDialog(title, hint, callback) {
       var dlg = document.createElement('div');
       dlg.className = "SBIS-UI-Customizer-SocNet-InputDialog";
-      dlg.innerHTML = Engine.getHTML('SocNet-InputDialog')
-         .replace(/\{\{title\}\}/, title)
-         .replace(/\{\{hint\}\}/, hint);
+      dlg.innerHTML = Engine.getHTML('SocNet-InputDialog', {
+         'title': title,
+         'hint': hint
+      });
       dlg.children[3].onkeydown = function (event) {
          if (event.ctrlKey && event.keyCode === 13) {
             if (dlg.children[3].value) {

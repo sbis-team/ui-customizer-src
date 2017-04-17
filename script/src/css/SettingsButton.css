@@ -16,11 +16,49 @@
    background: #F0F4FB;
 }
 
-#SBIS-UI-Customizer-SettingsButton .icon-16 {
+#SBIS-UI-Customizer-SettingsButton .icon {
    float: left;
-   margin: 1px 0px 0 15px;
+   margin: 2px 0px 0 15px;
+   height: 16px;
+   width: 16px;
 }
 
 #SBIS-UI-Customizer-SettingsButton .title {
    margin-left: 37px;
+}
+
+#SBIS-UI-Customizer-SettingsButton .title:hover {
+   color: #313E78;
+}
+
+#SBIS-UI-Customizer-SettingsButton-Header {
+   float: right;
+   margin-right: 8px;
+   margin-top: 2px;
+}
+
+#SBIS-UI-Customizer-SettingsButton-Header .icon {
+   height: 16px;
+   width: 16px;
+   cursor: pointer;
+}
+
+#SBIS-UI-Customizer-SettingsButton .icon>svg,
+#SBIS-UI-Customizer-SettingsButton-Header .icon>svg {
+   fill: #587AB0;
+}
+
+#SBIS-UI-Customizer-SettingsButton .icon>svg>g,
+#SBIS-UI-Customizer-SettingsButton-Header .icon>svg>g {
+   stroke: #587AB0;
+}
+
+#SBIS-UI-Customizer-SettingsButton .icon:hover>svg,
+#SBIS-UI-Customizer-SettingsButton-Header .icon:hover>svg {
+   fill: #313E78;
+}
+
+#SBIS-UI-Customizer-SettingsButton .icon:hover>svg>g,
+#SBIS-UI-Customizer-SettingsButton-Header .icon:hover>svg>g {
+   stroke: #313E78;
 }
