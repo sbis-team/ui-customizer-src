@@ -1,0 +1,4 @@
+#header [sbisname="ConfigurationLink"] .controls-Link__field,
+#header div.user-button-component .controls-Link__field {
+   display: none !important;
+}

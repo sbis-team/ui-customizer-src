@@ -185,16 +185,21 @@
                            "view": "option",
                            "type": "boolean",
                            "value": false
-                        }
+                        },
                         /*
-                        ,
                         "HideTapeEvents": {
                            "title": "Скрыть ленту событий",
                            "view": "option",
                            "type": "boolean",
                            "value": false
-                        }
+                        },
                         */
+                        "HideHeaderText": {
+                           "title": "Скрыть текст кнопок в шапке",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        }
                      }
                   }
                }
