@@ -1,8 +1,14 @@
-#sideRight,
 div.news-SpecialNews[sbisname="SpecialNewsRight"] {
    display: none !important;
 }
 
 #min-width {
    max-width: none;
+}
+
+@media screen and (min-width: 1618px) {
+   .online-OnlineBaseInnerView__notificationCenter {
+      left: inherit !important;
+      right: 17px !important;
+   }
 }

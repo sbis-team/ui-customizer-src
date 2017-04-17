@@ -138,6 +138,7 @@
                "view": "group",
                "module": "HomePageModify",
                "options": {
+                  /*
                   "News": {
                      "title": "Новости",
                      "view": "block",
@@ -174,6 +175,7 @@
                         }
                      }
                   },
+                  */
                   "Other": {
                      "title": "Прочее",
                      "view": "block",
