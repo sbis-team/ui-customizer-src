@@ -271,7 +271,7 @@ function __publish_git() {
       yield ndk_fs.writeText(scriptFile, it.script);
       switch (notesMode) {
          case 'README':
-            let text = `## ${it.notesMD}-\n\nCopyright (c) SBIS Team`;
+            let text = `## ${it.notesMD}---\n\nCopyright (c) SBIS Team`;
             let readme = `${repoDir}/README.md`;
             __log_variable('write', readme);
             yield ndk_fs.writeText(readme, text);
