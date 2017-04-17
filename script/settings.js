@@ -186,6 +186,12 @@
                            "type": "boolean",
                            "value": false
                         },
+                        "TapeEventsMinFoto": {
+                           "title": "Уменьшить фото в ленте событий",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
                         /*
                         "HideTapeEvents": {
                            "title": "Скрыть ленту событий",
