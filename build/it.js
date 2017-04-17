@@ -281,7 +281,7 @@ function __publish_git() {
             let clDefaultText = '## История изменений\n\nCopyright (c) SBIS Team';
             __log_variable('read', changelog);
             let clText = yield ndk_fs.readText(changelog, clDefaultText);
-            clText = clText.replace(/(История изменений)/, `$1\n\n### ${it.notesMD}-`);
+            clText = clText.replace(/(История изменений)/, `$1\n\n### ${it.notesMD}---`);
             __log_variable('write', changelog);
             yield ndk_fs.writeText(changelog, clText);
             break;
