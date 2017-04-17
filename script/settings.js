@@ -249,6 +249,18 @@
                            "view": "option",
                            "type": "boolean",
                            "value": false
+                        },
+                        "LinkOld": {
+                           "title": "Получить ссылку (старая)",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
+                        "Delete": {
+                           "title": "Удалить",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
                         }
                      }
                   },
@@ -330,6 +342,18 @@
                            "view": "option",
                            "type": "boolean",
                            "value": false
+                        },
+                        "LinkOld": {
+                           "title": "Получить ссылку (старая)",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
+                        "Delete": {
+                           "title": "Удалить",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
                         }
                      }
                   },
@@ -394,6 +418,18 @@
                         },
                         "Save": {
                            "title": "Скачать",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
+                        "LinkOld": {
+                           "title": "Получить ссылку (старая)",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
+                        },
+                        "Delete": {
+                           "title": "Удалить",
                            "view": "option",
                            "type": "boolean",
                            "value": false

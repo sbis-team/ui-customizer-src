@@ -24,7 +24,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
          'Monitoring': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoShowMonitoringDialog"]',
          'Agreement': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSendToAgreement"]',
          'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoPrintDocument"]',
-         'Save': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSaveDocumentOnDisk"]'
+         'Save': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSaveDocumentOnDisk"]',
+         'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoGetLink"]',
+         'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoDeleteDocument"]'
       }
    };
    var BranchNameUserLogin = '';
@@ -227,6 +229,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             console.error(PARSE_ERROR);
          }
       }
+
       function checkEvent(e, fieldName, val) {
          /*jshint -W040 */
          if (fieldName === 'record' && val.getIdProperty() === '@Документ') {
@@ -234,6 +237,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             check(val);
          }
       }
+
       function check(record) {
          let docName = record.get('РП.Документ').get('Регламент').get('Название');
          if (moduleProperty.ApplyDocTypeName && ~moduleProperty.ApplyDocTypeName.indexOf(docName)) {
@@ -261,7 +265,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             if (record) {
                return check(record);
             }
-         } catch (e) { }
+         } catch (e) {}
       }
       checkControl();
    }

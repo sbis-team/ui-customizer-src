@@ -13,7 +13,9 @@ UICustomizerDefine('MRToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Eng
          'Monitoring': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoShowMonitoringDialog"]',
          'Agreement': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoSendToAgreement"]',
          'Print': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoPrintDocument"]',
-         'Save': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoSaveDocumentOnDisk"]'
+         'Save': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoSaveDocumentOnDisk"]',
+         'LinkOld': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoGetLink"]',
+         'Delete': 'div.SBIS-UI-Customizer.MRToolbarBtns i[data-id="edoDeleteDocument"]'
       }
    };
 
