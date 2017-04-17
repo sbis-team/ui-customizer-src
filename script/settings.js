@@ -130,19 +130,6 @@
                            "value": false
                         }
                      }
-                  },
-                  "Notice": {
-                     "title": "Уведомления",
-                     "view": "block",
-                     "module": "HideNotice",
-                     "options": {
-                        "SBISPlugin": {
-                           "title": "Об отсутствии СБИС Плагина",
-                           "view": "option",
-                           "type": "boolean",
-                           "value": false
-                        }
-                     }
                   }
                }
             },

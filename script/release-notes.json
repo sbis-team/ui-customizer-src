@@ -2,6 +2,8 @@
    "release": false,
    "added": [],
    "changed": [],
-   "fixed": [],
+   "fixed": [
+      "Поправил настройки под новый онлайн"
+   ],
    "issues": []
 }
