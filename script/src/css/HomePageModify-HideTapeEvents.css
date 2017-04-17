@@ -1,3 +1,11 @@
 .online-OnlineBaseInnerView__notificationCenter {
    display: none !important;
 }
+
+.online-OnlineBaseInnerView__notificationButton {
+   display: none !important;
+}
+
+#headerLeft {
+   display: block !important;
+}
