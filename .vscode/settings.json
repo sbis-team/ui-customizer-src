@@ -4,5 +4,6 @@
    "editor.detectIndentation": false,
    "search.exclude": {
       "**/bin": true
-   }
+   },
+   "jshint.config": null
 }
