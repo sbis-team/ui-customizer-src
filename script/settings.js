@@ -285,14 +285,12 @@
                            "type": "boolean",
                            "value": false
                         },
-                        /*
                         "СommitMsg": {
                            "title": "Комментарий для коммита",
                            "view": "option",
                            "type": "boolean",
                            "value": false
                         },
-                        */
                         "TaskURL": {
                            "title": "Ссылка на задачу",
                            "view": "option",
