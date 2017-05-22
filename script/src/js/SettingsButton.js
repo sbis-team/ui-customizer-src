@@ -19,6 +19,12 @@ UICustomizerDefine('SettingsButton', ['Engine'], function (Engine) {
          });
          elm.parentElement.insertBefore(container, elm);
       });
+      Engine.waitOnce('.engine-OnlineBaseInnerMinCoreView__headerCell .header-ConfigurationButton', function (elm) {
+         var container = Engine.createComponent('SettingsButton-Header', {
+            icon: Engine.getSVG('settings')
+         });
+         elm.parentElement.insertBefore(container, elm);
+      });
    }
 
 });

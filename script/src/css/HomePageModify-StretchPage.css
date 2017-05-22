@@ -1,8 +1,9 @@
-div.news-SpecialNews[sbisname="SpecialNewsRight"] {
+div.news-SpecialNews {
    display: none !important;
 }
 
-#min-width {
+#min-width,
+.engine-OnlineBaseInnerMinCoreView__content {
    max-width: none;
 }
 

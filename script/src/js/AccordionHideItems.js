@@ -2,19 +2,19 @@ UICustomizerDefine('AccordionHideItems', ['Engine'], function (Engine) {
    "use strict";
 
    const selectors = {
-      'Documents': '#leftInfoBlocks div[data-id="documents"]',
-      'Staff': '#leftInfoBlocks div[data-id="staff"]',
-      'Tasks': '#leftInfoBlocks div[data-id="work"]',
-      'Contacts': '#leftInfoBlocks div[data-id="contacts"]',
-      'Calendar': '#leftInfoBlocks div[data-id="calendar"]',
-      'MyPage': '#leftInfoBlocks div[data-id="myProfile"]',
-      'Company': '#leftInfoBlocks div[data-id="contragents"]',
-      'Business': '#leftInfoBlocks div[data-id="business"]',
-      'Accounting': '#leftInfoBlocks div[data-id="accounting"]',
-      'UTS': '#leftInfoBlocks div[data-id="ca_navication"]',
-      'Telephony': '#leftInfoBlocks div[data-id="tel"]',
-      'Retail': '#leftInfoBlocks div[data-id="retail"]',
-      'Presto': '#leftInfoBlocks div[data-id="presto"]'
+      'Documents': '.nav-menu-container a[data-id="documents"]',
+      'Staff': '.nav-menu-container a[data-id="staff"]',
+      'Tasks': '.nav-menu-container a[data-id="work"]',
+      'Contacts': '.nav-menu-container a[data-id="contacts"]',
+      'Calendar': '.nav-menu-container a[data-id="calendar"]',
+      'MyPage': '.nav-menu-container a[data-id="myProfile"]',
+      'Company': '.nav-menu-container a[data-id="contragents"]',
+      'Business': '.nav-menu-container a[data-id="business"]',
+      'Accounting': '.nav-menu-container a[data-id="accounting"]',
+      'UTS': '.nav-menu-container a[data-id="ca_navication"]',
+      'Telephony': '.nav-menu-container a[data-id="tel"]',
+      'Retail': '.nav-menu-container a[data-id="retail"]',
+      'Presto': '.nav-menu-container a[data-id="presto"]'
    };
 
    return {

@@ -4,10 +4,10 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
    const selectors = {
       'Owl': 'div[data-component="SBIS3.Engine.HowEasy"]',
       'AsJust': `
-         .componentCommandsPannelArea i[sbisname="ExpandOurOrg"],
+         .ExpandOurOrg__div,
          .middle__OurOrgHowEasy
       `,
-      'SideRight': '#sideRight, div.news-SpecialNews[sbisname="SpecialNewsRight"]'
+      'SideRight': 'div.news-SpecialNews'
    };
 
    return {
