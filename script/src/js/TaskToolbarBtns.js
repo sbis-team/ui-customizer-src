@@ -108,7 +108,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             text =
                docName + ' № ' +
                record.get('Номер') +
-               ' v' + _extractVersionName(record.get('Вехи')) + ' от ' +
+               ' v' + _extractVersionName(record.get('РП.ВехаДокумента')) + ' от ' +
                Engine.getDate(record.get('ДокументРасширение.ДатаВремяСоздания')) + ' ' +
                record.get('ЛицоСоздал.Название') + '\n' +
                location.protocol + '//' +
@@ -131,7 +131,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             }
             msg = 'Имя ветки скопировано в буфер обмена';
             text =
-               _extractVersionName(record.get('Вехи')) + '/' +
+               _extractVersionName(record.get('РП.ВехаДокумента')) + '/' +
                (record.get('РП.Документ').get('Регламент').get('Название') === 'Ошибка в разработку' ? 'bugfix' : 'feature') + '/' +
                (BranchNameUserLogin ? BranchNameUserLogin + '/' : '') +
                record.get('Номер');
@@ -161,7 +161,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       let versionName = 'dev';
       let version = Infinity;
       milestones.each(function (record) {
-         let curNames = record.get('Название').replace(/[ \(\)]/g, '\n').split('\n');
+         let curNames = record.get('ДокументРасширение.Название').replace(/[ \(\)]/g, '\n').split('\n');
          for (let i = 0; i < curNames.length; i++) {
             let curName = curNames[i].replace(/[^\d\.]/g, '').replace(/^[\.]+/, '').replace(/[\.]+$/, '');
             if (curName) {
