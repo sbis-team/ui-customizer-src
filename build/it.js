@@ -369,12 +369,12 @@ function __publish_self_git() {
 
 function __log_step(title) {
    title = __apply__color(__apply__color(title, 'blue'), 'bold');
-   process.stdout.write(`***   ${title}   ***\n`);
+   console.log(`***   ${title}   ***`);
 }
 
 function __log_variable(...value) {
    value[0] = __apply__color(value[0], 'green');
-   process.stdout.write(`* ${value.join(' ')} \n`);
+   console.log(`* ${value.join(' ')}`);
 }
 
 function __log_text(...value) {
@@ -384,7 +384,7 @@ function __log_text(...value) {
       }
       value[i] = value[i].replace(/\n/g, '\n* ');
    }
-   process.stdout.write(`* ${value.join(' ')} \n`);
+   console.log(`* ${value.join(' ')}`);
 }
 
 function __apply__color(str, color) {

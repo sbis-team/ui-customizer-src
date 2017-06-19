@@ -73,18 +73,18 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
          }
          css += extbtn;
          if (moduleProperty.WaitHandler) {
-            Engine.unsubscribeWait('.edo-Dialog_header-ServiceButtons', moduleProperty.WaitHandler);
+            Engine.unsubscribeWait('.edo-Dialog__toolbar', moduleProperty.WaitHandler);
          }
          moduleProperty.WaitHandler = _appendExtraButtons(moduleName, moduleProperty);
-         Engine.wait('.edo-Dialog_header-ServiceButtons', moduleProperty.WaitHandler);
+         Engine.wait('.edo-Dialog__toolbar', moduleProperty.WaitHandler);
       } else {
          if (moduleProperty.WaitHandler) {
-            Engine.unsubscribeWait('.edo-Dialog_header-ServiceButtons', moduleProperty.WaitHandler);
+            Engine.unsubscribeWait('.edo-Dialog__toolbar', moduleProperty.WaitHandler);
             delete moduleProperty.WaitHandler;
          }
          if (css) {
             moduleProperty.WaitHandler = _appendButtonsClass(moduleName, moduleProperty);
-            Engine.wait('.edo-Dialog_header-ServiceButtons', moduleProperty.WaitHandler);
+            Engine.wait('.edo-Dialog__toolbar', moduleProperty.WaitHandler);
          }
          Engine.removeByQuery('.SBIS-UI-Customizer.' + moduleName + '-ExtraButtons');
       }
