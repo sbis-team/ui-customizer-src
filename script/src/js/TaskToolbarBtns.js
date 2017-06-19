@@ -20,13 +20,13 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       },
       ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку'],
       selectors: {
-         'Schedule': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoShowDocTime"]',
-         'Monitoring': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoShowMonitoringDialog"]',
-         'Agreement': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSendToAgreement"]',
-         'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoPrintDocument"]',
-         'Save': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoSaveDocumentOnDisk"]',
-         'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoGetLink"]',
-         'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns i[data-id="edoDeleteDocument"]'
+         'Schedule': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoShowDocTime"]',
+         'Monitoring': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoShowMonitoringDialog"]',
+         'Agreement': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoSendToAgreement"]',
+         'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoPrintDocument"]',
+         'Save': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoSaveDocumentOnDisk"]',
+         'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoGetLink"]',
+         'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns span[data-id="edoDeleteDocument"]'
       }
    };
    var BranchNameUserLogin = '';
@@ -256,16 +256,20 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
          });
       }
       var card = elm.parentElement;
-      while (card && card.getAttribute('templatename') !== 'js!SBIS3.EDO.FTask' && card.parentElement) {
+      while (card && card.getAttribute('data-component') !== 'SBIS3.EDO2.Dialog' && card.parentElement) {
          card = card.parentElement;
       }
-      if (card && card.getAttribute('templatename') === 'js!SBIS3.EDO.FTask') {
+      if (card && card.getAttribute('data-component') === 'SBIS3.EDO2.Dialog') {
          try {
-            record = card.wsControl._options.componentOptions.record;
+            record = card.wsControl.getTopParent()._options.componentOptions.record;
             if (record) {
                return check(record);
             }
-         } catch (e) {}
+         } catch (e) {
+            return setTimeout(() => {
+               _isTask(elm, moduleProperty, callback);
+            }, 100);
+         }
       }
       checkControl();
    }
