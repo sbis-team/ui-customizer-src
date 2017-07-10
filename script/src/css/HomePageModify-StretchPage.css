@@ -9,7 +9,10 @@ div.news-SpecialNews {
 
 @media screen and (min-width: 1618px) {
    .online-OnlineBaseInnerView__notificationCenter {
-      left: inherit !important;
       right: 17px !important;
+      left: inherit !important;
+   }
+   .engine-OnlineBaseInnerMinCoreView .online-OnlineBaseInnerView__notificationCenter {
+      right: inherit !important;
    }
 }
