@@ -55,19 +55,22 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
             let info_text =
                (record.has('РазличныеДокументы.Информация') ? record.get('РазличныеДокументы.Информация') : '') ||
                (record.has('Примечание') ? record.get('Примечание') : '') ||
+               (record.has('Описание') ? record.get('Описание') : '') ||
                (record.has('ДокументРасширение.Название') ? record.get('ДокументРасширение.Название') : '') ||
                '';
+            let url = record.get('ИдентификаторДокумента');
             number = number ? (' № ' + number) : '';
             face = face ? (' ' + face) : '';
             info_text = Engine.cutOverflow(Engine.cutTags(info_text), 98, 1024);
+            if (url) {
+               url = location.protocol + '//' + location.host + '/opendoc.html?guid=' + url;
+            } else {
+               url = '(Нет ссылки на документ, т.к. он не запущен в ЭДО)';
+            }
             text =
                docName + number + ' от ' +
                Engine.getDate(record.get('ДокументРасширение.ДатаВремяСоздания')) +
-               face + '\n' +
-               location.protocol + '//' +
-               location.host + '/opendoc.html?guid=' +
-               record.get('ИдентификаторДокумента') + '\n\n' +
-               info_text;
+               face + '\n' + url + '\n\n' + info_text;
             break;
       }
       Engine.copyToClipboard(text);
