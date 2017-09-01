@@ -454,6 +454,12 @@
                            "view": "option",
                            "type": "boolean",
                            "value": false
+                        },
+                        "CopyInfo": {
+                           "title": "Копировать описание",
+                           "view": "option",
+                           "type": "boolean",
+                           "value": false
                         }
                      }
                   }
