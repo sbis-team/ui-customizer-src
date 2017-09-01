@@ -60,7 +60,6 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
             number = number ? (' № ' + number) : '';
             face = face ? (' ' + face) : '';
             info_text = Engine.cutOverflow(Engine.cutTags(info_text), 98, 1024);
-            debugger
             text =
                docName + number + ' от ' +
                Engine.getDate(record.get('ДокументРасширение.ДатаВремяСоздания')) +
