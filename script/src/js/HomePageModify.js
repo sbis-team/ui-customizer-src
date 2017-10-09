@@ -35,11 +35,10 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
          let elm = document.querySelector('.mp-NewsColumnView');
          if (elm) {
             InOneColumn(elm);
-         } else {
-            Engine.waitOnce('.mp-NewsColumnView', function (elm) {
-               InOneColumn(elm);
-            });
          }
+         Engine.wait('.mp-NewsColumnView', function (elm) {
+            InOneColumn(elm);
+         });
       }
       if (css) {
          Engine.appendCSS('HomePageModify', css);
