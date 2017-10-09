@@ -61,6 +61,7 @@ UICustomizerDefine('Engine', function () {
          displayNone: generateCSS_displayNone,
          inlineBlock: generateCSS_inlineBlock
       },
+      hasCSS: hasCSS,
       getCSS: getCSS,
       appendCSS: appendCSS,
       removeCSS: removeCSS,
@@ -295,6 +296,11 @@ UICustomizerDefine('Engine', function () {
 
    function generateCSS_inlineBlock(selector) {
       return `${selector} { display: inline-block !important; }`;
+   }
+
+   function hasCSS(name) {
+      name += '.css';
+      return name in sources.css;
    }
 
    function getCSS(name) {

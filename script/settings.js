@@ -138,17 +138,17 @@
                "view": "group",
                "module": "HomePageModify",
                "options": {
-                  /*
                   "News": {
                      "title": "Новости",
                      "view": "block",
                      "options": {
-                        "HideAuthor": {
-                           "title": "Скрыть автора из списка",
+                        "InOneColumn": {
+                           "title": "Лента в одну колонку (BETA)",
                            "view": "option",
                            "type": "boolean",
                            "value": false
-                        },
+                        }
+                     }/*,
                         "SmallImg": {
                            "title": "Уменьшить фото новости",
                            "view": "option",
@@ -174,8 +174,8 @@
                            "value": false
                         }
                      }
+                     */
                   },
-                  */
                   "Other": {
                      "title": "Прочее",
                      "view": "block",

@@ -7,8 +7,8 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
 
    function applySettings(settings) {
       var css = '';
-      /*
       let news = settings.options.News.options;
+      /*
       if (news.HideAuthor.value && news.HideFooterBtn.value) {
          css += Engine.getCSS('HomePageModify-FixHeight');
       }
@@ -16,8 +16,9 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
       for (let groupName in settings.options) {
          let group = settings.options[groupName];
          for (let name in group.options) {
-            if (group.options[name].value) {
-               css += Engine.getCSS('HomePageModify-' + name);
+            let cssname = 'HomePageModify-' + name;
+            if (group.options[name].value && Engine.hasCSS(cssname)) {
+               css += Engine.getCSS(cssname);
             }
          }
       }
@@ -30,10 +31,33 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
          );
       }
       */
+      if (news.InOneColumn.value) {
+         let elm = document.querySelector('.mp-NewsColumnView');
+         if (elm) {
+            InOneColumn(elm);
+         } else {
+            Engine.waitOnce('.mp-NewsColumnView', function (elm) {
+               InOneColumn(elm);
+            });
+         }
+      }
       if (css) {
          Engine.appendCSS('HomePageModify', css);
       } else {
          Engine.removeCSS('HomePageModify');
+      }
+   }
+
+   function InOneColumn() {
+      if (document.querySelector('.mp-NewsColumnView .icon-Column2')) {
+         if (document.querySelector('.mp-NewsColumnView .controls-IconButton').wsControl) {
+            document.querySelector('.mp-NewsColumnView .controls-IconButton').click();
+            Engine.waitOnce('.mp-NewsColumnView .controls-IconButton', function (elm) {
+               elm.click();
+            });
+         } else {
+            setTimeout(InOneColumn, 300);
+         }
       }
    }
 

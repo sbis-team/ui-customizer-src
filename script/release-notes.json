@@ -1,7 +1,9 @@
 {
    "release": false,
    "added": [],
-   "changed": [],
+   "changed": [
+      "Новая опция - Лента в одну колонку (BETA)"
+   ],
    "fixed": [],
    "issues": []
 }
