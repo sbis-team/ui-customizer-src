@@ -34,7 +34,7 @@
 #SBIS-UI-Customizer-SettingsButton-Header {
    float: right;
    margin-right: 8px;
-   margin-top: 2px;
+   margin-top: 5px;
 }
 
 #SBIS-UI-Customizer-SettingsButton-Header .icon {
@@ -65,5 +65,5 @@
 
 .engine-OnlineBaseInnerMinCoreView__headerCell #SBIS-UI-Customizer-SettingsButton-Header {
    float: left;
-   margin-top: 1px;
+   margin-top: 4px;
 }

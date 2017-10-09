@@ -49,7 +49,7 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
    }
 
    function InOneColumn() {
-      if (document.querySelector('.mp-NewsColumnView .icon-Column2')) {
+      if (document.querySelector('.mp-NewsColumnView .icon-Column2') && document.querySelector('.sn-NewsLeftColumn')) {
          if (document.querySelector('.mp-NewsColumnView .controls-IconButton').wsControl) {
             document.querySelector('.mp-NewsColumnView .controls-IconButton').click();
             Engine.waitOnce('.mp-NewsColumnView .controls-IconButton', function (elm) {
