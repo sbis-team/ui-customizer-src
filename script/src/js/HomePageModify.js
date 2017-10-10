@@ -34,10 +34,10 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
       if (news.InOneColumn.value) {
          let elm = document.querySelector('.mp-NewsColumnView');
          if (elm) {
-            InOneColumn(elm);
+            InOneColumn();
          }
-         Engine.wait('.mp-NewsColumnView', function (elm) {
-            InOneColumn(elm);
+         Engine.wait('.sn-NewsLeftColumn', function () {
+            InOneColumn();
          });
       }
       if (css) {
