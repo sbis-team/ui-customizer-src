@@ -599,7 +599,7 @@ function __publish_createNotes(date, version, notes) {
             changed: [],
             fixed: [],
             issues: []
-         }, null, '   '));
+         }, null, '  '));
          yield trggit.add('CHANGELOG.md');
       }
       return text;
