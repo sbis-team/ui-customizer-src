@@ -143,7 +143,7 @@
                      "view": "block",
                      "options": {
                         "InOneColumn": {
-                           "title": "Лента в одну колонку (BETA)",
+                           "title": "Лента в одну колонку",
                            "view": "option",
                            "type": "boolean",
                            "value": false
