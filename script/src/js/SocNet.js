@@ -23,9 +23,9 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
   function getFeedbackButtons() {
     if (!feedbackButtons) {
       feedbackButtons = Engine.getHTML('SocNet-FeedbackButtons', {
-        'LikeIt': Engine.getSVG('thumbsup'),
+        //'LikeIt': Engine.getSVG('thumbsup'),
         'SendQuestion': Engine.getSVG('comment-discussion'),
-        'SendFeedback': Engine.getSVG('megaphone'),
+        //'SendFeedback': Engine.getSVG('megaphone'),
         'ReportError': Engine.getSVG('bug')
       });
     }
