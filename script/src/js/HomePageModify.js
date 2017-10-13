@@ -64,7 +64,7 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
       } else {
         setTimeout(function () { toggleColumn(isOne); }, 300);
       }
-    } else {
+    } else if (document.querySelector('.mp-NewsColumnView')) {
       if (document.querySelector('.mp-NewsColumnView .controls-IconButton').wsControl) {
         document.querySelector('.mp-NewsColumnView .controls-IconButton').click();
       } else {
