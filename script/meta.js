@@ -9,11 +9,6 @@
 // @icon          /*ICON*/
 // @icon64        /*ICON64*/
 // @supportURL    https://github.com/sbis-team/ui-customizer/issues
-// @include       *inside.tensor.ru/*
-// @exclude       *inside.tensor.ru/obj/*
-// @exclude       *inside.tensor.ru/shared/*
-// @exclude       *inside.tensor.ru/docview/*
-// @exclude       *inside.tensor.ru/auth/*
 // @include       *online.sbis.ru/*
 // @exclude       *online.sbis.ru/obj/*
 // @exclude       *online.sbis.ru/shared/*
