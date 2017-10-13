@@ -14,6 +14,9 @@
 // @exclude       *online.sbis.ru/shared/*
 // @exclude       *online.sbis.ru/docview/*
 // @exclude       *online.sbis.ru/auth/*
+// @exclude       *online.sbis.ru/carry.html*
+// @exclude       *online.sbis.ru/presto.html*
+// @exclude       *online.sbis.ru/booking.html*
 // @run-at        document-start
 // @grant         unsafeWindow
 // @grant         GM_setClipboard
