@@ -1,9 +1,7 @@
 {
-   "release": 1,
+   "release": false,
    "added": [],
    "changed": [],
-   "fixed": [
-     "Исключил страницы из плагина: /carry.html, /presto.html, /booking.html"
-   ],
+   "fixed": [],
    "issues": []
 }
