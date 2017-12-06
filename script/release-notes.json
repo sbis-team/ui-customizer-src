@@ -4,6 +4,6 @@
   "changed": [],
   "fixed": [],
   "issues": [
-    ["https://github.com/sbis-team/ui-customizer/issues/8", "Исправлена плавающая ошибка падения загрузки страницы с включенным плагином"]
+    ["https://github.com/sbis-team/ui-customizer/issues/8", "Исправлена плавающая ошибка, приводящая к падению загрузки страницы с включенным плагином"]
   ]
 }
