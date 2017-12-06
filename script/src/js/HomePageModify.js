@@ -37,7 +37,7 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
       Engine.removeCSS('HomePageModify');
     }
     Engine.waitRequire(function () {
-      require(['Core/UserConfig'], function (UserConfig) {
+      require(['WS.Data/Source/SbisService', 'Core/UserConfig'], function (SbisService, UserConfig) {
         let ifColumn2 = document.querySelector('.sn-NewsLeftColumn');
         if (news.InOneColumn.value) {
           if (ifColumn2) {

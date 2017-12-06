@@ -1,5 +1,5 @@
 UICustomizerDefine('Engine', function () {
-  "use strict";
+  'use strict';
 
   const htmlre = /\{\{([\w]+)\}\}/g;
 
@@ -23,11 +23,15 @@ UICustomizerDefine('Engine', function () {
   var _waitRequireEvents = [];
   var _waitRequireID = setInterval(function () {
     if (typeof require !== 'undefined') {
-      _waitRequireEvents.forEach(function (fn) {
-        fn();
+      require(['Core/core-ready'], function (cReady) {
+        cReady.addCallback(function () {
+          _waitRequireEvents.forEach(function (fn) {
+            fn();
+          });
+          _waitRequire = true;
+          _waitRequireEvents = null;
+        });
       });
-      _waitRequire = true;
-      _waitRequireEvents = null;
       clearInterval(_waitRequireID);
     }
   }, 100);
@@ -36,7 +40,7 @@ UICustomizerDefine('Engine', function () {
   var _wait = {};
   var _waitSync = {};
   var _waitOnce = {};
-  document.addEventListener("DOMNodeInserted", function (ev) {
+  document.addEventListener('DOMNodeInserted', function () {
     _waiting();
     _waitingSync();
   }, false);
