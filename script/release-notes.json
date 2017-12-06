@@ -1,9 +1,7 @@
 {
-  "release": false,
-  "added": [],
-  "changed": [],
-  "fixed": [],
-  "issues": [
-    ["https://github.com/sbis-team/ui-customizer/issues/8", "Исправлена плавающая ошибка, приводящая к падению загрузки страницы с включенным плагином"]
-  ]
+   "release": false,
+   "added": [],
+   "changed": [],
+   "fixed": [],
+   "issues": []
 }
