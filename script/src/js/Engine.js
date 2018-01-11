@@ -22,11 +22,11 @@ UICustomizerDefine('Engine', function () {
   var _waitRequire = false;
   var _waitRequireEvents = [];
   var _waitRequireID = setInterval(function () {
-    if (typeof require !== 'undefined') {
-      require(['Core/core-ready'], function (cReady) {
+    if (typeof window.require !== 'undefined') {
+      window.require(['Core/core-ready'], function (cReady) {
         cReady.addCallback(function () {
           _waitRequireEvents.forEach(function (fn) {
-            fn();
+            fn(window.require);
           });
           _waitRequire = true;
           _waitRequireEvents = null;
@@ -127,7 +127,7 @@ UICustomizerDefine('Engine', function () {
 
   function waitRequire(fn) {
     if (_waitRequire) {
-      fn();
+      fn(window.require);
     } else {
       _waitRequireEvents.push(fn);
     }
@@ -440,9 +440,11 @@ UICustomizerDefine('Engine', function () {
 
   function rpc_sbis(obj) {
     if (!SbisService) {
-      return require(['js!WS.Data/Source/SbisService'], function (svr) {
-        SbisService = svr;
-        rpc_sbis(obj);
+      return waitRequire(function (require) {
+        require(['WS.Data/Source/SbisService'], function (svr) {
+          SbisService = svr;
+          rpc_sbis(obj);
+        })
       });
     }
     var service = obj.service ? ('/' + obj.service) : '';
@@ -466,9 +468,11 @@ UICustomizerDefine('Engine', function () {
 
   function openInformationPopup(text, status) {
     if (!InformationPopupManager) {
-      return require(['js!SBIS3.CONTROLS.Utils.InformationPopupManager'], function (ipm) {
-        InformationPopupManager = ipm;
-        return openInformationPopup(text, status);
+      return waitRequire(function (require) {
+        require(['js!SBIS3.CONTROLS.Utils.InformationPopupManager'], function (ipm) {
+          InformationPopupManager = ipm;
+          return openInformationPopup(text, status);
+        });
       });
     }
     status = status ? status : 'success';

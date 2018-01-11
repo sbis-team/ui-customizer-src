@@ -1,5 +1,6 @@
+/* globals UICustomizerEvent */
 UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
-  "use strict";
+  'use strict';
 
   var GroupUUID = '2d110a8e-7edb-469a-a3cb-5eb6d8095c10';
   var ChatUUID = '3af31f44-c91a-4bbf-8470-3dd423f0b6eb';
@@ -101,7 +102,7 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
         },
         callback: function () {
           UICustomizerEvent('SettingsDialog', 'close');
-          Engine.openInformationPopup(rk('Ваше сообщение успешно отправлено в чат "SBIS UI-Customizer"'));
+          Engine.openInformationPopup('Ваше сообщение успешно отправлено в чат "SBIS UI-Customizer"');
         }
       });
     });
@@ -134,47 +135,49 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
         },
         callback: function () {
           UICustomizerEvent('SettingsDialog', 'close');
-          Engine.openInformationPopup(rk('Ваш отзыв успешно отправлен в группу "SBIS UI-Customizer"'));
+          Engine.openInformationPopup('Ваш отзыв успешно отправлен в группу "SBIS UI-Customizer"');
         }
       });
     });
   }
 
   function _ReportError(msg) {
-    require(['Core/helpers/generate-helpers'], function (gh) {
-      var guid = gh.createGUID();
-      var ver = Engine.getVerInfo();
-      msg = 'Ошибка: SBIS UI-Customizer ' + ver.version + '\nСборка от: ' +
-        ver.date + '\n\nСообщение:\n' + msg + '\n\n--- Настройки плагина ---\n' +
-        JSON.stringify(Engine.getSettings(true)) +
-        '\n------------------------';
-      Engine.rpc.sbis({
-        method: 'Персона.СОтправить',
-        params: {
-          "Получатели": [AuthorUUID],
-          "Текст": msg,
-          "Диалог": guid,
-          "Документ": null,
-          "Сообщение": null,
-          "Файлы": [],
-          "Опции": {
-            "d": [
-              false,
-              false,
-              false
-            ],
-            "s": [
-              { "t": "Логическое", "n": "МассовоеСообщение" },
-              { "t": "Логическое", "n": "СлитьСПредыдущим" },
-              { "t": "Логическое", "n": "ВсемУчастникамТемы" }
-            ],
-            "_type": "record"
+    Engine.waitRequire(function (require) {
+      require(['Core/helpers/generate-helpers'], function (gh) {
+        var guid = gh.createGUID();
+        var ver = Engine.getVerInfo();
+        msg = 'Ошибка: SBIS UI-Customizer ' + ver.version + '\nСборка от: ' +
+          ver.date + '\n\nСообщение:\n' + msg + '\n\n--- Настройки плагина ---\n' +
+          JSON.stringify(Engine.getSettings(true)) +
+          '\n------------------------';
+        Engine.rpc.sbis({
+          method: 'Персона.СОтправить',
+          params: {
+            "Получатели": [AuthorUUID],
+            "Текст": msg,
+            "Диалог": guid,
+            "Документ": null,
+            "Сообщение": null,
+            "Файлы": [],
+            "Опции": {
+              "d": [
+                false,
+                false,
+                false
+              ],
+              "s": [
+                { "t": "Логическое", "n": "МассовоеСообщение" },
+                { "t": "Логическое", "n": "СлитьСПредыдущим" },
+                { "t": "Логическое", "n": "ВсемУчастникамТемы" }
+              ],
+              "_type": "record"
+            }
+          },
+          callback: function () {
+            UICustomizerEvent('SettingsDialog', 'close');
+            Engine.openInformationPopup('Ваше сообщение успешно отправлено автору плагина');
           }
-        },
-        callback: function () {
-          UICustomizerEvent('SettingsDialog', 'close');
-          Engine.openInformationPopup(rk('Ваше сообщение успешно отправлено автору плагина'));
-        }
+        });
       });
     });
   }
