@@ -1,12 +1,7 @@
 {
-  "release": false,
-  "added": [],
-  "changed": [],
-  "fixed": [],
-  "issues": [
-    [
-      "https://github.com/sbis-team/ui-customizer/issues/9",
-      "Исправлены падения загрузки страницы сайта при открытии документов в отдельной вкладке"
-    ]
-  ]
+   "release": false,
+   "added": [],
+   "changed": [],
+   "fixed": [],
+   "issues": []
 }
