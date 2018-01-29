@@ -21,19 +21,39 @@ UICustomizerDefine('Engine', function () {
 
   var _waitRequire = false;
   var _waitRequireEvents = [];
-  var _waitRequireID = setInterval(function () {
-    if (typeof window.require !== 'undefined') {
-      window.require(['Core/core-ready'], function (cReady) {
-        cReady.addCallback(function () {
-          _waitRequireEvents.forEach(function (fn) {
-            fn(window.require);
-          });
-          _waitRequire = true;
-          _waitRequireEvents = null;
-        });
+  var _waitRequireFN = function _waitRequireFN() {
+    if (_waitRequireEvents) {
+      _waitRequireEvents.forEach(function (fn) {
+        fn(window.require);
       });
-      clearInterval(_waitRequireID);
     }
+    _waitRequire = true;
+    _waitRequireEvents = null;
+  };
+  var _waitRequireID = setInterval(function () {
+    onload(function () {
+      if (typeof window.require !== 'undefined') {
+        window.require(['Core/core-ready'], function (ready) {
+          ready.addCallback(_waitRequireFN);
+          return ready;
+        }, function (error) {
+          console.warn('UICustomizer', error);
+          window.require(['Core/core-init-min'],
+            function (ready) {
+              ready.addCallback(_waitRequireFN);
+              return ready;
+            },
+            function (error) {
+              console.warn('UICustomizer', error);
+              console.warn('UICustomizer: Не удалось получить деферред готовности страницы');
+              return error;
+            }
+          );
+          return error;
+        });
+        clearInterval(_waitRequireID);
+      }
+    });
   }, 100);
 
   var _waitID = null;
