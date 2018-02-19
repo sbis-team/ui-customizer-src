@@ -139,6 +139,12 @@
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
+                },
+                'HideMaximumButton': {
+                  'title': 'Переключатель аккордеона',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
                 }
               }
             }
