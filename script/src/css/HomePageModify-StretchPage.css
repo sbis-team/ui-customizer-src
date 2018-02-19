@@ -1,18 +1,15 @@
 div.news-SpecialNews {
-   display: none !important;
+  display: none !important;
 }
 
 #min-width,
 .engine-OnlineBaseInnerMinCoreView__content {
-   max-width: none;
+  max-width: none;
 }
 
-@media screen and (min-width: 1618px) {
-   .online-OnlineBaseInnerView__notificationCenter {
-      right: 17px !important;
-      left: inherit !important;
-   }
-   .engine-OnlineBaseInnerMinCoreView .online-OnlineBaseInnerView__notificationCenter {
-      right: inherit !important;
-   }
+@media screen and (min-width: 1600px) {
+  .online-OnlineBaseInnerView__notificationCenter {
+    left: inherit !important;
+    right: 0 !important;
+  }
 }
