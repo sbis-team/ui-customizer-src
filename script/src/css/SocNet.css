@@ -1,45 +1,48 @@
 .SBIS-UI-Customizer-SocNet-InputDialog {
-   background: #FFFFFF;
-   border-left: 2px solid #DDDDDD;
-   border-bottom: 2px solid #DDDDDD;
-   border-bottom-left-radius: 5px;
-   position: absolute;
-   top: 0;
-   right: 0;
-   z-index: 1000001;
+  background: #FFFFFF;
+  border-left: 2px solid #DDDDDD;
+  border-bottom: 2px solid #DDDDDD;
+  border-bottom-left-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000001;
 }
 
-.SBIS-UI-Customizer-SocNet-InputDialog > .header {
-   height: 24px;
-   padding: 12px;
-   border-bottom: 1px solid #EAEAEA;
-} 
+.SBIS-UI-Customizer-SocNet-InputDialog>.header {
+  height: 24px;
+  padding: 9px;
+  border-bottom: 1px solid #EAEAEA;
+}
 
-.SBIS-UI-Customizer-SocNet-InputDialog > .header .title {
-   font-weight: bold;
-   font-size: 20px;
-   color: #313e78;
+.SBIS-UI-Customizer-SocNet-InputDialog>.header .title {
+  font-weight: bold;
+  font-size: 20px;
+  color: #313e78;
 }
 
 .SBIS-UI-Customizer-SocNet-InputDialog textarea {
-   width: 350px;
-   resize: none;
-   padding: 6px;
-   margin: 8px;
-   border: 1px solid #EAEAEA;
+  width: 350px;
+  resize: none;
+  padding: 6px;
+  margin: 8px;
+  border: 1px solid #EAEAEA;
 }
+
 .SBIS-UI-Customizer-SocNet-InputDialog .send {
-   position: absolute;
-   top: 12px;
-   right: 44px;
-   padding: 2px 8px;
-   cursor: pointer;
-   border: 1px solid #ff7033;
-   border-radius: 16px;
+  position: absolute;
+  top: 9px;
+  right: 44px;
+  padding: 2px 8px;
+  cursor: pointer;
+  border: 1px solid #ff7033;
+  border-radius: 16px;
 }
-.SBIS-UI-Customizer-SocNet-InputDialog .send:hover{
-   background: #FDECD9;
+
+.SBIS-UI-Customizer-SocNet-InputDialog .send:hover {
+  background: #FDECD9;
 }
+
 .SBIS-UI-Customizer-SocNet-InputDialog .send:active {
-   background: #FDD2C0
+  background: #FDD2C0
 }

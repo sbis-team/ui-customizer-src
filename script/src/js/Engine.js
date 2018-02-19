@@ -131,6 +131,9 @@ UICustomizerDefine('Engine', function () {
     UICustomizerRequire(['SettingsButton'], function (SettingsButton) {
       SettingsButton.init();
     });
+    UICustomizerRequire(['HotKeys'], function (HotKeys) {
+      HotKeys.init();
+    });
   }
 
   function getVerInfo() {
@@ -464,7 +467,7 @@ UICustomizerDefine('Engine', function () {
         require(['WS.Data/Source/SbisService'], function (svr) {
           SbisService = svr;
           rpc_sbis(obj);
-        })
+        });
       });
     }
     var service = obj.service ? ('/' + obj.service) : '';

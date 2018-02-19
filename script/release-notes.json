@@ -1,7 +1,11 @@
 {
-   "release": false,
-   "added": [],
-   "changed": [],
-   "fixed": [],
-   "issues": []
+  "release": false,
+  "added": [],
+  "changed": [],
+  "fixed": [
+    "Правки стилей после обновления rc-3.18.10",
+    "Убрана иконка настроек в шапке сайта (глюичт шапка)",
+    "Открытие диалога настроек через HotKeys: ctrl+shift+U и ctrl+alt+U"
+  ],
+  "issues": []
 }

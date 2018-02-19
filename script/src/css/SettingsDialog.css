@@ -1,187 +1,188 @@
 #SBIS-UI-Customizer-SettingsDialog-Area {
-   background: #FFFFFF;
-   border-left: 2px solid #DDDDDD;
-   border-bottom: 2px solid #DDDDDD;
-   border-bottom-left-radius: 5px;
-   position: absolute;
-   top: 0;
-   right: 0;
-   z-index: 1000000;
+  background: #FFFFFF;
+  border-left: 2px solid #DDDDDD;
+  border-bottom: 2px solid #DDDDDD;
+  border-bottom-left-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000000;
 }
+
 #SBIS-UI-Customizer-SettingsDialog {
-   width: 520px;
+  width: 520px;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .header {
-   height: 24px;
-   padding: 12px;
-   border-bottom: 1px solid #EAEAEA;
-} 
-
-#SBIS-UI-Customizer-SettingsDialog > .header .title {
-   font-weight: bold;
-   font-size: 20px;
-   color: #313e78;
+#SBIS-UI-Customizer-SettingsDialog>.header {
+  height: 24px;
+  padding: 9px;
+  border-bottom: 1px solid #EAEAEA;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .feedback {
-   position: absolute;
-   right: 48px;
-   height: 16px;
-   top: 16px;
-   display: inline-block;
+#SBIS-UI-Customizer-SettingsDialog>.header .title {
+  font-weight: bold;
+  font-size: 20px;
+  color: #313e78;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .feedback i {
-   cursor: pointer;
-   margin-right: 4px;
-   height: 16px;
-   width: 16px;
-   display: inline-block;
+#SBIS-UI-Customizer-SettingsDialog>.feedback {
+  position: absolute;
+  right: 48px;
+  height: 16px;
+  top: 14px;
+  display: inline-block;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .feedback i.separator {
-   width: 4px;
-   border-right: 1px solid #E4E4E4;
+#SBIS-UI-Customizer-SettingsDialog>.feedback i {
+  cursor: pointer;
+  margin-right: 4px;
+  height: 16px;
+  width: 16px;
+  display: inline-block;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .feedback i svg {
-   fill: #587AB0;
+#SBIS-UI-Customizer-SettingsDialog>.feedback i.separator {
+  width: 4px;
+  border-right: 1px solid #E4E4E4;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .feedback i:hover svg {
-   fill: #FF7033;
+#SBIS-UI-Customizer-SettingsDialog>.feedback i svg {
+  fill: #587AB0;
 }
 
-#SBIS-UI-Customizer-SettingsDialog > .Settings-panel {
-   overflow-y: auto;
+#SBIS-UI-Customizer-SettingsDialog>.feedback i:hover svg {
+  fill: #FF7033;
+}
+
+#SBIS-UI-Customizer-SettingsDialog>.Settings-panel {
+  overflow-y: auto;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-section {
-   float: left;
-   width: 100%;
+  float: left;
+  width: 100%;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section:last-child  > .header {
-   border-bottom: none;
-   border-bottom-left-radius: 3px;
+.SBIS-UI-Customizer .SettingsDialog-section:last-child>.header {
+  border-bottom: none;
+  border-bottom-left-radius: 3px;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section.active > .header {
-   background: #F3F3F3;
+.SBIS-UI-Customizer .SettingsDialog-section.active>.header {
+  background: #F3F3F3;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section > .header {
-   padding: 6px 12px;
-   cursor: pointer;
-   border-bottom: 1px solid #F5F5F5;
+.SBIS-UI-Customizer .SettingsDialog-section>.header {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #F5F5F5;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section > .header:hover {
-   background: #F0F5FB;
+.SBIS-UI-Customizer .SettingsDialog-section>.header:hover {
+  background: #F0F5FB;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section > .header .title {
-   font-size: 18px;
-   color: #313E78;
-   font-weight: bold;
+.SBIS-UI-Customizer .SettingsDialog-section>.header .title {
+  font-size: 18px;
+  color: #313E78;
+  font-weight: bold;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-section .slider {
-   float: left;
-   width: 100%;
-   border-bottom: 1px solid #EAEAEA;
-   display: none;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #EAEAEA;
+  display: none;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-section.active .slider {
-   display: block;
+  display: block;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-section:last-child .slider {
-   border-bottom: none;
+  border-bottom: none;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-group {
-   float: left;
-   width: 100%;
+  float: left;
+  width: 100%;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-group > .box {
-   float: left;
-   width: 100%;
-   border-bottom: 1px solid #EAEAEA;
+.SBIS-UI-Customizer .SettingsDialog-group>.box {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #EAEAEA;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-section .SettingsDialog-group:last-child > .box {
-   border-bottom: none;
+.SBIS-UI-Customizer .SettingsDialog-section .SettingsDialog-group:last-child>.box {
+  border-bottom: none;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-group > .header {
-   border-bottom: 1px solid #F5F5F5;
+.SBIS-UI-Customizer .SettingsDialog-group>.header {
+  border-bottom: 1px solid #F5F5F5;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-group > .header .title {
-   font-size: 16px;
-   padding: 4px 12px;
-   display: inline-block;
+.SBIS-UI-Customizer .SettingsDialog-group>.header .title {
+  font-size: 16px;
+  padding: 4px 12px;
+  display: inline-block;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-block {
-   float: left;
-   width: 250px;
+  float: left;
+  width: 250px;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-block > .title {
-   color: #313E78;
-   font-size: 14px;
-   font-weight: bold;
-   padding: 6px 12px 0;
-   display: inline-block;
+.SBIS-UI-Customizer .SettingsDialog-block>.title {
+  color: #313E78;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 12px 0;
+  display: inline-block;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-block > .box {
-   padding: 0px 0px 6px 12px;
+.SBIS-UI-Customizer .SettingsDialog-block>.box {
+  padding: 0px 0px 6px 12px;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-option-boolean label {
-   cursor: pointer;
-   display: inline-block;
-   padding: 2px 0;
+  cursor: pointer;
+  display: inline-block;
+  padding: 2px 0;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-option-boolean input {
-   -webkit-appearance: none;
-   /*-moz-appearance: none;*/
-   border: 1px solid #ADADAD;
-   vertical-align: middle;
-   height: 14px;
-   width: 14px;
-   position: relative;
-   cursor: pointer;
+  -webkit-appearance: none;
+  /*-moz-appearance: none;*/
+  border: 1px solid #ADADAD;
+  vertical-align: middle;
+  height: 14px;
+  width: 14px;
+  position: relative;
+  cursor: pointer;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-option-boolean label:hover input {
-   background: #F0F5FB;
+  background: #F0F5FB;
 }
 
-.SBIS-UI-Customizer .SettingsDialog-option-boolean input:checked:after{
-   content: '\2714';
-   font-size: 14px;
-   position: absolute;
-   left: 0;
-   color: #FF7033;
-   font-weight: bold;
-   line-height: 12px;
-   vertical-align: middle;
+.SBIS-UI-Customizer .SettingsDialog-option-boolean input:checked:after {
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  left: 0;
+  color: #FF7033;
+  font-weight: bold;
+  line-height: 12px;
+  vertical-align: middle;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-option-boolean span {
-   vertical-align: middle;
-   padding-left: 4px;
+  vertical-align: middle;
+  padding-left: 4px;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-option-boolean label:hover span {
-   text-decoration: underline;
-   color: #FF7033;
+  text-decoration: underline;
+  color: #FF7033;
 }
