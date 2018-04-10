@@ -150,7 +150,7 @@ UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, Soc
 
   function _resize() {
     var panel = dialog.children[0].children[3];
-    panel.style['max-height'] = (document.body.clientHeight - 49) + 'px';
+    panel.style['max-height'] = (document.body.clientHeight - 86) + 'px';
   }
 
 });
