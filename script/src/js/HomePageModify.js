@@ -55,21 +55,9 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
   }
 
   function toggleColumn(isOne) {
-    if (isOne && document.querySelector('.mp-NewsColumnView .icon-Column2') && document.querySelector('.sn-NewsLeftColumn')) {
-      if (document.querySelector('.mp-NewsColumnView .controls-IconButton').wsControl) {
-        document.querySelector('.mp-NewsColumnView .controls-IconButton').click();
-        Engine.waitOnce('.mp-NewsColumnView .controls-IconButton', function (elm) {
-          elm.click();
-        });
-      } else {
-        setTimeout(function () { toggleColumn(isOne); }, 300);
-      }
-    } else if (document.querySelector('.mp-NewsColumnView')) {
-      if (document.querySelector('.mp-NewsColumnView .controls-IconButton').wsControl) {
-        document.querySelector('.mp-NewsColumnView .controls-IconButton').click();
-      } else {
-        setTimeout(function () { toggleColumn(isOne); }, 300);
-      }
+    var news = document.querySelector('.n-NewsPageList');
+    if (news && news.wsControl) {
+      news.wsControl._setOneColumnMode(isOne, false);
     }
   }
 
