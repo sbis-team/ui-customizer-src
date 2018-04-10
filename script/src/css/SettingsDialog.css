@@ -13,6 +13,17 @@
   width: 520px;
 }
 
+#SBIS-UI-Customizer-SettingsDialog .link {
+  color: #05b;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#SBIS-UI-Customizer-SettingsDialog .right {
+  float: right;
+}
+
 #SBIS-UI-Customizer-SettingsDialog>.header {
   height: 24px;
   padding: 9px;
@@ -23,6 +34,7 @@
   font-weight: bold;
   font-size: 20px;
   color: #313e78;
+  margin-right: 12px;
 }
 
 #SBIS-UI-Customizer-SettingsDialog>.feedback {
@@ -185,4 +197,11 @@
 .SBIS-UI-Customizer .SettingsDialog-option-boolean label:hover span {
   text-decoration: underline;
   color: #FF7033;
+}
+
+.SBIS-UI-Customizer .SettingsDialog-footer {
+  background-color: #F8F8F8;
+  border-top: 1px solid #DDDDDD;
+  color: #8991A9;
+  padding: 12px;
 }

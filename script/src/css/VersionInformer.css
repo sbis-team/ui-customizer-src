@@ -32,7 +32,7 @@
    padding: 12px;
    border-bottom: 1px solid #EAEAEA;
    border-top: 3px solid #135091;
-} 
+}
 
 .SBIS-UI-Customizer .VersionInformer .dialog > .header .title {
    font-weight: bold;
@@ -112,4 +112,11 @@
 
 .SBIS-UI-Customizer .VersionInformer .dialog > .footer .button:active {
    background-color: #fdd2c0 !important;
+}
+
+.SBIS-UI-Customizer .VersionInformer .link {
+  color: #05b;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
 }

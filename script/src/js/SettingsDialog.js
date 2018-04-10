@@ -12,7 +12,7 @@ UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, Soc
   };
 
   function open() {
-    var up = document.querySelector('div[templatename="js!SBIS3.AccountsManagement.UserPanel"]');
+    var up = document.querySelector('div[templatename="AccountsManagement/User/Panel"]');
     if (up) {
       up.wsControl.hide();
     }
@@ -54,6 +54,7 @@ UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, Soc
   }
 
   function _createDialog() {
+    var verinfo = Engine.getVerInfo();
     Engine.appendCSS('SettingsDialog');
     dialog = document.createElement('div');
     dialog.id = 'SBIS-UI-Customizer-SettingsDialog-Area';
@@ -63,6 +64,9 @@ UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, Soc
     feedback.innerHTML = SocNet.getFeedbackButtons();
     template.appendChild(feedback);
     _buildSettings(template);
+    template.appendChild(Engine.createElement('SettingsDialog-footer', {
+      version: verinfo.version
+    }));
     dialog.appendChild(template);
     document.body.appendChild(dialog);
     open();

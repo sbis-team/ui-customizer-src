@@ -492,7 +492,7 @@ UICustomizerDefine('Engine', function () {
   function openInformationPopup(text, status) {
     if (!InformationPopupManager) {
       return waitRequire(function (require) {
-        require(['js!SBIS3.CONTROLS.Utils.InformationPopupManager'], function (ipm) {
+        require(['SBIS3.CONTROLS/Utils/InformationPopupManager'], function (ipm) {
           InformationPopupManager = ipm;
           return openInformationPopup(text, status);
         });
