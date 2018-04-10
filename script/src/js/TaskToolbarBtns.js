@@ -258,10 +258,10 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       });
     }
     var card = elm.parentElement;
-    while (card && card.getAttribute('data-component') !== 'SBIS3.EDO2.Dialog' && card.parentElement) {
+    while (card && card.getAttribute('data-component') !== 'EDO2/Document/Dialog' && card.parentElement) {
       card = card.parentElement;
     }
-    if (card && card.getAttribute('data-component') === 'SBIS3.EDO2.Dialog') {
+    if (card && card.getAttribute('data-component') === 'EDO2/Document/Dialog') {
       try {
         record = card.wsControl.getTopParent()._options.componentOptions.record;
         if (record) {

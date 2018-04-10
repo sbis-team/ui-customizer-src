@@ -2,7 +2,7 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
   'use strict';
 
   const selectors = {
-    'Owl': 'div[data-component="SBIS3.Engine.HowEasy"]',
+    'Owl': 'div[sbisname="howEasy"]',
     'AsJust': `
          .ExpandOurOrg__div,
          .middle__OurOrgHowEasy
