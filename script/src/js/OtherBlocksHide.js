@@ -2,13 +2,8 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
   'use strict';
 
   const selectors = {
-    'Owl': 'div[sbisname="howEasy"]',
-    'AsJust': `
-         .ExpandOurOrg__div,
-         .middle__OurOrgHowEasy
-      `,
-    'SideRight': 'div.news-SpecialNews',
-    'HideMaximumButton': '.NavSchemeLink.navSidebar__navSchemeLink'
+    'Owl': 'div[sbisname="howEasy"], .online-howEasy',
+    'HideMaximumButton': '.NavSchemeLink.navSidebar__navSchemeLink, .NavSchemeLink.engine-Sidebar__navSchemeLink'
   };
 
   return {

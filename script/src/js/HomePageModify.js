@@ -1,6 +1,9 @@
 UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
   'use strict';
 
+  let __oneColumnMode = false;
+  let _changeColumnsOrigon;
+
   return {
     applySettings: applySettings
   };
@@ -36,9 +39,21 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
     } else {
       Engine.removeCSS('HomePageModify');
     }
+
+    Engine.unsubscribeWait('.feed-LeftItems', oneColumnMode);
+    __oneColumnMode = news.InOneColumn.value;
+    if (__oneColumnMode) {
+      if (document.querySelector('.feed-LeftItems')) {
+        oneColumnMode();
+      }
+      Engine.wait('.feed-LeftItems', oneColumnMode);
+    } else {
+      oneColumnMode();
+    }
+    /*
     Engine.waitRequire(function (require) {
       require(['WS.Data/Source/SbisService', 'Core/UserConfig'], function (SbisService, UserConfig) {
-        let ifColumn2 = document.querySelector('.sn-NewsLeftColumn');
+        let ifColumn2 = document.querySelector('.feed-All__twoColumns');
         if (news.InOneColumn.value) {
           if (ifColumn2) {
             UserConfig.setParam('OnlyOneColumn', 'true');
@@ -52,13 +67,34 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
         }
       });
     });
+    */
   }
 
-  function toggleColumn(isOne) {
-    var news = document.querySelector('.n-NewsPageList');
-    if (news && news.wsControl) {
-      news.wsControl._setOneColumnMode(isOne, false);
+  function oneColumnMode() {
+    let news = document.querySelector('.feed-All .ws-ListView');
+    if (news && news.controlNodes && news.controlNodes[0] && news.controlNodes[0].control) {
+      news = news.controlNodes[0].control;
+      if (!_changeColumnsOrigon) {
+        _changeColumnsOrigon = news._changeColumns;
+        news._changeColumns = (clientWidth) => {
+          if (!__oneColumnMode) {
+            _changeColumnsOrigon.call(news, clientWidth);
+          }
+        };
+      }
+      if (news.oneColumnMode !== __oneColumnMode) {
+        news.changeColumnMode(__oneColumnMode);
+      }
+    } else {
+      setTimeout(oneColumnMode, 10);
     }
   }
+  /*
+    function toggleColumn(isOne) {
+      var news = document.querySelector('.n-NewsPageList');
+      if (news && news.wsControl) {
+        news.wsControl._setOneColumnMode(isOne, false);
+      }
+    }*/
 
 });

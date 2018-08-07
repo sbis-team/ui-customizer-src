@@ -1,5 +1,6 @@
 .engine-OnlineBaseInnerMinCoreView__headerCell .header-ConfigurationButton .controls-Button__text,
 #header [sbisname="ConfigurationLink"] .controls-Link__field,
-#header div.user-button-component .controls-Link__field {
-   display: none !important;
+#header div.user-button-component .controls-Link__field,
+.online-OnlinePageTemplate__header .controls-BaseButton__text {
+  display: none !important;
 }

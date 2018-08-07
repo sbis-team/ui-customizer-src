@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "ndk.env": "< v0.1",
+        "ndk.env": "0.0.4",
         "ndk.fn": "< v0.1",
         "ndk.fs": "< v0.1",
         "ndk.git": "< v0.1",

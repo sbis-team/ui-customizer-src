@@ -13,6 +13,20 @@
   width: 520px;
 }
 
+.SBIS-UI-Customizer-close-btn {
+  float: right;
+  font-size: 18px;
+  padding: 0px 4px;
+  margin: 10px 7px;
+  color: #999;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.SBIS-UI-Customizer-close-btn:hover {
+  color: #313e78;
+}
+
 #SBIS-UI-Customizer-SettingsDialog .link {
   color: #05b;
   outline: 0;
@@ -39,7 +53,7 @@
 
 #SBIS-UI-Customizer-SettingsDialog>.feedback {
   position: absolute;
-  right: 48px;
+  right: 32px;
   height: 16px;
   top: 14px;
   display: inline-block;

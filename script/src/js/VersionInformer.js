@@ -58,7 +58,7 @@ UICustomizerDefine('VersionInformer', ['Engine', 'SettingsDialog'], function (En
       date: verinfo.date,
       content: content
     });
-    Engine.waitOnce('body', function (body) {
+    Engine.waitOnce('#SBIS-UI-Customizer', function (body) {
       body.appendChild(_dialog);
       _resize();
       window.addEventListener('resize', _resize);

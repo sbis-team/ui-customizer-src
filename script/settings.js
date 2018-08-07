@@ -4,6 +4,7 @@
       'title': 'Главная страница',
       'view': 'section',
       'options': {
+        /*
         'HideAccordion': {
           'title': 'Скрыть пункты аккордеона',
           'view': 'group',
@@ -113,6 +114,7 @@
             }
           }
         },
+        */
         'HideOther': {
           'title': 'Скрыть прочие блоки',
           'view': 'group',
@@ -124,18 +126,6 @@
               'options': {
                 'Owl': {
                   'title': 'Сова > Как просто',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'AsJust': {
-                  'title': '\'Как просто\' над лентой',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'SideRight': {
-                  'title': 'Правый баннер',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
@@ -198,26 +188,6 @@
               'title': 'Прочее',
               'view': 'block',
               'options': {
-                'StretchPage': {
-                  'title': 'Растянуть сайт на всю страницу',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'TapeEventsMinFoto': {
-                  'title': 'Уменьшить фото в ленте событий',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                /*
-                'HideTapeEvents': {
-                   'title': 'Скрыть ленту событий',
-                   'view': 'option',
-                   'type': 'boolean',
-                   'value': false
-                },
-                */
                 'HideHeaderText': {
                   'title': 'Скрыть текст кнопок в шапке',
                   'view': 'option',

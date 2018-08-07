@@ -5,11 +5,11 @@
   },
   "env": {
     "es6": true,
-    "browser": true,
+    "node": true,
     "amd": true
   },
   "rules": {
-    "strict": "off",
+    "strict": "warn",
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "semi": ["warn", "always"],
     "no-trailing-spaces": "warn",
@@ -18,9 +18,6 @@
   },
   "globals": {
     "UICustomizerDefine": true,
-    "UICustomizerRequire": true,
-    "GM_info": true,
-    "GM_setClipboard": true,
-    "unsafeWindow": true
+    "UICustomizerRequire": true
   }
 }

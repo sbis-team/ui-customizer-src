@@ -1,9 +1,0 @@
-div.Staff-EventRibbon-ShortList-ItemTemplate__photoCnt {
-   text-align: center;
-}
-
-div.Staff-EventRibbon-ShortList-ItemTemplate__photoCnt .Person-PersonPhoto,
-div.Staff-EventRibbon-ShortList-ItemTemplate__photoCnt .Person-PersonPhoto__with-miniCard {
-   width: 42px !important;
-   height: 42px !important;
-}
