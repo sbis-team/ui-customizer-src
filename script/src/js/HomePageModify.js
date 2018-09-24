@@ -1,16 +1,16 @@
 UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
   'use strict';
-
-  let __oneColumnMode = false;
-  let _changeColumnsOrigon;
-
+  /*
+    let __oneColumnMode = false;
+    let _changeColumnsOrigon;
+  */
   return {
     applySettings: applySettings
   };
 
   function applySettings(settings) {
     var css = '';
-    let news = settings.options.News.options;
+    /*let news = settings.options.News.options;*/
 
     for (let groupName in settings.options) {
       let group = settings.options[groupName];
@@ -27,7 +27,7 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
     } else {
       Engine.removeCSS('HomePageModify');
     }
-
+    /*
     Engine.unsubscribeWait('.feed-LeftItems', oneColumnMode);
     __oneColumnMode = news.InOneColumn.value;
     if (__oneColumnMode) {
@@ -38,8 +38,9 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
     } else {
       oneColumnMode();
     }
+    */
   }
-
+  /*
   function oneColumnMode() {
     let news = document.querySelector('.feed-All .ws-ListView');
     if (news && news.controlNodes && news.controlNodes[0] && news.controlNodes[0].control) {
@@ -59,5 +60,5 @@ UICustomizerDefine('HomePageModify', ['Engine'], function (Engine) {
       setTimeout(oneColumnMode, 10);
     }
   }
-
+  */
 });
