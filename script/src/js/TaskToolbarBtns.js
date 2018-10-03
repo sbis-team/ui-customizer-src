@@ -98,8 +98,15 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   function copyToClipboard(elm, action) {
     var docName, msg = '';
     var text = '';
-    var opener = elm.parentElement.parentElement.wsControl;
-    var record = opener.getLinkedContext().getValue('record');
+    var card = elm;
+    while (!card.wsControl && card.parentElement) {
+      card = card.parentElement;
+    }
+    if (!card || !card.wsControl) {
+      throw new Error('Не удалось распознать карточку задачи');
+    }
+    card = card.wsControl;
+    var record = card.getLinkedContext().getValue('record');
     switch (action) {
       case 'СommitMsg':
         msg = 'Описание скопировано в буфер обмена';
