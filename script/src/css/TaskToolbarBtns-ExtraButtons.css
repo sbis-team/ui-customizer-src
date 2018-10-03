@@ -1,7 +1,7 @@
 .SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons {
    display: inline-block;
    border-right: 1px solid #E4E4E4;
-   margin-right: 5px;
+   padding-right: 8px;
 }
 
 .SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons i {
