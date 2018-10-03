@@ -1,5 +1,5 @@
 UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
-  "use strict";
+  'use strict';
 
   const PARSE_ERROR = 'TaskToolbarBtns: Ошибка разбора карточки задачи';
   const ReplaceDocTypeName = {
@@ -168,9 +168,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     let versionName = 'dev';
     let version = Infinity;
     milestones.each(function (record) {
-      let curNames = record.get('ДокументРасширение.Название').replace(/[ \(\)]/g, '\n').split('\n');
+      let curNames = record.get('ДокументРасширение.Название').replace(/[ ()]/g, '\n').split('\n');
       for (let i = 0; i < curNames.length; i++) {
-        let curName = curNames[i].replace(/[^\d\.]/g, '').replace(/^[\.]+/, '').replace(/[\.]+$/, '');
+        let curName = curNames[i].replace(/[^\d.]/g, '').replace(/^[.]+/, '').replace(/[.]+$/, '');
         if (curName) {
           let n = Number(curName.replace(/\./g, ''));
           if (!isNaN(n)) {
