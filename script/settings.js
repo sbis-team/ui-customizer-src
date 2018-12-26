@@ -475,7 +475,7 @@
                   'value': false
                 },
                 'MenuIconsColor': {
-                  'title': 'Иконки в аккордеоне',
+                  'title': 'Иконки в аккордеоне (цветные)',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
