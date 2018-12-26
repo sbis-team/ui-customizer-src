@@ -454,6 +454,49 @@
           }
         }
       }
+    },
+    'Themes': {
+      'title': 'Темы оформления',
+      'view': 'section',
+      'options': {
+        'ChristmasStyle': {
+          'title': 'Новогодний Онлайн',
+          'module': 'ChristmasStyle',
+          'view': 'group',
+          'options': {
+            'Accordion': {
+              'title': 'Новогодний Аккордеон',
+              'view': 'block',
+              'options': {
+                'MenuIcons': {
+                  'title': 'Иконки в аккордеоне',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                },
+                'MenuIconsColor': {
+                  'title': 'Иконки в аккордеоне',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                }/*,
+                'ChristmasBall': {
+                  'title': 'Логотип СБИС',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                },
+                'Snow': {
+                  'title': 'Снег',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                }*/
+              }
+            }
+          }
+        }
+      }
     }
   };
 })()

@@ -1,7 +1,7 @@
 UICustomizerDefine('Engine', function () {
   'use strict';
 
-  const htmlre = /\{\{([\w]+)\}\}/g;
+  const keyWordRE = /\{\{([\w-]+)\}\}/g;
 
   const migrateSettingsGroup = {};
 
@@ -90,6 +90,7 @@ UICustomizerDefine('Engine', function () {
     appendCSS: appendCSS,
     removeCSS: removeCSS,
     getSVG: getSVG,
+    getPNG: getPNG,
     getSettings: getSettings,
     setSetting: setSetting,
     cutTags: cutTags,
@@ -281,7 +282,7 @@ UICustomizerDefine('Engine', function () {
     if (name in sources.xhtml) {
       let xhtml = sources.xhtml[name];
       if (data) {
-        xhtml = xhtml.replace(htmlre, function (str, key) {
+        xhtml = xhtml.replace(keyWordRE, function (str, key) {
           return key in data ? data[key] : str;
         });
       }
@@ -332,10 +333,16 @@ UICustomizerDefine('Engine', function () {
     return name in sources.css;
   }
 
-  function getCSS(name) {
+  function getCSS(name, data) {
     name += '.css';
     if (name in sources.css) {
-      return sources.css[name];
+      var css = sources.css[name];
+      if (data) {
+        css = css.replace(keyWordRE, function (str, key) {
+          return key in data ? data[key] : str;
+        });
+      }
+      return css;
     } else {
       throw Error('Неизвестное имя файла: ' + name);
     }
@@ -370,6 +377,15 @@ UICustomizerDefine('Engine', function () {
     name += '.svg';
     if (name in sources.svg) {
       return sources.svg[name];
+    } else {
+      throw Error('Неизвестное имя файла: ' + name);
+    }
+  }
+
+  function getPNG(name) {
+    name += '.png';
+    if (name in sources.png) {
+      return sources.png[name];
     } else {
       throw Error('Неизвестное имя файла: ' + name);
     }

@@ -1,0 +1,163 @@
+.acc-menu-icon.contacts:before,
+.acc-menu-icon.groups:before,
+.acc-menu-icon.ereport:before,
+.acc-menu-icon.icon-cashbox:before,
+.acc-menu-icon.auction:before,
+.acc-menu-icon.sales:before,
+.acc-menu-icon.purchases:before,
+.acc-menu-icon.nomenclature:before,
+.acc-menu-icon.egais:before,
+.acc-menu-icon.icon-Mercury:before,
+.acc-menu-icon.icon-Stock:before,
+.acc-menu-icon.icon-Production:before,
+.acc-menu-icon.icon-Money:before,
+.acc-menu-icon.instructStorage:before,
+.acc-menu-icon.icon-work:before,
+.acc-menu-icon.business:before,
+.acc-menu-icon.accounting:before,
+.acc-menu-icon.icon-staff:before,
+.acc-menu-icon.documents:before,
+.acc-menu-icon.icon-contragents:before,
+.acc-menu-icon.icon-calendar:before,
+.acc-menu-icon.icon-calendar:after,
+.acc-menu-icon.icon-Bookkeeping:before,
+.acc-menu-icon.presto:before,
+.acc-menu-icon.retail:before,
+.acc-menu-icon.booking:before,
+.acc-menu-icon.ca_navication:before {
+  content: '' !important;
+}
+
+.acc-menu-icon.contacts,
+.acc-menu-icon.groups,
+.acc-menu-icon.ereport,
+.acc-menu-icon.icon-cashbox,
+.acc-menu-icon.auction,
+.acc-menu-icon.sales,
+.acc-menu-icon.purchases,
+.acc-menu-icon.nomenclature,
+.acc-menu-icon.egais,
+.acc-menu-icon.icon-Mercury,
+.acc-menu-icon.icon-Stock,
+.acc-menu-icon.icon-Production,
+.acc-menu-icon.icon-Money,
+.acc-menu-icon.instructStorage,
+.acc-menu-icon.icon-work,
+.acc-menu-icon.business,
+.acc-menu-icon.accounting,
+.acc-menu-icon.icon-staff,
+.acc-menu-icon.documents,
+.acc-menu-icon.icon-contragents,
+.acc-menu-icon.icon-calendar,
+.acc-menu-icon.icon-Bookkeeping,
+.acc-menu-icon.presto,
+.acc-menu-icon.retail,
+.acc-menu-icon.booking,
+.acc-menu-icon.ca_navication {
+  background-repeat: no-repeat !important;
+  background-position: 12px 10px !important;
+}
+
+.acc-menu-icon.contacts {
+  background-image: url("{{christmas-card}}") !important;
+}
+
+.acc-menu-icon.icon-work {
+  background-image: url("{{christmas-sock}}") !important;
+}
+
+.acc-menu-icon.icon-staff {
+  background-image: url("{{gingerbread-man}}") !important;
+}
+
+.acc-menu-icon.documents {
+  background-image: url("{{christmas-card2}}") !important;
+}
+
+.acc-menu-icon.icon-calendar {
+  background-image: url("{{christmas-bell}}") !important;
+}
+
+.acc-menu-icon.icon-contragents {
+  background-image: url("{{snow-globe}}") !important;
+}
+
+.acc-menu-icon.accounting {
+  background-image: url("{{christmas-ball}}") !important;
+}
+
+.acc-menu-icon.business {
+  background-image: url("{{cabin}}") !important;
+}
+
+.acc-menu-icon.ca_navication {
+  background-image: url("{{light}}") !important;
+}
+
+.acc-menu-icon.ereport {
+  background-image: url("{{christmas-card3}}") !important;
+}
+
+.acc-menu-icon.auction {
+  background-image: url("{{mitten}}") !important;
+}
+
+.acc-menu-icon.purchases {
+  background-image: url("{{shopping-bag}}") !important;
+}
+
+.acc-menu-icon.sales {
+  background-image: url("{{sale}}") !important;
+}
+
+.acc-menu-icon.egais {
+  background-image: url("{{mug}}") !important;
+}
+
+.acc-menu-icon.icon-Mercury {
+  background-image: url("{{reindeer}}") !important;
+}
+
+.acc-menu-icon.nomenclature {
+  background-image: url("{{gift}}") !important;
+}
+
+.acc-menu-icon.icon-Bookkeeping {
+  background-image: url("{{mittens}}") !important;
+}
+
+.acc-menu-icon.icon-cashbox {
+  background-image: url("{{sleigh}}") !important;
+}
+
+.acc-menu-icon.icon-Stock {
+  background-image: url("{{gift2}}") !important;
+}
+
+.acc-menu-icon.icon-Production {
+  background-image: url("{{elf}}") !important;
+}
+
+.acc-menu-icon.icon-Money {
+  background-image: url("{{candy-cane}}") !important;
+}
+
+.acc-menu-icon.groups {
+  background-image: url("{{cane}}") !important;
+}
+
+.acc-menu-icon.instructStorage {
+  background-image: url("{{card}}") !important;
+}
+
+.acc-menu-icon.presto {
+  background-image: url("{{santa-claus}}") !important;
+}
+
+.acc-menu-icon.retail {
+  background-image: url("{{shopping-bag}}") !important;
+}
+
+.acc-menu-icon.booking {
+  background-image: url("{{gift3}}") !important;
+}
