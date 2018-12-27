@@ -83,6 +83,7 @@ UICustomizerDefine('Engine', function () {
     generateCSS: {
       custom: generateCSS_custom,
       displayNone: generateCSS_displayNone,
+      visibilityHidden: generateCSS_visibilityHidden,
       inlineBlock: generateCSS_inlineBlock
     },
     hasCSS: hasCSS,
@@ -322,6 +323,10 @@ UICustomizerDefine('Engine', function () {
 
   function generateCSS_displayNone(selector) {
     return `${selector} { display: none !important; }`;
+  }
+
+  function generateCSS_visibilityHidden(selector) {
+    return `${selector} { visibility: hidden; }`;
   }
 
   function generateCSS_inlineBlock(selector) {

@@ -31,6 +31,8 @@ UICustomizerDefine('ChristmasStyle', ['Engine'], function (Engine) {
     'gift3': Engine.getPNG('gift3-24'),
     /* Прочие картинки */
     'tree': Engine.getPNG('tree-16'),
+    'santa-hat': Engine.getPNG('santa-hat-24'),
+    'penguin': Engine.getPNG('penguin-32'),
   };
   var imagesColor = {
     'christmas-card': Engine.getPNG('christmas-card-24-color'),

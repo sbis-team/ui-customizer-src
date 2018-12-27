@@ -465,7 +465,7 @@
           'view': 'group',
           'options': {
             'Accordion': {
-              'title': 'Новогодний Аккордеон',
+              'title': 'Аккордеон',
               'view': 'block',
               'options': {
                 'MenuIcons': {
@@ -498,6 +498,24 @@
                   'type': 'boolean',
                   'value': false
                 }*/
+              }
+            },
+            'Logo': {
+              'title': 'Логотип',
+              'view': 'block',
+              'options': {
+                'SantaHat': {
+                  'title': 'Новогодняя шапка',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                },
+                'Bird': {
+                  'title': 'Птица',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                }
               }
             }
           }

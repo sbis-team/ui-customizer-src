@@ -2,8 +2,13 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
   'use strict';
 
   const selectors = {
-    'Owl': 'div[sbisname="howEasy"], .online-howEasy',
-    'HideMaximumButton': '.NavSchemeLink.navSidebar__navSchemeLink, .NavSchemeLink.engine-Sidebar__navSchemeLink'
+    'Owl': {
+      cls: 'div[sbisname="howEasy"], .online-howEasy'
+    },
+    'HideMaximumButton': {
+      cls: '.online-Sidebar__navSchemeLink',
+      visibilityHidden: true
+    }
   };
 
   return {
@@ -19,7 +24,12 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
       }
       for (let name in group.options) {
         if (group.options[name].value) {
-          css += Engine.generateCSS.displayNone(selectors[name]);
+          var cfg = selectors[name];
+          if (cfg.visibilityHidden) {
+            css += Engine.generateCSS.visibilityHidden(cfg.cls);
+          } else {
+            css += Engine.generateCSS.displayNone(cfg.cls);
+          }
         }
       }
     }

@@ -1,0 +1,9 @@
+.online-Sidebar_logotype {
+  background-image: url("{{penguin}}") !important;
+  background-repeat: no-repeat;
+  background-position: 119px 7px;
+}
+
+.online-Sidebar_logoDefault {
+  width: 75px !important;
+}
