@@ -1,0 +1,5 @@
+.online-Sidebar__scrollContainerContent {
+  background-image: url("{{christmas-tree-big}}") !important;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+}

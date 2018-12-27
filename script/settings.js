@@ -485,19 +485,13 @@
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
-                }/*,
-                'ChristmasBall': {
-                  'title': 'Логотип СБИС',
+                },
+                'ChristmasTree': {
+                  'title': 'Ёлка под меню',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
                 },
-                'Snow': {
-                  'title': 'Снег',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                }*/
               }
             },
             'Logo': {
@@ -512,6 +506,12 @@
                 },
                 'Bird': {
                   'title': 'Птица',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                },
+                'Owl': {
+                  'title': 'Сова > Как просто',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false

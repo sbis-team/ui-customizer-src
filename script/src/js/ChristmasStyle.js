@@ -33,6 +33,8 @@ UICustomizerDefine('ChristmasStyle', ['Engine'], function (Engine) {
     'tree': Engine.getPNG('tree-16'),
     'santa-hat': Engine.getPNG('santa-hat-24'),
     'penguin': Engine.getPNG('penguin-32'),
+    'owl': Engine.getPNG('owl-64'),
+    'christmas-tree-big': Engine.getPNG('christmas-tree-big'),
   };
   var imagesColor = {
     'christmas-card': Engine.getPNG('christmas-card-24-color'),
