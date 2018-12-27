@@ -1,0 +1,11 @@
+.menu-counter__lvl-1:empty:before {
+  content: '';
+  width: 16px;
+  height: 28px;
+  background-image: url("{{tree}}") !important;
+  background-repeat: no-repeat;
+}
+
+.menu-counter__lvl-1:empty:hover:before {
+  transform: rotate(25deg);
+}

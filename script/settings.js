@@ -479,6 +479,12 @@
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
+                },
+                'TreeArrow': {
+                  'title': 'Ёлочки вместо стрелок',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
                 }/*,
                 'ChristmasBall': {
                   'title': 'Логотип СБИС',

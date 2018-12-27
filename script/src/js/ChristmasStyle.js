@@ -2,6 +2,7 @@ UICustomizerDefine('ChristmasStyle', ['Engine'], function (Engine) {
   'use strict';
 
   var images = {
+    /* Иконки меню */
     'christmas-card': Engine.getPNG('christmas-card-24'),
     'christmas-sock': Engine.getPNG('christmas-sock-24'),
     'gingerbread-man': Engine.getPNG('gingerbread-man-24'),
@@ -28,6 +29,8 @@ UICustomizerDefine('ChristmasStyle', ['Engine'], function (Engine) {
     'santa-claus': Engine.getPNG('santa-claus-24'),
     'shopping-bag2': Engine.getPNG('shopping-bag2-24'),
     'gift3': Engine.getPNG('gift3-24'),
+    /* Прочие картинки */
+    'tree': Engine.getPNG('tree-16'),
   };
   var imagesColor = {
     'christmas-card': Engine.getPNG('christmas-card-24-color'),

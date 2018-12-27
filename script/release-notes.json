@@ -1,7 +1,9 @@
 {
-   "release": false,
-   "added": [],
-   "changed": [],
-   "fixed": [],
-   "issues": []
+  "release": false,
+  "added": [],
+  "changed": [
+    "Новая 'Новогодний Онлайн / Аккордеон / Ёлочки вместо стрелок'"
+  ],
+  "fixed": [],
+  "issues": []
 }
