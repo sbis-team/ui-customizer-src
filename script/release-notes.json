@@ -1,7 +1,9 @@
 {
-   "release": false,
-   "added": [],
-   "changed": [],
-   "fixed": [],
-   "issues": []
+  "release": false,
+  "added": [],
+  "changed": [],
+  "fixed": [
+    "В свернутом аккордеоне ёлочка отображается по центру"
+  ],
+  "issues": []
 }
