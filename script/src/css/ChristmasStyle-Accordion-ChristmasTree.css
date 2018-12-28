@@ -3,3 +3,11 @@
   background-repeat: no-repeat;
   background-position-y: calc(100% - 24px);
 }
+
+.acc-menu-container {
+  margin-bottom: 200px;
+}
+
+.online-howEasy {
+  max-height: 58px;
+}
