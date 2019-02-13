@@ -6,6 +6,7 @@
   window.UICustomizerEvent = UICustomizerEvent;
   var globalContainer = document.createElement('userscript');
   globalContainer.id = 'SBIS-UI-Customizer';
+  globalContainer.setAttribute('data-vdomignore', 'true');
   document.getElementsByTagName('html')[0].appendChild(globalContainer);
   document.addEventListener('DOMNodeInserted', function () {
     if (!document.querySelector('#' + globalContainer.id)) {

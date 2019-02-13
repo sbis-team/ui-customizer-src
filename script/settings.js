@@ -209,42 +209,12 @@
           'view': 'group',
           'module': 'TaskToolbarBtns',
           'options': {
-            'Show': {
-              'title': 'Показать',
-              'view': 'block',
-              'options': {
-                'Schedule': {
-                  'title': 'Время по документу',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Monitoring': {
-                  'title': 'Поставить на контроль',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Agreement': {
-                  'title': 'Отправить на согласование',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                }
-              }
-            },
             'Hide': {
-              'title': 'Скрыть',
+              'title': 'Скрыть базовые',
               'view': 'block',
               'options': {
                 'Print': {
                   'title': 'Распечатать',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Save': {
-                  'title': 'Скачать',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
@@ -264,7 +234,7 @@
               }
             },
             'Add': {
-              'title': 'Добавить',
+              'title': 'Добавить новые',
               'view': 'block',
               'options': {
                 'BranchName': {
@@ -300,42 +270,12 @@
           'view': 'group',
           'module': 'MRToolbarBtns',
           'options': {
-            'Show': {
-              'title': 'Показать',
-              'view': 'block',
-              'options': {
-                'Schedule': {
-                  'title': 'Время по документу',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Monitoring': {
-                  'title': 'Поставить на контроль',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Agreement': {
-                  'title': 'Отправить на согласование',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                }
-              }
-            },
             'Hide': {
-              'title': 'Скрыть',
+              'title': 'Скрыть базовые',
               'view': 'block',
               'options': {
                 'Print': {
                   'title': 'Распечатать',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Save': {
-                  'title': 'Скачать',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
@@ -355,7 +295,7 @@
               }
             },
             'Add': {
-              'title': 'Добавить',
+              'title': 'Добавить новые',
               'view': 'block',
               'options': {
                 'TaskURL': {
@@ -379,42 +319,12 @@
           'view': 'group',
           'module': 'ErrandToolbarBtns',
           'options': {
-            'Show': {
-              'title': 'Показать',
-              'view': 'block',
-              'options': {
-                'Schedule': {
-                  'title': 'Время по документу',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Monitoring': {
-                  'title': 'Поставить на контроль',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Agreement': {
-                  'title': 'Отправить на согласование',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                }
-              }
-            },
             'Hide': {
-              'title': 'Скрыть',
+              'title': 'Скрыть базовые',
               'view': 'block',
               'options': {
                 'Print': {
                   'title': 'Распечатать',
-                  'view': 'option',
-                  'type': 'boolean',
-                  'value': false
-                },
-                'Save': {
-                  'title': 'Скачать',
                   'view': 'option',
                   'type': 'boolean',
                   'value': false
@@ -434,7 +344,7 @@
               }
             },
             'Add': {
-              'title': 'Добавить',
+              'title': 'Добавить новые',
               'view': 'block',
               'options': {
                 'TaskURL': {

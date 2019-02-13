@@ -33,24 +33,7 @@ UICustomizerDefine('Engine', function () {
   var _waitRequireID = setInterval(function () {
     onload(function () {
       if (typeof window.require !== 'undefined') {
-        window.require(['Core/core-ready'], function (ready) {
-          ready.addCallback(_waitRequireFN);
-          return ready;
-        }, function (error) {
-          console.warn('UICustomizer', error);
-          window.require(['Core/core-init-min'],
-            function (ready) {
-              ready.addCallback(_waitRequireFN);
-              return ready;
-            },
-            function (error) {
-              console.warn('UICustomizer', error);
-              console.warn('UICustomizer: Не удалось получить деферред готовности страницы');
-              return error;
-            }
-          );
-          return error;
-        });
+        _waitRequireFN();
         clearInterval(_waitRequireID);
       }
     });

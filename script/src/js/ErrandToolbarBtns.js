@@ -1,6 +1,7 @@
 UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Engine, Task) {
   'use strict';
 
+  const PARSE_ERROR = 'TaskToolbarBtns: Ошибка разбора карточки задачи';
   var property = {
     btns: {
       TaskURL: {
@@ -12,13 +13,9 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
     },
     ExcludeDocTypeName: ['Merge request', 'Ошибка в разработку', 'Задача в разработку'],
     selectors: {
-      'Schedule': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoShowDocTime"]',
-      'Monitoring': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoShowMonitoringDialog"]',
-      'Agreement': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoSendToAgreement"]',
-      'Print': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoPrintDocument"]',
-      'Save': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoSaveDocumentOnDisk"]',
-      'LinkOld': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoGetLink"]',
-      'Delete': 'div.SBIS-UI-Customizer.ErrandToolbarBtns span[data-id="edoDeleteDocument"]'
+      'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
+      'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
+      'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Удалить"]'
     }
   };
 
@@ -34,15 +31,23 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
   function copyToClipboard(elm, action) {
     var docName, number, face, info_text, url, msg = '';
     var text = '';
-    var card = elm;
-    while (!card.wsControl && card.parentElement) {
-      card = card.parentElement;
+
+    var edo3Dialog = elm;
+    while (edo3Dialog && !edo3Dialog.classList.contains('edo3-Dialog')) {
+      edo3Dialog = edo3Dialog.parentElement;
     }
-    if (!card || !card.wsControl) {
-      throw new Error('Не удалось распознать карточку задачи');
+    if (edo3Dialog && edo3Dialog.controlNodes && edo3Dialog.controlNodes[0]) {
+      edo3Dialog = edo3Dialog.controlNodes[0];
+    } else {
+      console.error(PARSE_ERROR);
+      return false;
     }
-    card = card.wsControl;
-    var record = card.getLinkedContext().getValue('record');
+    var record = (edo3Dialog.options || {}).record;
+    if (!record) {
+      console.error(PARSE_ERROR);
+      return false;
+    }
+
     switch (action) {
       case 'CopyInfo':
         msg = 'Описание скопировано в буфер обмена';

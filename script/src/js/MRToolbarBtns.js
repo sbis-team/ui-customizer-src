@@ -1,30 +1,26 @@
 UICustomizerDefine('MRToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Engine, Task) {
-   "use strict";
+  "use strict";
 
-   var property = {
-      btns: {
-         TaskURL: {
-            icon: 'link'
-         }
-      },
-      ApplyDocTypeName: ['Merge request'],
-      selectors: {
-         'Schedule': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoShowDocTime"]',
-         'Monitoring': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoShowMonitoringDialog"]',
-         'Agreement': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoSendToAgreement"]',
-         'Print': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoPrintDocument"]',
-         'Save': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoSaveDocumentOnDisk"]',
-         'LinkOld': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoGetLink"]',
-         'Delete': 'div.SBIS-UI-Customizer.MRToolbarBtns span[data-id="edoDeleteDocument"]'
+  var property = {
+    btns: {
+      TaskURL: {
+        icon: 'link'
       }
-   };
+    },
+    ApplyDocTypeName: ['Merge request'],
+    selectors: {
+      'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
+      'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
+      'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+    }
+  };
 
-   return {
-      applySettings: applySettings
-   };
+  return {
+    applySettings: applySettings
+  };
 
-   function applySettings(settings) {
-      Task.applySettings(settings, 'MRToolbarBtns', property);
-   }
+  function applySettings(settings) {
+    Task.applySettings(settings, 'MRToolbarBtns', property);
+  }
 
 });
