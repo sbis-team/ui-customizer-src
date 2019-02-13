@@ -1,9 +1,7 @@
 {
-  "release": false,
-  "added": [],
-  "changed": [],
-  "fixed": [
-    "Исправлено отображение доп. кнопок в карточке задачи/ошибки/поручения на vasaby"
-  ],
-  "issues": []
+   "release": false,
+   "added": [],
+   "changed": [],
+   "fixed": [],
+   "issues": []
 }
