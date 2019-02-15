@@ -29,6 +29,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   };
   var BranchNameUserLogin = '';
   var idReadedUserLogin = false;
+  var allWaitHandlers = {};
 
   return {
     applySettings: applySettings,
@@ -68,14 +69,17 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
         Engine.unsubscribeWait(toolbarClass, moduleProperty.WaitHandler);
       }
       moduleProperty.WaitHandler = _appendExtraButtons(moduleName, moduleProperty);
+      allWaitHandlers[moduleName] = moduleProperty.WaitHandler;
       Engine.wait(toolbarClass, moduleProperty.WaitHandler);
     } else {
       if (moduleProperty.WaitHandler) {
         Engine.unsubscribeWait(toolbarClass, moduleProperty.WaitHandler);
         delete moduleProperty.WaitHandler;
+        delete allWaitHandlers[moduleName];
       }
       if (css) {
         moduleProperty.WaitHandler = _appendButtonsClass(moduleName, moduleProperty);
+        allWaitHandlers[moduleName] = moduleProperty.WaitHandler;
         Engine.wait(toolbarClass, moduleProperty.WaitHandler);
       }
       Engine.removeByQuery('.SBIS-UI-Customizer.' + moduleName + '-ExtraButtons');
@@ -105,8 +109,11 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   function _get_doc_version(record) {
     var flds = record.get('РП.ПоляДляРендера');
     var milestone = ((flds || {})['ВехаДокумента'] || {}).name || '';
-    if (!milestone && record.has('РП.ВехаДокумента')) {
-      milestone = record.get('РП.ВехаДокумента').at(0).get('ДокументРасширение.Название');
+    if (!milestone && record.get('РП.ВехаДокумента')) {
+      milestone = record.get('РП.ВехаДокумента').at(0) || '';
+      if (milestone) {
+        milestone = milestone.get('ДокументРасширение.Название');
+      }
     }
     var version = milestone.split(' ')[0] || '';
     if (!/^[\d.]+$/.test(version)) {
@@ -217,14 +224,21 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   }
 
   function _appendExtraButtonsH(elm, moduleName, moduleProperty) {
-    return function () {
-      let btns = document.createElement('div');
-      btns.className = 'SBIS-UI-Customizer ' + moduleName + '-ExtraButtons';
-      btns.innerHTML = moduleProperty.ExtraButtonsHTML;
-      btns.setAttribute('data-vdomignore', 'true');
-      elm.insertBefore(btns, elm.children[0]);
-      elm.classList.add('SBIS-UI-Customizer');
-      elm.classList.add(moduleName);
+    return function (options = {}) {
+      if (options.remove) {
+        let btns = elm.querySelector('.SBIS-UI-Customizer .' + moduleName + '-ExtraButtons');
+        if (btns) {
+          btns.remove();
+        }
+      } else {
+        let btns = document.createElement('div');
+        btns.className = 'SBIS-UI-Customizer ' + moduleName + '-ExtraButtons';
+        btns.innerHTML = moduleProperty.ExtraButtonsHTML;
+        btns.setAttribute('data-vdomignore', 'true');
+        elm.insertBefore(btns, elm.children[0]);
+        elm.classList.add('SBIS-UI-Customizer');
+        elm.classList.add(moduleName);
+      }
     };
   }
 
@@ -239,6 +253,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
 
   function _appendButtonsClassH(elm, moduleName) {
     return function () {
+      console.log('_appendButtonsClassH');
       elm.classList.add('SBIS-UI-Customizer');
       elm.classList.add(moduleName);
     };
@@ -268,10 +283,36 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     }
 
     let docName = _get_doc_name(record);
-    if (moduleProperty.ApplyDocTypeName && ~moduleProperty.ApplyDocTypeName.indexOf(docName)) {
-      return callback();
-    }
-    if (moduleProperty.ExcludeDocTypeName && !~moduleProperty.ExcludeDocTypeName.indexOf(docName)) {
+    if (moduleProperty.ApplyDocTypeName && ~moduleProperty.ApplyDocTypeName.indexOf(docName) ||
+      moduleProperty.ExcludeDocTypeName && !~moduleProperty.ExcludeDocTypeName.indexOf(docName)) {
+
+      var _beforeUpdate__Origin = edo3Dialog.control._beforeUpdate;
+      var _beforeUnmount__Origin = edo3Dialog.control._beforeUnmount;
+      var _beforeUpdate = edo3Dialog.control._beforeUpdate.bind(edo3Dialog.control);
+
+      var task_key = edo3Dialog.control.key;
+
+      edo3Dialog.control._beforeUpdate = function (...args) {
+        var new_task_key = args[0].key;
+        if (task_key !== new_task_key) {
+          task_key = new_task_key;
+          callback({ remove: true });
+          edo3Dialog.control._beforeUpdate = _beforeUpdate__Origin;
+          edo3Dialog.control._beforeUnmount = _beforeUnmount__Origin;
+          for (var moduleName in allWaitHandlers) {
+            allWaitHandlers[moduleName]([elm]);
+          }
+        }
+        _beforeUpdate(...args);
+
+      };
+      edo3Dialog.control._beforeUnmount = function (...args) {
+        edo3Dialog.control._beforeUpdate = _beforeUpdate__Origin;
+        edo3Dialog.control._beforeUnmount = _beforeUnmount__Origin;
+        edo3Dialog.control._beforeUnmount(...args);
+      };
+
+
       return callback();
     }
 
