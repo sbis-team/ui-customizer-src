@@ -12,6 +12,7 @@
   height: 24px;
   width: 24px;
   display: inline-block;
+  margin-top: -2px;
 }
 
 .SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons i svg {

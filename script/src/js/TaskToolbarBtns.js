@@ -33,7 +33,14 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
 
   return {
     applySettings: applySettings,
-    copyToClipboard: copyToClipboard
+    copyToClipboard: copyToClipboard,
+    _resolve_edo_dialog_record: _resolve_edo_dialog_record,
+    _get_doc_number: _get_doc_number,
+    _get_doc_author: _get_doc_author,
+    _get_doc_name: _get_doc_name,
+    _get_doc_date: _get_doc_date,
+    _get_doc_url: _get_doc_url,
+    _get_doc_description: _get_doc_description
   };
 
   function applySettings(settings, moduleName, moduleProperty) {
@@ -101,9 +108,19 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     return docName;
   }
 
+  function _get_doc_date(record) {
+    var doc_date = Engine.getDate(record.get('Документ.Дата'));
+    return doc_date;
+  }
+
   function _get_doc_number(record) {
     var numb = record.get('Документ.Номер') || record.get('Номер');
     return numb;
+  }
+
+  function _get_doc_author(record) {
+    var author = record.get('Сотрудник.Название');
+    return author;
   }
 
   function _get_doc_version(record) {
@@ -126,7 +143,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     var flds = record.get('РП.ПоляДляРендера');
     var description = (flds || {}).Description;
     if (!description) {
-      description = Engine.cutOverflow(Engine.cutTags(record.get('РазличныеДокументы.Информация')), 98, 1024);
+      description = Engine.cutOverflow(Engine.cutTags(record.get('РазличныеДокументы.Информация') || ''), 98, 1024);
     }
     return description;
   }
@@ -136,8 +153,8 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     docName = ReplaceDocTypeName[docName] || docName;
     var docNumber = ' № ' + _get_doc_number(record);
     var version = ' веха ' + _get_doc_version(record);
-    var date = ' от ' + Engine.getDate(record.get('Документ.Дата'));
-    var author = ' ' + record.get('Сотрудник.Название');
+    var date = ' от ' + _get_doc_date(record);
+    var author = ' ' + _get_doc_author(record);
     var utl = _get_doc_url(record);
     var description = _get_doc_description(record);
     return docName + docNumber + version + date + author + '\n' + utl + '\n\n' + description;
@@ -155,10 +172,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     return version + '/' + prefix + '/' + (BranchNameUserLogin ? BranchNameUserLogin + '/' : '') + docNumber;
   }
 
-  function copyToClipboard(elm, action) {
-    var msg = '';
-    var text = '';
-
+  function _resolve_edo_dialog_record(elm) {
     var edo3Dialog = elm;
     while (edo3Dialog && !edo3Dialog.classList.contains('edo3-Dialog')) {
       edo3Dialog = edo3Dialog.parentElement;
@@ -174,6 +188,14 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       console.error(PARSE_ERROR);
       return false;
     }
+    return record;
+  }
+
+  function copyToClipboard(elm, action) {
+    var msg = '';
+    var text = '';
+
+    var record = _resolve_edo_dialog_record(elm);
 
     switch (action) {
       case 'СommitMsg':
@@ -228,8 +250,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       if (options.remove) {
         let btns = elm.querySelector('.SBIS-UI-Customizer .' + moduleName + '-ExtraButtons');
         if (btns) {
-          btns.remove();
+          btns.remove(moduleName);
         }
+        elm.classList.remove(moduleName);
       } else {
         let btns = document.createElement('div');
         btns.className = 'SBIS-UI-Customizer ' + moduleName + '-ExtraButtons';
@@ -252,10 +275,13 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   }
 
   function _appendButtonsClassH(elm, moduleName) {
-    return function () {
-      console.log('_appendButtonsClassH');
-      elm.classList.add('SBIS-UI-Customizer');
-      elm.classList.add(moduleName);
+    return function (options = {}) {
+      if (options.remove) {
+        elm.classList.remove(moduleName);
+      } else {
+        elm.classList.add('SBIS-UI-Customizer');
+        elm.classList.add(moduleName);
+      }
     };
   }
 
