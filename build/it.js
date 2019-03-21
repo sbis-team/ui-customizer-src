@@ -268,18 +268,19 @@ function __publish_git() {
     yield ndk_fs.writeText(metaFile, it.meta);
     __log_variable('write', scriptFile);
     yield ndk_fs.writeText(scriptFile, it.script);
+    let text, readme, changelog, clDefaultText, clText;
     switch (notesMode) {
       case 'README':
-        let text = `## ${it.notesMD}---\n\nCopyright (c) SBIS Team`;
-        let readme = `${repoDir}/README.md`;
+        text = `## ${it.notesMD}---\n\nCopyright (c) SBIS Team`;
+        readme = `${repoDir}/README.md`;
         __log_variable('write', readme);
         yield ndk_fs.writeText(readme, text);
         break;
       case 'CHANGELOG':
-        let changelog = `${repoDir}/CHANGELOG.md`;
-        let clDefaultText = '## История изменений\n\nCopyright (c) SBIS Team';
+        changelog = `${repoDir}/CHANGELOG.md`;
+        clDefaultText = '## История изменений\n\nCopyright (c) SBIS Team';
         __log_variable('read', changelog);
-        let clText = yield ndk_fs.readText(changelog, clDefaultText);
+        clText = yield ndk_fs.readText(changelog, clDefaultText);
         clText = clText.replace(/(История изменений)/, `$1\n\n### ${it.notesMD}---`);
         __log_variable('write', changelog);
         yield ndk_fs.writeText(changelog, clText);
@@ -321,13 +322,14 @@ function __publish_self_git() {
     yield git.reset();
     __log_variable('git pull');
     yield git.pull();
+    let buildFile;
     switch (it.mode) {
       case 'candidate':
         __log_variable('git add', it.buildFile);
         yield git.add(it.buildFile);
         break;
       case 'release':
-        const buildFile = it.options.buildFile.candidate;
+        buildFile = it.options.buildFile.candidate;
         __log_variable('write', it.options.notes);
         yield ndk_fs.writeJSON(it.options.notes, {
           release: false,
@@ -430,181 +432,5 @@ function parse(tmpl, data) {
       fromIndex = yield tmpl.indexOf('/*', fromIndex);
     }
     return tmpl;
-  });
-}
-
-function __publish_development(scriptData) {
-  return new Promise((resolve, reject) => {
-    const hostname = node_os.hostname();
-    const port = 1777;
-    const server = node_http.createServer(function requestListener(req, res) {
-      ndk_fn.execute(function* () {
-        req.url = node_url.parse(req.url, true);
-        res.end = (function (end) {
-          return function (data, callback) {
-            node_dns.reverse(req.socket.remoteAddress, (err, hostnames) => {
-              let addr = hostnames[0] || req.socket.remoteAddress;
-              console.log(`${addr} ${res.statusCode} ${req.method} ${req.url.href}`);
-              end.call(res, data);
-              if (typeof callback === 'function') {
-                callback();
-              }
-            });
-          };
-        })(res.end);
-        switch (req.url.pathname) {
-          case '/sbis-ui-customizer.user.js':
-            res.setHeader('Content-Type', 'text/js;charset=utf-8');
-            res.end(yield ndk_fs.readText(`bin/development_sbis-ui-customizer.user.js`), () => {
-              console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
-              resolve(true);
-              setTimeout(process.exit, 100);
-            });
-            break;
-          case '/sbis-ui-customizer.meta.js':
-            res.setHeader('Content-Type', 'text/js;charset=utf-8');
-            res.end(yield ndk_fs.readText(`bin/development_sbis-ui-customizer.meta.js`));
-            break;
-          default:
-            res.setHeader('Content-Type', 'text/plain;charset=utf-8');
-            res.statusCode = 404;
-            res.end('404 Not Found');
-        }
-      }).catch(err => {
-        reject(err);
-        res.setHeader('Content-Type', 'text/plain;charset=utf-8');
-        res.statusCode = 500;
-        res.end('500 Internal Server Error');
-      });
-    });
-    server.on('error', function (err) {
-      reject(err);
-    });
-    server.listen(port, hostname, function () {
-      console.log(`Обновить с: http://${hostname}:${port}/sbis-ui-customizer.user.js`);
-    });
-  });
-}
-
-function __publish_release(version, build, scriptData, notes) {
-  const srcgit = ndk_git.createCL('./', process.stdout, process.stderr);
-  const trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
-  const targetBranch = it.mode;
-  return ndk_fn.execute(function* () {
-    if (!notes.added.length && !notes.changed.length && !notes.fixed.length && !notes.issues.length) {
-      console.error('Необходимо заполнить заметки о выпуске!');
-      return false;
-    }
-    if (it.mode === 'release' && !notes.release) {
-      console.error('Необходимо подтвердить обновление release!');
-      return false;
-    }
-    if (!node_fs.existsSync('./bin/ui-customizer/')) {
-      yield ndk_git.createCL('./bin/', process.stdout, process.stderr)
-        .clone('git@github.com:sbis-team/ui-customizer.git');
-    }
-    console.log(`Обновляем "${it.mode}" до v${scriptData.VERSION}`);
-    yield trggit.fetch();
-    yield trggit.reset();
-    const branch = yield trggit['rev-parse']('--abbrev-ref', 'HEAD');
-    if (branch !== targetBranch) {
-      yield trggit.checkout(targetBranch);
-    }
-    yield trggit.pull();
-    yield ndk_fs.copyFile(
-      `bin/${it.mode}_sbis-ui-customizer.user.js`,
-      './bin/ui-customizer/sbis-ui-customizer.user.js',
-      true
-    );
-    yield ndk_fs.copyFile(
-      `bin/${it.mode}_sbis-ui-customizer.meta.js`,
-      './bin/ui-customizer/sbis-ui-customizer.meta.js',
-      true
-    );
-    notes = yield __publish_createNotes(scriptData.DATE, scriptData.VERSION, notes);
-    yield trggit.add('sbis-ui-customizer.user.js');
-    yield trggit.add('sbis-ui-customizer.meta.js');
-    yield trggit.commit('-m', notes);
-    yield trggit.push();
-    if (branch !== targetBranch) {
-      yield trggit.checkout(branch);
-    }
-    if (it.mode === 'release') {
-      const oldBranch = yield srcgit['rev-parse']('--abbrev-ref', 'HEAD');
-      const newBranch = `release/v${scriptData.VERSION}`;
-      yield srcgit.fetch();
-      yield srcgit.reset();
-      yield srcgit.pull();
-      if (yield srcgit.status('-s', 'script/release-notes.json')) {
-        yield srcgit.add('script/release-notes.json');
-      }
-      yield ndk_fs.writeJSON('script/version.json', version);
-      yield srcgit.add('script/version.json');
-      yield srcgit.commit('-m', `Обновление v${scriptData.VERSION}-${it.mode}`);
-      yield srcgit.push();
-      yield srcgit.checkout('-b', newBranch);
-      yield srcgit.push('origin', newBranch);
-      if (oldBranch === 'development') {
-        yield srcgit.checkout(oldBranch);
-      }
-      build.number = 0;
-    }
-    console.log(`Скрипт "${it.mode}" v${scriptData.VERSION} успешно опубликован`);
-    return true;
-  });
-}
-
-function __publish_createNotes(date, version, notes) {
-  const trggit = ndk_git.createCL('./bin/ui-customizer/', process.stdout, process.stderr);
-  return ndk_fn.execute(function* () {
-    let text = `Обновление v${version}\n\n`;
-    text += `Сборка от: ${date}\n\n`;
-    if (notes.added.length) {
-      text += '#### Новые возможности\n\n';
-      notes.added.forEach((note) => {
-        text += `* ${note}\n\n`;
-      });
-    }
-    if (notes.changed.length) {
-      text += '#### Небольшие изменения\n\n';
-      notes.changed.forEach((note) => {
-        text += `* ${note}\n\n`;
-      });
-    }
-    if (notes.fixed.length) {
-      text += '#### Исправленные ошибки\n\n';
-      notes.fixed.forEach((note) => {
-        text += `* ${note}\n\n`;
-      });
-    }
-    if (notes.issues.length) {
-      text += '#### Выполненные задачи\n\n';
-      notes.issues.forEach((note) => {
-        if (note instanceof Array) {
-          let id = note[0].replace(/.*\/(\d+).*/g, '$1');
-          text += `* [[issue#${id}](${note[0]})] ${note[1]}\n\n`;
-        } else {
-          text += `* ${note}\n\n`;
-        }
-      });
-    }
-    if (it.mode === 'candidate') {
-      yield ndk_fs.writeText('./bin/ui-customizer/README.md', '## ' + text + '-\n\nCopyright (c) SBIS Team');
-      yield trggit.add('README.md');
-    } else {
-      let file = './bin/ui-customizer/CHANGELOG.md';
-      let clog = yield ndk_fs.readText(file);
-      clog = clog.replace(/История изменений/, 'История изменений\n\n' + '### ' + text + '-');
-      yield ndk_fs.writeText(file, clog);
-      yield ndk_fs.writeText('script/release-notes.json', JSON.stringify({
-        release: false,
-        added: [],
-        changed: [],
-        fixed: [],
-        issues: []
-      }, null, '  '));
-      yield trggit.add('CHANGELOG.md');
-    }
-    return text;
   });
 }

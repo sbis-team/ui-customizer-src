@@ -54,7 +54,7 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
 
   function _showInputDialog(title, hint, callback) {
     var dlg = document.createElement('div');
-    dlg.className = "SBIS-UI-Customizer-SocNet-InputDialog";
+    dlg.className = 'SBIS-UI-Customizer-SocNet-InputDialog';
     dlg.innerHTML = Engine.getHTML('SocNet-InputDialog', {
       'title': title,
       'hint': hint
@@ -82,22 +82,22 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
       Engine.rpc.sbis({
         method: 'Персона.СОтправить',
         params: {
-          "Получатели": [],
-          "Текст": msg,
-          "Диалог": ChatUUID,
-          "Документ": null,
-          "Сообщение": null,
-          "Файлы": [],
-          "Опции": {
-            "d": [
+          'Получатели': [],
+          'Текст': msg,
+          'Диалог': ChatUUID,
+          'Документ': null,
+          'Сообщение': null,
+          'Файлы': [],
+          'Опции': {
+            'd': [
               false,
               false
             ],
-            "s": [
-              { "t": "Логическое", "n": "МассовоеСообщение" },
-              { "t": "Логическое", "n": "СлитьСПредыдущим" }
+            's': [
+              { 't': 'Логическое', 'n': 'МассовоеСообщение' },
+              { 't': 'Логическое', 'n': 'СлитьСПредыдущим' }
             ],
-            "_type": "record"
+            '_type': 'record'
           }
         },
         callback: function () {
@@ -113,8 +113,8 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
       Engine.rpc.sbis({
         method: 'Event.CreateNews',
         params: {
-          "Object": {
-            "d": [
+          'Object': {
+            'd': [
               GroupUUID,
               null,
               1,
@@ -122,15 +122,15 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
               false,
               msg
             ],
-            "s": [
-              { "n": "Channel", "t": "UUID" },
-              { "n": "News", "t": "UUID" },
-              { "n": "Visibility", "t": "Число целое" },
-              { "n": "EventType", "t": "Число целое" },
-              { "n": "FromGroup", "t": "Логическое" },
-              { "n": "Text", "t": "Строка" }
+            's': [
+              { 'n': 'Channel', 't': 'UUID' },
+              { 'n': 'News', 't': 'UUID' },
+              { 'n': 'Visibility', 't': 'Число целое' },
+              { 'n': 'EventType', 't': 'Число целое' },
+              { 'n': 'FromGroup', 't': 'Логическое' },
+              { 'n': 'Text', 't': 'Строка' }
             ],
-            "_type": "record"
+            '_type': 'record'
           }
         },
         callback: function () {
@@ -153,24 +153,24 @@ UICustomizerDefine('SocNet', ['Engine'], function (Engine) {
         Engine.rpc.sbis({
           method: 'Персона.СОтправить',
           params: {
-            "Получатели": [AuthorUUID],
-            "Текст": msg,
-            "Диалог": guid,
-            "Документ": null,
-            "Сообщение": null,
-            "Файлы": [],
-            "Опции": {
-              "d": [
+            'Получатели': [AuthorUUID],
+            'Текст': msg,
+            'Диалог': guid,
+            'Документ': null,
+            'Сообщение': null,
+            'Файлы': [],
+            'Опции': {
+              'd': [
                 false,
                 false,
                 false
               ],
-              "s": [
-                { "t": "Логическое", "n": "МассовоеСообщение" },
-                { "t": "Логическое", "n": "СлитьСПредыдущим" },
-                { "t": "Логическое", "n": "ВсемУчастникамТемы" }
+              's': [
+                { 't': 'Логическое', 'n': 'МассовоеСообщение' },
+                { 't': 'Логическое', 'n': 'СлитьСПредыдущим' },
+                { 't': 'Логическое', 'n': 'ВсемУчастникамТемы' }
               ],
-              "_type": "record"
+              '_type': 'record'
             }
           },
           callback: function () {

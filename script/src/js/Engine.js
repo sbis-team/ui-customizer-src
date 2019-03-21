@@ -62,7 +62,6 @@ UICustomizerDefine('Engine', function () {
     getHTML: getHTML,
     createElement: createElement,
     createComponent: createComponent,
-    removeByQuery: removeByQuery,
     generateCSS: {
       custom: generateCSS_custom,
       displayNone: generateCSS_displayNone,
@@ -291,13 +290,6 @@ UICustomizerDefine('Engine', function () {
     cnt.className = 'SBIS-UI-Customizer';
     cnt.innerHTML = html;
     return cnt;
-  }
-
-  function removeByQuery(query) {
-    var elms = document.querySelectorAll(query);
-    for (let i = 0; i < elms.length; i++) {
-      elms[i].remove();
-    }
   }
 
   function generateCSS_custom(selector, rule, value) {

@@ -1,5 +1,5 @@
 UICustomizerDefine('MRToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Engine, Task) {
-  "use strict";
+  'use strict';
 
   var property = {
     btns: {
@@ -9,9 +9,9 @@ UICustomizerDefine('MRToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Eng
     },
     ApplyDocTypeName: ['Merge request'],
     selectors: {
-      'Print': 'div.SBIS-UI-Customizer.MRToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
-      'LinkOld': 'div.SBIS-UI-Customizer.MRToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
-      'Delete': 'div.SBIS-UI-Customizer.MRToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-MRToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
+      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-MRToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
+      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-MRToolbarBtns .controls-Toolbar_item[title="Удалить"]'
     }
   };
 

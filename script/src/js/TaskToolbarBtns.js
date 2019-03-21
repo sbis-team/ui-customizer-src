@@ -2,11 +2,11 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   'use strict';
 
   const PARSE_ERROR = 'TaskToolbarBtns: Ошибка разбора карточки задачи';
-  const WAITING_COMPONENT = 'TaskToolbarBtns: Ожидание загрузки карточки задачи';
   const ReplaceDocTypeName = {
     'Ошибка в разработку': 'Ошибка',
     'Задача в разработку': 'Задача'
   };
+  const taskDialogClass = 'edo3-Dialog';
   const toolbarClass = '.edo3-Dialog__head-first-line-buttons .controls-Toolbar';
   var property = {
     btns: {
@@ -22,14 +22,16 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     },
     ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку'],
     selectors: {
-      'Print': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
-      'LinkOld': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
-      'Delete': 'div.SBIS-UI-Customizer.TaskToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
+      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
+      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Удалить"]'
     }
   };
   var BranchNameUserLogin = '';
   var idReadedUserLogin = false;
-  var allWaitHandlers = {};
+  var modulesProperties = {};
+  var isListener = false;
+  var taskChangeCache = new WeakMap();
 
   return {
     applySettings: applySettings,
@@ -62,41 +64,113 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
         let btn = Engine.getHTML(moduleName + '-' + name);
         btn = btn.replace(/\{\{icon\}\}/, Engine.getSVG(moduleProperty.btns[name].icon));
         moduleProperty.ExtraButtonsHTML += btn;
-      } else {
-        Engine.removeByQuery('.SBIS-UI-Customizer.' + moduleName + '-ExtraButtons .' + name);
       }
     }
+
     if (addExtraButtons) {
       let extbtn = Engine.getCSS('TaskToolbarBtns-ExtraButtons');
       if (moduleName !== 'TaskToolbarBtns') {
         extbtn = extbtn.replace(/TaskToolbarBtns/g, moduleName);
       }
       css += extbtn;
-      if (moduleProperty.WaitHandler) {
-        Engine.unsubscribeWait(toolbarClass, moduleProperty.WaitHandler);
-      }
-      moduleProperty.WaitHandler = _appendExtraButtons(moduleName, moduleProperty);
-      allWaitHandlers[moduleName] = moduleProperty.WaitHandler;
-      Engine.wait(toolbarClass, moduleProperty.WaitHandler);
-    } else {
-      if (moduleProperty.WaitHandler) {
-        Engine.unsubscribeWait(toolbarClass, moduleProperty.WaitHandler);
-        delete moduleProperty.WaitHandler;
-        delete allWaitHandlers[moduleName];
-      }
-      if (css) {
-        moduleProperty.WaitHandler = _appendButtonsClass(moduleName, moduleProperty);
-        allWaitHandlers[moduleName] = moduleProperty.WaitHandler;
-        Engine.wait(toolbarClass, moduleProperty.WaitHandler);
-      }
-      Engine.removeByQuery('.SBIS-UI-Customizer.' + moduleName + '-ExtraButtons');
     }
     if (css) {
       Engine.appendCSS(moduleName, css);
     } else {
       Engine.removeCSS(moduleName);
     }
+
+    if (addExtraButtons || !!css) {
+      modulesProperties[moduleName] = { moduleProperty, addExtraButtons, css: !!css };
+    } else {
+      delete modulesProperties[moduleName];
+    }
+
+    if (Object.keys(modulesProperties).length > 0) {
+      if (!isListener) {
+        const edo3Dialog = document.querySelector('.' + taskDialogClass);
+        if (edo3Dialog) {
+          taskFinderHandler({ srcElement: edo3Dialog });
+        }
+        document.addEventListener('DOMNodeInserted', taskFinderHandler);
+        isListener = true;
+      }
+    } else {
+      if (isListener) {
+        document.removeEventListener('DOMNodeInserted', taskFinderHandler);
+        isListener = false;
+      }
+    }
+
   }
+
+  function taskFinderHandler(event) {
+    const srcElement = event.srcElement;
+    if (srcElement && srcElement.classList && srcElement.classList.contains(taskDialogClass)) {
+      srcElement.addEventListener('DOMNodeRemovedFromDocument', taskRemoverHandler);
+      srcElement.addEventListener('DOMSubtreeModified', taskModifierHandler);
+    }
+  }
+
+  function taskRemoverHandler(event) {
+    const srcElement = event.srcElement;
+    if (srcElement && srcElement.classList && srcElement.classList.contains(taskDialogClass)) {
+      srcElement.removeEventListener('DOMNodeRemovedFromDocument', taskRemoverHandler);
+      srcElement.removeEventListener('DOMSubtreeModified', taskModifierHandler);
+    }
+  }
+
+  function taskModifierHandler(event) {
+    const edo3Dialog = event.currentTarget;
+    if (edo3Dialog.controlNodes && edo3Dialog.controlNodes[0] && edo3Dialog.controlNodes[0].control) {
+      const control = edo3Dialog.controlNodes[0].control;
+      const controlRecord = control.record;
+      if (controlRecord !== taskChangeCache.get(control)) {
+        taskChangeCache.set(control, controlRecord);
+        prepareTask(edo3Dialog, control);
+      }
+    }
+  }
+
+  function prepareTask(edo3Dialog, control) {
+    const record = control.record;
+    const docName = _get_doc_name(record);
+    let moduleName = null;
+    let moduleProps = null;
+    for (const _moduleName in modulesProperties) {
+      const props = modulesProperties[_moduleName];
+      const moduleProperty = props.moduleProperty;
+      if (moduleProperty.ApplyDocTypeName && ~moduleProperty.ApplyDocTypeName.indexOf(docName) ||
+        moduleProperty.ExcludeDocTypeName && !~moduleProperty.ExcludeDocTypeName.indexOf(docName)) {
+        moduleName = _moduleName;
+        moduleProps = props;
+        break;
+      }
+    }
+    const toolbar = edo3Dialog.querySelector(toolbarClass);
+    const oldBtns = toolbar.querySelector('.SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons');
+    if (oldBtns) {
+      oldBtns.remove();
+    }
+    toolbar.classList.forEach(clsName => {
+      if (clsName.startsWith('SBIS-UI-Customizer-TaskToolbarBtns-')) {
+        toolbar.classList.remove(clsName);
+      }
+    });
+    if (moduleProps) {
+      if (moduleProps.addExtraButtons) {
+        let btns = document.createElement('div');
+        btns.className = 'SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons ';
+        btns.innerHTML = moduleProps.moduleProperty.ExtraButtonsHTML;
+        btns.setAttribute('data-vdomignore', 'true');
+        toolbar.insertBefore(btns, toolbar.children[0]);
+      }
+      if (moduleProps.css) {
+        toolbar.classList.add('SBIS-UI-Customizer-TaskToolbarBtns-' + moduleName);
+      }
+    }
+  }
+
 
   function _get_doc_url(record) {
     var uuid = record.get('РП.Документ').get('ИдентификаторПереписки');
@@ -239,114 +313,6 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     } else {
       callback();
     }
-  }
-
-  function _appendExtraButtons(moduleName, moduleProperty) {
-    return function _appendExtraButtonsEH(elms) {
-      for (let i = 0; i < elms.length; i++) {
-        let elm = elms[i];
-        _isTask(elm, moduleProperty, _appendExtraButtonsH(elm, moduleName, moduleProperty));
-      }
-    };
-  }
-
-  function _appendExtraButtonsH(elm, moduleName, moduleProperty) {
-    return function (options = {}) {
-      if (options.remove) {
-        let btns = elm.querySelector('.SBIS-UI-Customizer .' + moduleName + '-ExtraButtons');
-        if (btns) {
-          btns.remove(moduleName);
-        }
-        elm.classList.remove(moduleName);
-      } else {
-        let btns = document.createElement('div');
-        btns.className = 'SBIS-UI-Customizer ' + moduleName + '-ExtraButtons';
-        btns.innerHTML = moduleProperty.ExtraButtonsHTML;
-        btns.setAttribute('data-vdomignore', 'true');
-        elm.insertBefore(btns, elm.children[0]);
-        elm.classList.add('SBIS-UI-Customizer');
-        elm.classList.add(moduleName);
-      }
-    };
-  }
-
-  function _appendButtonsClass(moduleName, moduleProperty) {
-    return function _appendButtonsClassEH(elms) {
-      for (let i = 0; i < elms.length; i++) {
-        let elm = elms[i];
-        _isTask(elm, moduleProperty, _appendButtonsClassH(elm, moduleName));
-      }
-    };
-  }
-
-  function _appendButtonsClassH(elm, moduleName) {
-    return function (options = {}) {
-      if (options.remove) {
-        elm.classList.remove(moduleName);
-      } else {
-        elm.classList.add('SBIS-UI-Customizer');
-        elm.classList.add(moduleName);
-      }
-    };
-  }
-
-  function _isTask(elm, moduleProperty, callback) {
-
-    var edo3Dialog = elm;
-    while (edo3Dialog && !edo3Dialog.classList.contains('edo3-Dialog')) {
-      edo3Dialog = edo3Dialog.parentElement;
-    }
-    if (!edo3Dialog) {
-      console.error(PARSE_ERROR);
-      return false;
-    } else if (edo3Dialog.controlNodes && edo3Dialog.controlNodes[0]) {
-      edo3Dialog = edo3Dialog.controlNodes[0];
-    } else {
-      return setTimeout(() => {
-        _isTask(elm, moduleProperty, callback);
-        console.log(WAITING_COMPONENT);
-      }, 500);
-    }
-    var record = (edo3Dialog.control || {}).record || (edo3Dialog.options || {}).record;
-    if (!record) {
-      console.error(PARSE_ERROR);
-      return false;
-    }
-
-    let docName = _get_doc_name(record);
-    if (moduleProperty.ApplyDocTypeName && ~moduleProperty.ApplyDocTypeName.indexOf(docName) ||
-      moduleProperty.ExcludeDocTypeName && !~moduleProperty.ExcludeDocTypeName.indexOf(docName)) {
-
-      var _beforeUpdate__Origin = edo3Dialog.control._beforeUpdate;
-      var _beforeUnmount__Origin = edo3Dialog.control._beforeUnmount;
-      var _beforeUpdate = edo3Dialog.control._beforeUpdate.bind(edo3Dialog.control);
-
-      var task_key = edo3Dialog.control.key;
-
-      edo3Dialog.control._beforeUpdate = function (...args) {
-        var new_task_key = args[0].key;
-        if (task_key !== new_task_key) {
-          task_key = new_task_key;
-          callback({ remove: true });
-          edo3Dialog.control._beforeUpdate = _beforeUpdate__Origin;
-          edo3Dialog.control._beforeUnmount = _beforeUnmount__Origin;
-          for (var moduleName in allWaitHandlers) {
-            allWaitHandlers[moduleName]([elm]);
-          }
-        }
-        _beforeUpdate(...args);
-
-      };
-      edo3Dialog.control._beforeUnmount = function (...args) {
-        edo3Dialog.control._beforeUpdate = _beforeUpdate__Origin;
-        edo3Dialog.control._beforeUnmount = _beforeUnmount__Origin;
-        edo3Dialog.control._beforeUnmount(...args);
-      };
-
-
-      return callback();
-    }
-
   }
 
 });

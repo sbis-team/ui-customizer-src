@@ -1,7 +1,6 @@
 UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function (Engine, Task) {
   'use strict';
 
-  const PARSE_ERROR = 'TaskToolbarBtns: Ошибка разбора карточки задачи';
   var property = {
     btns: {
       TaskURL: {
@@ -13,9 +12,9 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
     },
     ExcludeDocTypeName: ['Merge request', 'Ошибка в разработку', 'Задача в разработку'],
     selectors: {
-      'Print': 'div.SBIS-UI-Customizer.ErrandToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
-      'LinkOld': 'div.SBIS-UI-Customizer.ErrandToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
-      'Delete': 'div.SBIS-UI-Customizer.ErrandToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
+      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
+      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Удалить"]'
     }
   };
 

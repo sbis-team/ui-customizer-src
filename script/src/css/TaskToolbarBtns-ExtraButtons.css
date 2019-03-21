@@ -1,11 +1,11 @@
-.SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons {
+.SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons {
   display: inline-block;
   border-right: 1px solid #E4E4E4;
   padding-right: 4px;
   margin-right: 8px;
 }
 
-.SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons i {
+.SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons i {
   vertical-align: middle;
   cursor: pointer;
   margin-right: 4px;
@@ -15,10 +15,10 @@
   margin-top: -2px;
 }
 
-.SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons i svg {
+.SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons i svg {
   fill: #587AB0;
 }
 
-.SBIS-UI-Customizer.TaskToolbarBtns-ExtraButtons i:hover svg {
+.SBIS-UI-Customizer-TaskToolbarBtns-ExtraButtons i:hover svg {
   fill: #FF7033;
 }

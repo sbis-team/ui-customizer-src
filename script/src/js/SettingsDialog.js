@@ -1,5 +1,5 @@
 UICustomizerDefine('SettingsDialog', ['Engine', 'SocNet'], function (Engine, SocNet) {
-  "use strict";
+  'use strict';
 
   var dialog;
 
