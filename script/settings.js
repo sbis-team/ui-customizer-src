@@ -249,6 +249,12 @@
                   'type': 'boolean',
                   'value': false
                 },
+                'PullRequest': {
+                  'title': 'Создать MR (Beta)',
+                  'view': 'option',
+                  'type': 'boolean',
+                  'value': false
+                },
                 'TaskURL': {
                   'title': 'Ссылка на задачу',
                   'view': 'option',

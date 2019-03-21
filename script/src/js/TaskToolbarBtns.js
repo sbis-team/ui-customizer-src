@@ -18,6 +18,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       },
       СommitMsg: {
         icon: 'git-commit'
+      },
+      PullRequest: {
+        icon: 'git-pull-request'
       }
     },
     ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку'],
@@ -32,10 +35,12 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   var modulesProperties = {};
   var isListener = false;
   var taskChangeCache = new WeakMap();
+  var toolbarSources = new WeakMap();
 
   return {
     applySettings: applySettings,
     copyToClipboard: copyToClipboard,
+    createPullRequest: createPullRequest,
     _resolve_edo_dialog_record: _resolve_edo_dialog_record,
     _get_doc_number: _get_doc_number,
     _get_doc_author: _get_doc_author,
@@ -251,7 +256,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     return version + '/' + prefix + '/' + (BranchNameUserLogin ? BranchNameUserLogin + '/' : '') + docNumber;
   }
 
-  function _resolve_edo_dialog_record(elm) {
+  function _resolve_edo_dialog(elm) {
     var edo3Dialog = elm;
     while (edo3Dialog && !edo3Dialog.classList.contains('edo3-Dialog')) {
       edo3Dialog = edo3Dialog.parentElement;
@@ -262,6 +267,11 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       console.error(PARSE_ERROR);
       return false;
     }
+    return edo3Dialog;
+  }
+
+  function _resolve_edo_dialog_record(elm) {
+    var edo3Dialog = _resolve_edo_dialog(elm);
     var record = (edo3Dialog.control || {}).record || (edo3Dialog.options || {}).record;
     if (!record) {
       console.error(PARSE_ERROR);
@@ -297,6 +307,42 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     }
     Engine.copyToClipboard(text);
     Engine.openInformationPopup(msg);
+  }
+
+  function createPullRequest(elm) {
+    var edo3Dialog = _resolve_edo_dialog(elm);
+    var self = edo3Dialog.control;
+    var record = self.record;
+    var id = 'linkedDocuments';
+    //copyToClipboard(elm, 'BranchName'); // Сделать авто-заполнение вехи в МР
+    Engine.waitRequire(require => {
+      require(['EDO3/Document/Toolbar/Source'], ToolbarSource => {
+        let toolbarSource = toolbarSources.get(self);
+        if (!toolbarSource) {
+          toolbarSource = new ToolbarSource({
+            options: {
+              linkedDocs: self.linkedDocs,
+              objectName: record && record.getModelField('РП.Документ/ИмяОбъекта'),
+              ruleId: record && record.getModelField('ИдРегламента'),
+              docId: record && record.getModelField('РП.Документ/ИдО'),
+              isIncoming: record && record.getModelField('РП.Документ/Состояние/Подписание/Входящий'),
+              id: id
+            }
+          });
+          toolbarSources.set(self, toolbarSource);
+        }
+        toolbarSource.query().addCallback(data => {
+          const enumerator = data.getEnumerator();
+          while (enumerator.moveNext()) {
+            const item = enumerator.getCurrent();
+            if (item.get('title') === 'Merge request') {
+              self._toolbarItemClickHandler({ target: edo3Dialog }, item);
+              break;
+            }
+          }
+        });
+      });
+    });
   }
 
   function _readUserLogin(callback) {
