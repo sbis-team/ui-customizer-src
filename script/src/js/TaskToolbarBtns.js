@@ -249,9 +249,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     var prefix = _get_doc_name(record) === 'Ошибка в разработку' ? 'bugfix' : 'feature';
     var docNumber = _get_doc_number(record);
     if (!/^[\d.]+$/.test(version)) {
-      var msg = 'Не удалось определить ветку по вехе!';
-      Engine.openInformationPopup(msg, 'error');
-      throw Error(msg);
+      version = 'dev';
     }
     return version + '/' + prefix + '/' + (BranchNameUserLogin ? BranchNameUserLogin + '/' : '') + docNumber;
   }
@@ -303,6 +301,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
         }
         text = _get_doc_branch_name(record);
         msg = 'Имя ветки скопировано в буфер обмена:\n' + text;
+        if (text.startsWith('dev')) {
+          msg = 'Не удалось определить версию по вехе, для ветки указан \'dev\'.\n' + msg;
+        }
         break;
     }
     Engine.copyToClipboard(text);
