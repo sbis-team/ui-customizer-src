@@ -7,12 +7,17 @@ UICustomizerDefine('SettingsButton', ['Engine'], function (Engine) {
 
   function init() {
     Engine.appendCSS('SettingsButton');
-    Engine.waitOnce('div.am-User__panel-lists .controls-ListView__itemsContainer', function (elm) {
-      var container = Engine.createComponent('SettingsButton', {
-        icon: Engine.getSVG('settings')
-      });
-      elm.parentElement.insertBefore(container, elm);
+    var container = Engine.createComponent('SettingsButton', {
+      icon: Engine.getSVG('settings')
     });
+    Engine.wait('div.engineUser-MenuPanel__scrollContainer', function (elm) {
+      elm.forEach(element => element.append(container));
+    });
+    Engine.wait('div.engine-ViewSettingsWindow__width', function (elm) {
+      elm.forEach(element => element.append(container));
+    });
+
+
   }
 
 });

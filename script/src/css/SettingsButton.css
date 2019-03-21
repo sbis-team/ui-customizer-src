@@ -1,69 +1,76 @@
 #SBIS-UI-Customizer-SettingsButton {
-   margin-bottom: 4px;
-   padding-bottom: 4px;
-   padding-top: 4px;
-   height: 100%;
-   font-size: 15px;
-   border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  height: 100%;
+  font-size: 15px;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 #SBIS-UI-Customizer-SettingsButton .row {
-   padding: 6px 0px 6px;
+  padding: 6px 0px 6px;
 }
 
 #SBIS-UI-Customizer-SettingsButton .row:hover {
-   cursor: pointer;
-   background: #F0F4FB;
+  cursor: pointer;
+  background: #F0F4FB;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon {
-   float: left;
-   margin: 2px 0px 0 15px;
-   height: 16px;
-   width: 16px;
+  float: left;
+  margin: 2px 0px 0 15px;
+  height: 16px;
+  width: 16px;
 }
 
 #SBIS-UI-Customizer-SettingsButton .title {
-   margin-left: 37px;
+  margin-left: 37px;
 }
 
 #SBIS-UI-Customizer-SettingsButton .title:hover {
-   color: #313E78;
+  color: #313E78;
 }
 
 #SBIS-UI-Customizer-SettingsButton-Header {
-   float: right;
-   margin-right: 8px;
-   margin-top: 5px;
+  float: right;
+  margin-right: 8px;
+  margin-top: 5px;
 }
 
 #SBIS-UI-Customizer-SettingsButton-Header .icon {
-   height: 16px;
-   width: 16px;
-   cursor: pointer;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon>svg,
 #SBIS-UI-Customizer-SettingsButton-Header .icon>svg {
-   fill: #587AB0;
+  fill: #587AB0;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon>svg>g,
 #SBIS-UI-Customizer-SettingsButton-Header .icon>svg>g {
-   stroke: #587AB0;
+  stroke: #587AB0;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon:hover>svg,
 #SBIS-UI-Customizer-SettingsButton-Header .icon:hover>svg {
-   fill: #313E78;
+  fill: #313E78;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon:hover>svg>g,
 #SBIS-UI-Customizer-SettingsButton-Header .icon:hover>svg>g {
-   stroke: #313E78;
+  stroke: #313E78;
 }
 
 .engine-OnlineBaseInnerMinCoreView__headerCell #SBIS-UI-Customizer-SettingsButton-Header {
-   float: left;
-   margin-top: 4px;
+  float: left;
+  margin-top: 4px;
+}
+
+.engine-ViewSettingsWindow #SBIS-UI-Customizer-SettingsButton {
+  border-bottom: none;
+  border-top: 1px solid #e4e4e4;
+  margin-bottom: 0;
+  width: 100%;
 }
