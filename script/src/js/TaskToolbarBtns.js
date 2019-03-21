@@ -126,17 +126,22 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
   function _get_doc_version(record) {
     var flds = record.get('РП.ПоляДляРендера');
     var milestone = ((flds || {})['ВехаДокумента'] || {}).name || '';
-    if (!milestone && record.get('РП.ВехаДокумента')) {
-      milestone = record.get('РП.ВехаДокумента').at(0) || '';
-      if (milestone) {
-        milestone = milestone.get('ДокументРасширение.Название');
-      }
-    }
     var version = milestone.split(' ')[0] || '';
     if (!/^[\d.]+$/.test(version)) {
-      version = 'dev';
+      if (!milestone && record.get('РП.ВехаДокумента')) {
+        const enumerator = record.get('РП.ВехаДокумента').getEnumerator();
+        while (enumerator.moveNext()) {
+          milestone = enumerator.getCurrent();
+          milestone = milestone.get('ДокументРасширение.Название');
+          const __version = milestone.split(' ')[0] || '';
+          if (/^[\d.]+$/.test(__version)) {
+            version = __version;
+            break;
+          }
+        }
+      }
     }
-    return version;
+    return version || 'dev';
   }
 
   function _get_doc_description(record) {
@@ -183,7 +188,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
       console.error(PARSE_ERROR);
       return false;
     }
-    var record = (edo3Dialog.options || {}).record;
+    var record = (edo3Dialog.control || {}).record || (edo3Dialog.options || {}).record;
     if (!record) {
       console.error(PARSE_ERROR);
       return false;
@@ -212,8 +217,8 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
             copyToClipboard(elm, action);
           });
         }
-        msg = 'Имя ветки скопировано в буфер обмена';
         text = _get_doc_branch_name(record);
+        msg = 'Имя ветки скопировано в буфер обмена:\n' + text;
         break;
     }
     Engine.copyToClipboard(text);
@@ -302,7 +307,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
         console.log(WAITING_COMPONENT);
       }, 500);
     }
-    var record = (edo3Dialog.options || {}).record;
+    var record = (edo3Dialog.control || {}).record || (edo3Dialog.options || {}).record;
     if (!record) {
       console.error(PARSE_ERROR);
       return false;

@@ -468,8 +468,8 @@ UICustomizerDefine('Engine', function () {
   function rpc_sbis(obj) {
     if (!SbisService) {
       return waitRequire(function (require) {
-        require(['WS.Data/Source/SbisService'], function (svr) {
-          SbisService = svr;
+        require(['Types/source'], function (svr) {
+          SbisService = svr.SbisService;
           rpc_sbis(obj);
         });
       });
