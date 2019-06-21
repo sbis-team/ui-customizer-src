@@ -1,7 +1,9 @@
 {
-   "release": false,
-   "added": [],
-   "changed": [],
-   "fixed": [],
-   "issues": []
+  "release": false,
+  "added": [],
+  "changed": [],
+  "fixed": [
+    "Исправлено копирование описания задачи для коммита"
+  ],
+  "issues": []
 }

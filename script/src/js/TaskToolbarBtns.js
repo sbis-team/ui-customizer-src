@@ -229,6 +229,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     if (!description) {
       description = Engine.cutOverflow(Engine.cutTags(record.get('РазличныеДокументы.Информация') || ''), 98, 1024);
     }
+    if (!description) {
+      description = Engine.cutOverflow(Engine.textFromJSON(record.get('РазличныеДокументы.ИнформацияJSON') || '[]'), 98, 1024);
+    }
     return description;
   }
 

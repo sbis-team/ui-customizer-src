@@ -77,6 +77,7 @@ UICustomizerDefine('Engine', function () {
     getSettings: getSettings,
     setSetting: setSetting,
     cutTags: cutTags,
+    textFromJSON: textFromJSON,
     cutOverflow: cutOverflow,
     copyToClipboard: copyToClipboard,
     getDate: getDate,
@@ -405,6 +406,48 @@ UICustomizerDefine('Engine', function () {
       .replace(/\n\s+\n/g, '\n\n')
       .replace(/\n\n+/g, '\n\n')
       .replace(/\n\n+$/g, '\n');
+  }
+
+  function _parseJSON(json) {
+    var text = '';
+    for (let item of json) {
+      let tag = item[0];
+      let data = item.slice(1);
+      switch (tag) {
+        case 'p':
+          for (let itemData of data) {
+            let type = typeof itemData;
+            if (type === 'string') {
+              text += itemData;
+            } else if (itemData instanceof Array) {
+              text += _parseJSON(itemData[0] instanceof Array ? itemData : [itemData]);
+            }
+          }
+          text += '\n';
+          break;
+        case 'a':
+          text += data[0].href;
+          break;
+        default:
+          for (let itemData of data) {
+            let type = typeof itemData;
+            if (type === 'string') {
+              text += itemData;
+            }
+          }
+      }
+    }
+    return text;
+  }
+
+  function textFromJSON(originText) {
+    let json = [];
+    try {
+      json = JSON.parse(originText);
+    } catch (error) {
+      console.error(error.stack);
+    }
+    return _parseJSON(json);
   }
 
   function cutOverflow(text, maxLine, maxLength) {
