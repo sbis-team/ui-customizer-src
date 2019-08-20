@@ -7,7 +7,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     'Задача в разработку': 'Задача'
   };
   const taskDialogClass = 'edo3-Dialog';
-  const toolbarClass = '.edo3-Dialog__head-first-line-buttons .controls-Toolbar';
+  const toolbarClass = '.edo3-Dialog__head-firstLine-buttons .controls-Toolbar';
   var property = {
     btns: {
       TaskURL: {

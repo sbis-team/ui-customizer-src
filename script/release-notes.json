@@ -2,6 +2,8 @@
    "release": false,
    "added": [],
    "changed": [],
-   "fixed": [],
+   "fixed": [
+     "Отображение доп. кнопок в шапке задач"
+   ],
    "issues": []
 }
