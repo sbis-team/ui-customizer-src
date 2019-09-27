@@ -3,7 +3,7 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
 
   const selectors = {
     'Owl': {
-      cls: 'div[sbisname="howEasy"], .online-howEasy'
+      cls: 'div.online-Sidebar__helpButton'
     },
     'HideMaximumButton': {
       cls: '.online-Sidebar__navSchemeLink',

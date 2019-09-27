@@ -1,5 +1,9 @@
-.online-howEasy__bird {
+.hint-helpButton__button {
   background-image: url("{{owl}}") !important;
   background-repeat: no-repeat;
   background-size: 38px;
+}
+
+.hint-helpButton__icon {
+  background: none;
 }

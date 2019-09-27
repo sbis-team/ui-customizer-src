@@ -2,6 +2,8 @@
    "release": false,
    "added": [],
    "changed": [],
-   "fixed": [],
+   "fixed": [
+     "Скрыватель кнопки помощи"
+   ],
    "issues": []
 }
