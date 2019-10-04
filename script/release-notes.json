@@ -1,7 +1,9 @@
 {
-   "release": false,
-   "added": [],
-   "changed": [],
-   "fixed": [],
-   "issues": []
+  "release": false,
+  "added": [],
+  "changed": [],
+  "fixed": [
+    "Исправлено отображение доп. кнопок в карточке ошибки"
+  ],
+  "issues": []
 }

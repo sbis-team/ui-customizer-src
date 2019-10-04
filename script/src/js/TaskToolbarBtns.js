@@ -23,7 +23,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
         icon: 'git-pull-request'
       }
     },
-    ApplyDocTypeName: ['Ошибка в разработку', 'Задача в разработку'],
+    ApplyDocTypeName: ['Ошибка', 'Задача'],
     selectors: {
       'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
       'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
@@ -184,6 +184,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
 
   function _get_doc_name(record) {
     var docName = record.get('РП.Документ').get('Регламент').get('Название');
+    docName = ReplaceDocTypeName[docName] || docName;
     return docName;
   }
 
@@ -237,7 +238,6 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
 
   function _get_doc_commit_description(record) {
     var docName = _get_doc_name(record);
-    docName = ReplaceDocTypeName[docName] || docName;
     var docNumber = ' № ' + _get_doc_number(record);
     var version = ' веха ' + _get_doc_version(record);
     var date = ' от ' + _get_doc_date(record);
@@ -249,7 +249,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
 
   function _get_doc_branch_name(record) {
     var version = _get_doc_version(record);
-    var prefix = _get_doc_name(record) === 'Ошибка в разработку' ? 'bugfix' : 'feature';
+    var prefix = _get_doc_name(record) === 'Ошибка' ? 'bugfix' : 'feature';
     var docNumber = _get_doc_number(record);
     if (!/^[\d.]+$/.test(version)) {
       version = 'dev';

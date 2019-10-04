@@ -10,7 +10,7 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
         icon: 'info'
       }
     },
-    ExcludeDocTypeName: ['Merge request', 'Ошибка в разработку', 'Задача в разработку'],
+    ExcludeDocTypeName: ['Merge request', 'Ошибка', 'Задача'],
     selectors: {
       'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
       'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
