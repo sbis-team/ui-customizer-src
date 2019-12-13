@@ -12,3 +12,45 @@
 .online-howEasy {
   max-height: 58px;
 }
+
+.onlinePage_Base_mainContent {
+ background: #2c3e50 !important;
+}
+
+.online-Sidebar{
+ background: #2c3e5077 !important;
+}
+
+.NavigationPanels-Accordion__item {
+  background: none !important;
+}
+
+.NavigationPanels-Accordion__item:hover {
+  background-color: #465e7377 !important;
+}
+
+.NavigationPanels-Accordion__item_activeMenu .nav-menu-counter__shadow::after,
+.NavigationPanels-Accordion__item_level-2 .nav-menu-counter__shadow::after,
+.NavigationPanels-Accordion__item_level-3 .nav-menu-counter__shadow::after,
+.NavigationPanels-Accordion__item_level-4 .nav-menu-counter__shadow::after,
+.NavigationPanels-Accordion__item:hover .nav-menu-counter__shadow::after,
+.NavigationPanels-Accordion__item_activeMenu .nav-menu-counter__shadow,
+.NavigationPanels-Accordion__item_level-2 .nav-menu-counter__shadow,
+.NavigationPanels-Accordion__item_level-3 .nav-menu-counter__shadow,
+.NavigationPanels-Accordion__item_level-4 .nav-menu-counter__shadow,
+.NavigationPanels-Accordion__item:hover .nav-menu-counter__shadow,
+.NavigationPanels-Accordion__title_activeMenu::after,
+.NavigationPanels-Accordion__title_activeMenu,
+.NavigationPanels-Accordion__item_activeMenu .nav-menu-counter__shadow,
+.NavigationPanels-SubMenu__separator::after,
+.NavigationPanels-Accordion__item:hover .NavigationPanels-Accordion__title_level-1::after,
+.nav-menu-counter__separator::after,
+.nav-menu-counter__shadow,
+.nav-menu-counter__shadow::after {
+  background: none !important;
+  border-left: none !important;
+}
+
+.NavigationPanels-Accordion__title_level-1::after {
+  width: 0;
+}

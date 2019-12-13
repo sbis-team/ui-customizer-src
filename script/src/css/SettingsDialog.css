@@ -82,6 +82,7 @@
 
 #SBIS-UI-Customizer-SettingsDialog>.Settings-panel {
   overflow-y: auto;
+  width: 100%;
 }
 
 .SBIS-UI-Customizer .SettingsDialog-section {

@@ -1,163 +1,169 @@
-.acc-menu-icon.contacts:before,
-.acc-menu-icon.groups:before,
-.acc-menu-icon.ereport:before,
-.acc-menu-icon.icon-cashbox:before,
-.acc-menu-icon.auction:before,
-.acc-menu-icon.sales:before,
-.acc-menu-icon.purchases:before,
-.acc-menu-icon.nomenclature:before,
-.acc-menu-icon.egais:before,
-.acc-menu-icon.icon-Mercury:before,
-.acc-menu-icon.icon-Stock:before,
-.acc-menu-icon.icon-Production:before,
-.acc-menu-icon.icon-Money:before,
-.acc-menu-icon.instructStorage:before,
-.acc-menu-icon.icon-work:before,
-.acc-menu-icon.business:before,
-.acc-menu-icon.accounting:before,
-.acc-menu-icon.icon-staff:before,
-.acc-menu-icon.documents:before,
-.acc-menu-icon.icon-contragents:before,
-.acc-menu-icon.icon-calendar:before,
-.acc-menu-icon.icon-calendar:after,
-.acc-menu-icon.icon-Bookkeeping:before,
-.acc-menu-icon.presto:before,
-.acc-menu-icon.retail:before,
-.acc-menu-icon.booking:before,
-.acc-menu-icon.ca_navication:before {
+.NavigationPanels-Accordion__icon.contacts:before,
+.NavigationPanels-Accordion__icon.groups:before,
+.NavigationPanels-Accordion__icon.ereport:before,
+.NavigationPanels-Accordion__icon.icon-cashbox:before,
+.NavigationPanels-Accordion__icon.auction:before,
+.NavigationPanels-Accordion__icon.sales:before,
+.NavigationPanels-Accordion__icon.purchases:before,
+.NavigationPanels-Accordion__icon.nomenclature:before,
+.NavigationPanels-Accordion__icon.egais:before,
+.NavigationPanels-Accordion__icon.icon-Mercury:before,
+.NavigationPanels-Accordion__icon.marking:before,
+.NavigationPanels-Accordion__icon.icon-Stock:before,
+.NavigationPanels-Accordion__icon.icon-Production:before,
+.NavigationPanels-Accordion__icon.icon-Money:before,
+.NavigationPanels-Accordion__icon.instructStorage:before,
+.NavigationPanels-Accordion__icon.icon-work:before,
+.NavigationPanels-Accordion__icon.business:before,
+.NavigationPanels-Accordion__icon.accounting:before,
+.NavigationPanels-Accordion__icon.icon-staff:before,
+.NavigationPanels-Accordion__icon.documents:before,
+.NavigationPanels-Accordion__icon.icon-contragents:before,
+.NavigationPanels-Accordion__icon.icon-calendar:before,
+.NavigationPanels-Accordion__icon.icon-calendar:after,
+.NavigationPanels-Accordion__icon.icon-Bookkeeping:before,
+.NavigationPanels-Accordion__icon.presto:before,
+.NavigationPanels-Accordion__icon.retail:before,
+.NavigationPanels-Accordion__icon.booking:before,
+.NavigationPanels-Accordion__icon.ca_navication:before {
   content: '' !important;
 }
 
-.acc-menu-icon.contacts,
-.acc-menu-icon.groups,
-.acc-menu-icon.ereport,
-.acc-menu-icon.icon-cashbox,
-.acc-menu-icon.auction,
-.acc-menu-icon.sales,
-.acc-menu-icon.purchases,
-.acc-menu-icon.nomenclature,
-.acc-menu-icon.egais,
-.acc-menu-icon.icon-Mercury,
-.acc-menu-icon.icon-Stock,
-.acc-menu-icon.icon-Production,
-.acc-menu-icon.icon-Money,
-.acc-menu-icon.instructStorage,
-.acc-menu-icon.icon-work,
-.acc-menu-icon.business,
-.acc-menu-icon.accounting,
-.acc-menu-icon.icon-staff,
-.acc-menu-icon.documents,
-.acc-menu-icon.icon-contragents,
-.acc-menu-icon.icon-calendar,
-.acc-menu-icon.icon-Bookkeeping,
-.acc-menu-icon.presto,
-.acc-menu-icon.retail,
-.acc-menu-icon.booking,
-.acc-menu-icon.ca_navication {
+.NavigationPanels-Accordion__icon.contacts,
+.NavigationPanels-Accordion__icon.groups,
+.NavigationPanels-Accordion__icon.ereport,
+.NavigationPanels-Accordion__icon.icon-cashbox,
+.NavigationPanels-Accordion__icon.auction,
+.NavigationPanels-Accordion__icon.sales,
+.NavigationPanels-Accordion__icon.purchases,
+.NavigationPanels-Accordion__icon.nomenclature,
+.NavigationPanels-Accordion__icon.egais,
+.NavigationPanels-Accordion__icon.icon-Mercury,
+.NavigationPanels-Accordion__icon.marking,
+.NavigationPanels-Accordion__icon.icon-Stock,
+.NavigationPanels-Accordion__icon.icon-Production,
+.NavigationPanels-Accordion__icon.icon-Money,
+.NavigationPanels-Accordion__icon.instructStorage,
+.NavigationPanels-Accordion__icon.icon-work,
+.NavigationPanels-Accordion__icon.business,
+.NavigationPanels-Accordion__icon.accounting,
+.NavigationPanels-Accordion__icon.icon-staff,
+.NavigationPanels-Accordion__icon.documents,
+.NavigationPanels-Accordion__icon.icon-contragents,
+.NavigationPanels-Accordion__icon.icon-calendar,
+.NavigationPanels-Accordion__icon.icon-Bookkeeping,
+.NavigationPanels-Accordion__icon.presto,
+.NavigationPanels-Accordion__icon.retail,
+.NavigationPanels-Accordion__icon.booking,
+.NavigationPanels-Accordion__icon.ca_navication {
   background-repeat: no-repeat !important;
-  background-position: 12px 10px !important;
+  background-position: 12px 12px !important;
 }
 
-.acc-menu-icon.contacts {
+.NavigationPanels-Accordion__icon.contacts {
   background-image: url("{{christmas-card}}") !important;
 }
 
-.acc-menu-icon.icon-work {
+.NavigationPanels-Accordion__icon.icon-work {
   background-image: url("{{christmas-sock}}") !important;
 }
 
-.acc-menu-icon.icon-staff {
+.NavigationPanels-Accordion__icon.icon-staff {
   background-image: url("{{gingerbread-man}}") !important;
 }
 
-.acc-menu-icon.documents {
+.NavigationPanels-Accordion__icon.documents {
   background-image: url("{{christmas-card2}}") !important;
 }
 
-.acc-menu-icon.icon-calendar {
+.NavigationPanels-Accordion__icon.icon-calendar {
   background-image: url("{{christmas-day}}") !important;
 }
 
-.acc-menu-icon.icon-contragents {
+.NavigationPanels-Accordion__icon.icon-contragents {
   background-image: url("{{snow-globe}}") !important;
 }
 
-.acc-menu-icon.accounting {
+.NavigationPanels-Accordion__icon.accounting {
   background-image: url("{{christmas-ball}}") !important;
 }
 
-.acc-menu-icon.business {
+.NavigationPanels-Accordion__icon.business {
   background-image: url("{{cabin}}") !important;
 }
 
-.acc-menu-icon.ca_navication {
+.NavigationPanels-Accordion__icon.ca_navication {
   background-image: url("{{light}}") !important;
 }
 
-.acc-menu-icon.ereport {
+.NavigationPanels-Accordion__icon.ereport {
   background-image: url("{{christmas-card3}}") !important;
 }
 
-.acc-menu-icon.auction {
+.NavigationPanels-Accordion__icon.auction {
   background-image: url("{{mitten}}") !important;
 }
 
-.acc-menu-icon.purchases {
+.NavigationPanels-Accordion__icon.purchases {
   background-image: url("{{shopping-bag}}") !important;
 }
 
-.acc-menu-icon.sales {
+.NavigationPanels-Accordion__icon.sales {
   background-image: url("{{sale}}") !important;
 }
 
-.acc-menu-icon.egais {
+.NavigationPanels-Accordion__icon.egais {
   background-image: url("{{mug}}") !important;
 }
 
-.acc-menu-icon.icon-Mercury {
+.NavigationPanels-Accordion__icon.icon-Mercury {
   background-image: url("{{reindeer}}") !important;
 }
 
-.acc-menu-icon.nomenclature {
+.NavigationPanels-Accordion__icon.marking {
+  background-image: url("{{champagne}}") !important;
+}
+
+.NavigationPanels-Accordion__icon.nomenclature {
   background-image: url("{{gift}}") !important;
 }
 
-.acc-menu-icon.icon-Bookkeeping {
+.NavigationPanels-Accordion__icon.icon-Bookkeeping {
   background-image: url("{{mittens}}") !important;
 }
 
-.acc-menu-icon.icon-cashbox {
+.NavigationPanels-Accordion__icon.icon-cashbox {
   background-image: url("{{sleigh}}") !important;
 }
 
-.acc-menu-icon.icon-Stock {
+.NavigationPanels-Accordion__icon.icon-Stock {
   background-image: url("{{gift2}}") !important;
 }
 
-.acc-menu-icon.icon-Production {
+.NavigationPanels-Accordion__icon.icon-Production {
   background-image: url("{{elf}}") !important;
 }
 
-.acc-menu-icon.icon-Money {
+.NavigationPanels-Accordion__icon.icon-Money {
   background-image: url("{{candy-cane}}") !important;
 }
 
-.acc-menu-icon.groups {
+.NavigationPanels-Accordion__icon.groups {
   background-image: url("{{cane}}") !important;
 }
 
-.acc-menu-icon.instructStorage {
+.NavigationPanels-Accordion__icon.instructStorage {
   background-image: url("{{card}}") !important;
 }
 
-.acc-menu-icon.presto {
+.NavigationPanels-Accordion__icon.presto {
   background-image: url("{{santa-claus}}") !important;
 }
 
-.acc-menu-icon.retail {
+.NavigationPanels-Accordion__icon.retail {
   background-image: url("{{shopping-bag}}") !important;
 }
 
-.acc-menu-icon.booking {
+.NavigationPanels-Accordion__icon.booking {
   background-image: url("{{gift3}}") !important;
 }
