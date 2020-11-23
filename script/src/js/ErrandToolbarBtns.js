@@ -12,9 +12,9 @@ UICustomizerDefine('ErrandToolbarBtns', ['Engine', 'TaskToolbarBtns'], function 
     },
     ExcludeDocTypeName: ['Merge request', 'Ошибка', 'Задача'],
     selectors: {
-      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
-      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
-      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar__item[title="Распечатать"]',
+      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar__item[title="Скопировать в буфер"]',
+      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-ErrandToolbarBtns .controls-Toolbar__item[title="Удалить"]'
     }
   };
 

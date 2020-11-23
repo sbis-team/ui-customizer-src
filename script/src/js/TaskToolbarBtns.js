@@ -25,9 +25,9 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     },
     ApplyDocTypeName: ['Ошибка', 'Задача'],
     selectors: {
-      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Распечатать"]',
-      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Скопировать в буфер"]',
-      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar_item[title="Удалить"]'
+      'Print': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar__item[title="Распечатать"]',
+      'LinkOld': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar__item[title="Скопировать в буфер"]',
+      'Delete': '.SBIS-UI-Customizer-TaskToolbarBtns-TaskToolbarBtns .controls-Toolbar__item[title="Удалить"]'
     }
   };
   var BranchNameUserLogin = '';
@@ -129,17 +129,16 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     const edo3Dialog = event.currentTarget;
     if (edo3Dialog.controlNodes && edo3Dialog.controlNodes[0] && edo3Dialog.controlNodes[0].control) {
       const control = edo3Dialog.controlNodes[0].control;
-      const controlRecord = control.record;
+      const controlRecord = control.getRecordField ? control.getRecordField() : null;
       if (controlRecord && controlRecord !== taskChangeCache.get(control)) {
         taskChangeCache.set(control, controlRecord);
-        prepareTask(edo3Dialog, control);
+        prepareTask(edo3Dialog, control, controlRecord);
       }
     }
   }
 
-  function prepareTask(edo3Dialog, control) {
-    const record = control.record;
-    const docName = _get_doc_name(record);
+  function prepareTask(edo3Dialog, control, controlRecord) {
+    const docName = _get_doc_name(controlRecord);
     let moduleName = null;
     let moduleProps = null;
     for (const _moduleName in modulesProperties) {

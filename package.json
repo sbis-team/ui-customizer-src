@@ -1,9 +1,12 @@
 {
-    "dependencies": {
-        "ndk.env": "0.0.4",
-        "ndk.fn": "< v0.1",
-        "ndk.fs": "< v0.1",
-        "ndk.git": "< v0.1",
-        "ndk.src": "0.0.2"
-    }
+  "dependencies": {
+    "ndk.env": "0.0.4",
+    "ndk.fn": "< v0.1",
+    "ndk.fs": "< v0.1",
+    "ndk.git": "< v0.1",
+    "ndk.src": "0.0.2"
+  },
+  "devDependencies": {
+    "eslint": "7.14.0"
+  }
 }
