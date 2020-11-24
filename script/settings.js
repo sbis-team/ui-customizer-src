@@ -140,12 +140,11 @@
             }
           }
         },
-        'Modify': {
+        /* 'Modify': {
           'title': 'Изменить внешний вид',
           'view': 'group',
           'module': 'HomePageModify',
           'options': {
-            /*
             'News': {
               'title': 'Новости',
               'view': 'block',
@@ -183,8 +182,8 @@
               }
             }
 
-          },*/
-            'Other': {
+          },
+          'Other': {
               'title': 'Прочее',
               'view': 'block',
               'options': {
@@ -197,7 +196,7 @@
               }
             }
           }
-        }
+        } */
       }
     },
     'CardTask': {

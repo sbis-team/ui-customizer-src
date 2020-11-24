@@ -1,169 +1,156 @@
-.NavigationPanels-Accordion__icon.contacts:before,
-.NavigationPanels-Accordion__icon.groups:before,
-.NavigationPanels-Accordion__icon.ereport:before,
-.NavigationPanels-Accordion__icon.icon-cashbox:before,
-.NavigationPanels-Accordion__icon.auction:before,
-.NavigationPanels-Accordion__icon.sales:before,
-.NavigationPanels-Accordion__icon.purchases:before,
-.NavigationPanels-Accordion__icon.nomenclature:before,
-.NavigationPanels-Accordion__icon.egais:before,
-.NavigationPanels-Accordion__icon.icon-Mercury:before,
-.NavigationPanels-Accordion__icon.marking:before,
-.NavigationPanels-Accordion__icon.icon-Stock:before,
-.NavigationPanels-Accordion__icon.icon-Production:before,
-.NavigationPanels-Accordion__icon.icon-Money:before,
-.NavigationPanels-Accordion__icon.instructStorage:before,
-.NavigationPanels-Accordion__icon.icon-work:before,
-.NavigationPanels-Accordion__icon.business:before,
-.NavigationPanels-Accordion__icon.accounting:before,
-.NavigationPanels-Accordion__icon.icon-staff:before,
-.NavigationPanels-Accordion__icon.documents:before,
-.NavigationPanels-Accordion__icon.icon-contragents:before,
-.NavigationPanels-Accordion__icon.icon-calendar:before,
-.NavigationPanels-Accordion__icon.icon-calendar:after,
-.NavigationPanels-Accordion__icon.icon-Bookkeeping:before,
-.NavigationPanels-Accordion__icon.presto:before,
-.NavigationPanels-Accordion__icon.retail:before,
-.NavigationPanels-Accordion__icon.booking:before,
-.NavigationPanels-Accordion__icon.ca_navication:before {
+.acc-contacts:before,
+.acc-groups:before,
+.acc-icon-Ereport:before,
+.acc-icon-ereport:before,
+.acc-icon-cashbox:before,
+.acc-auction:before,
+.acc-sales:before,
+.acc-purchases:before,
+.acc-icon-Purchases:before,
+.acc-nomenclature:before,
+.acc-egais:before,
+.acc-icon-Mercury:before,
+.acc-market:before,
+.acc-icon-Stock:before,
+.acc-icon-Production:before,
+.acc-icon-Money:before,
+.acc-instructStorage:before,
+.acc-icon-work:before,
+.acc-business:before,
+.acc-accounting:before,
+.acc-icon-staff:before,
+.acc-documents:before,
+.acc-icon-contragents:before,
+.acc-icon-calendar:before,
+.acc-icon-calendar:after,
+.acc-icon-Clients:before,
+.acc-presto:before,
+.acc-retail:before,
+.acc-booking:before,
+.acc-ca_navication:before {
   content: '' !important;
 }
 
-.NavigationPanels-Accordion__icon.contacts,
-.NavigationPanels-Accordion__icon.groups,
-.NavigationPanels-Accordion__icon.ereport,
-.NavigationPanels-Accordion__icon.icon-cashbox,
-.NavigationPanels-Accordion__icon.auction,
-.NavigationPanels-Accordion__icon.sales,
-.NavigationPanels-Accordion__icon.purchases,
-.NavigationPanels-Accordion__icon.nomenclature,
-.NavigationPanels-Accordion__icon.egais,
-.NavigationPanels-Accordion__icon.icon-Mercury,
-.NavigationPanels-Accordion__icon.marking,
-.NavigationPanels-Accordion__icon.icon-Stock,
-.NavigationPanels-Accordion__icon.icon-Production,
-.NavigationPanels-Accordion__icon.icon-Money,
-.NavigationPanels-Accordion__icon.instructStorage,
-.NavigationPanels-Accordion__icon.icon-work,
-.NavigationPanels-Accordion__icon.business,
-.NavigationPanels-Accordion__icon.accounting,
-.NavigationPanels-Accordion__icon.icon-staff,
-.NavigationPanels-Accordion__icon.documents,
-.NavigationPanels-Accordion__icon.icon-contragents,
-.NavigationPanels-Accordion__icon.icon-calendar,
-.NavigationPanels-Accordion__icon.icon-Bookkeeping,
-.NavigationPanels-Accordion__icon.presto,
-.NavigationPanels-Accordion__icon.retail,
-.NavigationPanels-Accordion__icon.booking,
-.NavigationPanels-Accordion__icon.ca_navication {
+.acc-icon-small,
+.acc-icon {
   background-repeat: no-repeat !important;
-  background-position: 12px 12px !important;
+  height: 24px !important;
+  width: 24px !important;
+  margin-left: 8px !important;
+  margin-right: 8px !important;
 }
 
-.NavigationPanels-Accordion__icon.contacts {
+.OnlineSidebar-Sidebar__width_minimal .acc-icon {
+  margin-left: 12px !important;
+  margin-right: 12px !important;
+}
+
+.acc-contacts {
   background-image: url("{{christmas-card}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-work {
+.acc-icon-work {
   background-image: url("{{christmas-sock}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-staff {
+.acc-icon-staff {
   background-image: url("{{gingerbread-man}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.documents {
+.acc-documents {
   background-image: url("{{christmas-card2}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-calendar {
+.acc-icon-calendar {
   background-image: url("{{christmas-day}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-contragents {
+.acc-icon-contragents {
   background-image: url("{{snow-globe}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.accounting {
+.acc-accounting {
   background-image: url("{{christmas-ball}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.business {
+.acc-business {
   background-image: url("{{cabin}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.ca_navication {
+.acc-ca_navication {
   background-image: url("{{light}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.ereport {
+.acc-icon-Ereport,
+.acc-icon-ereport {
   background-image: url("{{christmas-card3}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.auction {
+.acc-auction {
   background-image: url("{{mitten}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.purchases {
+.acc-icon-Purchases,
+.acc-purchases {
   background-image: url("{{shopping-bag}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.sales {
+.acc-sales {
   background-image: url("{{sale}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.egais {
+.acc-egais {
   background-image: url("{{mug}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-Mercury {
+.acc-icon-Mercury {
   background-image: url("{{reindeer}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.marking {
+.acc-market {
   background-image: url("{{champagne}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.nomenclature {
+.acc-nomenclature {
   background-image: url("{{gift}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-Bookkeeping {
+.acc-icon-Clients {
   background-image: url("{{mittens}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-cashbox {
+.acc-icon-cashbox {
   background-image: url("{{sleigh}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-Stock {
+.acc-icon-Stock {
   background-image: url("{{gift2}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-Production {
+.acc-icon-Production {
   background-image: url("{{elf}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.icon-Money {
+.acc-icon-Money {
   background-image: url("{{candy-cane}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.groups {
+.acc-groups {
   background-image: url("{{cane}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.instructStorage {
+.acc-instructStorage {
   background-image: url("{{card}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.presto {
+.acc-presto {
   background-image: url("{{santa-claus}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.retail {
+.acc-retail {
   background-image: url("{{shopping-bag}}") !important;
 }
 
-.NavigationPanels-Accordion__icon.booking {
+.acc-booking {
   background-image: url("{{gift3}}") !important;
 }

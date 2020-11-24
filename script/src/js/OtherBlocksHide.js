@@ -6,7 +6,7 @@ UICustomizerDefine('OtherBlocksHide', ['Engine'], function (Engine) {
       cls: 'div.online-Sidebar__helpButton'
     },
     'HideMaximumButton': {
-      cls: '.online-Sidebar__navSchemeLink',
+      cls: '.OnlineSidebar-NavSchemeLink',
       visibilityHidden: true
     }
   };

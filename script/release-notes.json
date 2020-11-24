@@ -2,6 +2,8 @@
    "release": false,
    "added": [],
    "changed": [],
-   "fixed": [],
+   "fixed": [
+     "Исправлено отображение новогодней темы"
+   ],
    "issues": []
 }
