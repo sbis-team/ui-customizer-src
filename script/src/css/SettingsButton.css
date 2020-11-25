@@ -1,19 +1,12 @@
 #SBIS-UI-Customizer-SettingsButton {
-  margin-bottom: 4px;
-  padding-bottom: 4px;
   padding-top: 4px;
-  height: 100%;
   font-size: 15px;
-  border-bottom: 1px solid #e4e4e4;
+  color: #313e78;
+  cursor: pointer;
 }
 
 #SBIS-UI-Customizer-SettingsButton .row {
   padding: 6px 0px 6px;
-}
-
-#SBIS-UI-Customizer-SettingsButton .row:hover {
-  cursor: pointer;
-  background: #F0F4FB;
 }
 
 #SBIS-UI-Customizer-SettingsButton .icon {
@@ -25,10 +18,6 @@
 
 #SBIS-UI-Customizer-SettingsButton .title {
   margin-left: 37px;
-}
-
-#SBIS-UI-Customizer-SettingsButton .title:hover {
-  color: #313E78;
 }
 
 #SBIS-UI-Customizer-SettingsButton-Header {
