@@ -48,8 +48,8 @@ UICustomizerDefine('VersionInformer', ['Engine', 'SettingsDialog'], function (En
       }
       content += '</ul></div>';
     }
+    localStorage.setItem('SBIS-UI-Customizer-LastVersion', verinfo.version);
     if (!content) {
-      localStorage.setItem('SBIS-UI-Customizer-LastVersion', verinfo.version);
       return true;
     }
     Engine.appendCSS('VersionInformer');
