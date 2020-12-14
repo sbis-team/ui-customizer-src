@@ -33,7 +33,8 @@ UICustomizerDefine('ChristmasStyle', ['Engine'], function (Engine) {
     /* Прочие картинки */
     'tree': Engine.getPNG('tree-16'),
     'santa-hat': Engine.getPNG('santa-hat-24'),
-    'logo_penguin': Engine.getPNG('logo_penguin'),
+    'penguin': Engine.getPNG('penguin-32'),
+    /* 'logo_penguin': Engine.getPNG('logo_penguin'), */
     'owl': Engine.getPNG('owl-64'),
     'christmas-tree-big': Engine.getPNG('christmas-tree-big'),
   };

@@ -1,7 +1,7 @@
-.onlineSidebar-SidebarLogo__default {
-  background-image: url("{{logo_penguin}}") !important;
+.onlineSidebar-SidebarLogo {
+  background-image: url("{{penguin}}") !important;
   background-repeat: no-repeat;
   background-size: auto;
-  margin-top: 1px;
-  margin-bottom: 13px;
+  background-position: 54px -4px;
+  width: 90px;
 }
