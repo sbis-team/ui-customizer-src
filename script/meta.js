@@ -18,7 +18,7 @@
 // @exclude       *online.sbis.ru/carry.html*
 // @exclude       *online.sbis.ru/presto.html*
 // @exclude       *online.sbis.ru/booking.html*
-// @run-at        document-start
+// @run-at        document-end
 // @grant         unsafeWindow
 // @grant         GM_setClipboard
 // @noframes
