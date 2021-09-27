@@ -1,9 +1,7 @@
 {
-  "release": 1,
-  "added": [],
-  "changed": [],
-  "fixed": [
-    "Исправил отображение доп. кнопок в задаче. Опять."
-  ],
-  "issues": []
+   "release": false,
+   "added": [],
+   "changed": [],
+   "fixed": [],
+   "issues": []
 }
