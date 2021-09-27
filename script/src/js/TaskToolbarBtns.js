@@ -129,7 +129,7 @@ UICustomizerDefine('TaskToolbarBtns', ['Engine'], function (Engine) {
     const edo3Dialog = event.currentTarget;
     if (edo3Dialog.controlNodes && edo3Dialog.controlNodes[0] && edo3Dialog.controlNodes[0].control) {
       const control = edo3Dialog.controlNodes[0].control;
-      const controlRecord = control.getRecordField ? control.getRecordField() : null;
+      const controlRecord = control._options ? control._options.record : null;
       if (controlRecord && controlRecord !== taskChangeCache.get(control)) {
         taskChangeCache.set(control, controlRecord);
         prepareTask(edo3Dialog, control, controlRecord);
