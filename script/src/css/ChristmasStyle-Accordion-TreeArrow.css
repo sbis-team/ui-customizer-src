@@ -1,4 +1,4 @@
-.NavigationPanels-Counter__arrow:empty:before {
+.NavigationPanels-Counter__arrow>.NavigationPanels-Counter__arrow_icon {
   content: '';
   width: 16px;
   height: 16px;
@@ -6,6 +6,14 @@
   background-repeat: no-repeat;
 }
 
-.ws-is-hover .NavigationPanels-Counter__container_has-hover:hover:empty:before {
+.NavigationPanels-Counter__arrow>.NavigationPanels-Counter__arrow_icon polygon {
+  display: none;
+}
+
+.NavigationPanels-Counter__arrow:hover>.NavigationPanels-Counter__arrow_icon {
   transform: rotate(25deg);
+}
+
+.NavigationPanels-Accordion__counter.NavigationPanels-Counter__arrow {
+  padding-right: 6px;
 }

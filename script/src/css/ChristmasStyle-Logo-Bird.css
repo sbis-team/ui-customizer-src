@@ -1,7 +1,14 @@
-.onlineSidebar-SidebarLogo {
+.online-QuickAdd .icon-SabyBird,
+.online-QuickAdd_menuHeader .icon-SabyBird {
   background-image: url("{{penguin}}") !important;
   background-repeat: no-repeat;
   background-size: auto;
-  background-position: 54px -4px;
-  width: 90px;
+  background-position: -1px -2px;
+  width: 32px;
+  height: 32px;
+}
+
+.online-QuickAdd .icon-SabyBird:before,
+.online-QuickAdd_menuHeader .icon-SabyBird:before {
+  content: '' !important;
 }
