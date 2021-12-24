@@ -2,6 +2,6 @@
    "release": false,
    "added": [],
    "changed": [],
-   "fixed": [],
+   "fixed": ["Добавлена поддержка домена online.saby.ru"],
    "issues": []
 }

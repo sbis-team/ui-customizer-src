@@ -18,6 +18,15 @@
 // @exclude       *online.sbis.ru/carry.html*
 // @exclude       *online.sbis.ru/presto.html*
 // @exclude       *online.sbis.ru/booking.html*
+// @include       *online.saby.ru/*
+// @exclude       *online.saby.ru/obj/*
+// @exclude       *online.saby.ru/shared/*
+// @exclude       *online.saby.ru/docview/*
+// @exclude       *online.saby.ru/auth/*
+// @exclude       *online.saby.ru/webrtc/*
+// @exclude       *online.saby.ru/carry.html*
+// @exclude       *online.saby.ru/presto.html*
+// @exclude       *online.saby.ru/booking.html*
 // @run-at        document-end
 // @grant         unsafeWindow
 // @grant         GM_setClipboard
