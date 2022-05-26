@@ -151,7 +151,7 @@ function __buildNotes() {
   it.notesMD = '';
   it.notesTXT = '';
   __buildNotes_forEach('Новые возможности', it.notes.added);
-  __buildNotes_forEach('Небольшие изменения', it.notes.changed);
+  __buildNotes_forEach('Изменения', it.notes.changed);
   __buildNotes_forEach('Исправленные ошибки', it.notes.fixed);
   __buildNotes_forEach('Выполненные задачи', it.notes.issues);
   if (it.notesMD) {

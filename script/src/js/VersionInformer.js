@@ -21,7 +21,7 @@ UICustomizerDefine('VersionInformer', ['Engine', 'SettingsDialog'], function (En
       content += '</ul></div>';
     }
     if (notes.changed.length) {
-      content += '<div class="group"><span class="title">Небольшие изменения</span><ul>';
+      content += '<div class="group"><span class="title">Изменения</span><ul>';
       for (let i = 0; i < notes.changed.length; i++) {
         content += '<li>' + notes.changed[i] + '</li>';
       }
